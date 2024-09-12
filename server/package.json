@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "node --watch server"
+  },
+  "keywords": [],
+  "author": "Cheng Vue",
+  "license": "MIT",
+  "description": "sparks-ecommerce is a dynamic and user-friendly e-commerce application that makes buying and selling items a breeze, offering a seamless and engaging experience for all users.",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  }
+}
