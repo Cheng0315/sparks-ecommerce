@@ -20,15 +20,15 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey:true,
       autoIncrement: true
     },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    user_name: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique:true
@@ -42,15 +42,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    newsletter_subscription: {
+    newsletterSubscription: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    newsletter_coupon_used: {
+    newsletterCouponUsed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    is_seller: {
+    isSeller: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
@@ -58,7 +58,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
     tableName: 'users',
-    timestamps: false
+    timestamps: false,
+    underscored: true
   });
   return User;
 };
