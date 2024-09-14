@@ -1,13 +1,13 @@
 const express = require('express');
 require("dotenv").config()
 
-/* CONFIGURATIONS */
+/* Configurations */
 const app = express();
 
-/* ROUTES */
+/* Routes */
 app.get('/', (req, res) => {
   res.send('Hello from server');
 })
 
-/* Server Initialization */
-app.listen(process.env.SERVER_PORT, () => console.log(`Sever is running on Port: ${process.env.SERVER_PORT}`));
+/* Server initialization */
+app.listen(process.env.SERVER_PORT, () => console.log(`Server is running on Port: ${process.env.SERVER_PORT}`));
