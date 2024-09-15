@@ -1,16 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const {registerUser, userProfile} = require("../controllers/users.js");
+const {register, login, userProfile} = require("../controllers/users.js");
 const {validateUser} = require("../middleware/validateUser.js");
 const {verifyToken} = require("../middleware/auth.js");
 
-/* CREATE */
-router.post("/register", validateUser, registerUser);
 
-/* READ */
+/* Auth */
+router.post("/register", validateUser, register);
+router.post("/login", login);
+
+/* Create */
+
+/* Read */
 router.get("/:id/profile", verifyToken, userProfile);
 
-/* UPDATE */
+/* Update */
 
-/* DELETE */
+/* Delete */
+
 module.exports = router;

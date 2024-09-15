@@ -5,7 +5,7 @@ const {generateJWT} = require("../utils/jsonWebToken.js");
 
 /* Register the user */
 /* @route = POST /api/users/register */
-const registerUser = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { firstName, lastName, username, email, password } = req.body;
 
@@ -46,6 +46,25 @@ const registerUser = async (req, res) => {
   }
 }
 
+/* Log in the user */
+/* @route = POST /api/users/login */
+const login = async (req, res) => {
+  try {
+    const {email, password} = req.body;
+    const user = await User.findOne({where: {email}});
+    if (!user) return res.status(400).json({error: "Invalid email or password"});
+    
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) return res.status(400).json({error: "Invalid email or password"});
+    
+    delete user.dataValues.password;
+    generateJWT(res, user.id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+}
+
 /* View user's profile */
 /* @route = GET /api/users/:id/profile */
 const userProfile = async (req, res) => {
@@ -62,4 +81,4 @@ const userProfile = async (req, res) => {
   }
 }
 
-module.exports = {registerUser, userProfile};
+module.exports = {register, userProfile, login};
