@@ -1,5 +1,5 @@
 /* Validate user's input for registration */
-const validateUser = (req, res, next) => {
+const validateRegistrationInput = (req, res, next) => {
   const { firstName, lastName, username, email, password } = req.body;
 
   /* Validate firstName and lastName */
@@ -30,4 +30,4 @@ const validateUser = (req, res, next) => {
   next();
 };
 
-module.exports = {validateUser};
+module.exports = {validateRegistrationInput};

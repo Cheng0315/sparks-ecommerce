@@ -74,7 +74,8 @@ const userProfile = async (req, res) => {
       where: { id },
       attributes: { exclude: ['password'] }
     });
-    
+
+    if (!user) return res.status(404).json({error: "Invalid user id"});
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({error: error.message});
