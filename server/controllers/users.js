@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 const {User} = require("../models");
+const {generateJWT} = require("../utils/jsonWebToken.js");
 
 /* Register the user */
 /* @route = POST /api/users */
@@ -32,7 +33,12 @@ const registerUser = async (req, res) => {
         email,
         password: hashedPassword
       });
-      res.status(201).json(newUser);
+
+      if (newUser) {
+        delete newUser.dataValues.password;
+        generateJWT(res, newUser.id)
+        res.status(201).json(newUser);
+      }
     }
   } catch (error) {
     res.status(500).json({error: error.message});
