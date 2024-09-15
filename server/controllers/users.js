@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const {User} = require("../models");
-const {generateJWT} = require("../utils/jsonWebToken.js");
+const {generateJWT} = require("../middleware/auth.js");
 
 /* Register the user */
 /* @route = POST /api/users/register */
@@ -46,7 +46,7 @@ const register = async (req, res) => {
   }
 }
 
-/* Log in the user */
+/* User login */
 /* @route = POST /api/users/login */
 const login = async (req, res) => {
   try {
