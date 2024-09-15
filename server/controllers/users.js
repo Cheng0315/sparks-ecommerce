@@ -4,11 +4,11 @@ const {User} = require("../models");
 const {generateJWT} = require("../utils/jsonWebToken.js");
 
 /* Register the user */
-/* @route = POST /api/users */
+/* @route = POST /api/users/register */
 const registerUser = async (req, res) => {
-  const { firstName, lastName, username, email, password } = req.body;
- 
   try {
+    const { firstName, lastName, username, email, password } = req.body;
+
     /* check if email or username exists in database */
     const user = await User.findOne({
       where: {
@@ -34,6 +34,7 @@ const registerUser = async (req, res) => {
         password: hashedPassword
       });
 
+      /* If user exists, generate token */
       if (newUser) {
         delete newUser.dataValues.password;
         generateJWT(res, newUser.id)
@@ -45,4 +46,20 @@ const registerUser = async (req, res) => {
   }
 }
 
-module.exports = {registerUser};
+/* View user's profile */
+/* @route = GET /api/users/:id/profile */
+const userProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] }
+    });
+    
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({error: error.message});
+  }
+}
+
+module.exports = {registerUser, userProfile};

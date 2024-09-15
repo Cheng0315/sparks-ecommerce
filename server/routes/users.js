@@ -1,9 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const {registerUser} = require("../controllers/users.js");
+const {registerUser, userProfile} = require("../controllers/users.js");
 const {validateUser} = require("../middleware/validateUser.js");
 
-/* Register the user */
-router.post("/register", validateUser, registerUser)
+/* CREATE */
+router.post("/register", validateUser, registerUser);
 
+/* READ */
+router.get("/:id/profile", userProfile);
+
+/* UPDATE */
+
+/* DELETE */
 module.exports = router;
