@@ -53,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
     isSeller: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    token: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,

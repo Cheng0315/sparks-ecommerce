@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const {User} = require("../models");
-const {generateJWT} = require("../middleware/auth.js");
+const {generateAccessJWT, generateRefreshJWT} = require("../middleware/auth.js");
 
 /* Register the user */
 /* @route = POST /api/users/register */
@@ -21,11 +21,11 @@ const register = async (req, res) => {
 
     /* create user if email and username doesn't exist in database */
     if (user) {
-      return res.status(500).json({error: "Email or username already exist. Please try logging in or use a different email or username"});
+      return res.status(409).json({error: "Email or username already exist. Please try logging in or use a different email or username"});
     } else {
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
-  
+
       const newUser = await User.create({
         firstName,
         lastName,
@@ -34,11 +34,17 @@ const register = async (req, res) => {
         password: hashedPassword
       });
 
-      /* If user exists, generate token */
+      /* If user exists, generate tokens */
       if (newUser) {
-        delete newUser.dataValues.password;
-        generateJWT(res, newUser.id)
-        res.status(201).json(newUser);
+        const userData = newUser.toJSON();
+        delete userData.password;
+
+        const accessToken = generateAccessJWT(newUser.id);
+        const refreshToken = generateRefreshJWT(res, newUser.id);
+
+        await newUser.update({token: refreshToken});
+        userData.token = accessToken;
+        res.status(201).json(userData);
       }
     }
   } catch (error) {
@@ -66,8 +72,8 @@ const login = async (req, res) => {
 }
 
 /* View user's profile */
-/* @route = GET /api/users/:id/profile */
-const userProfile = async (req, res) => {
+/* @route = GET /api/users/:id */
+const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findOne({
@@ -82,4 +88,4 @@ const userProfile = async (req, res) => {
   }
 }
 
-module.exports = {register, userProfile, login};
+module.exports = {register, login, getUser};

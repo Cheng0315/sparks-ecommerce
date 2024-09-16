@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 /* Authenticate Token from client */
-const verifyToken = (req, res, next) => {
+const verifyJWT = async (req, res, next) => {
   try {
     let token = req.header("Authorization");
    
@@ -17,22 +17,30 @@ const verifyToken = (req, res, next) => {
     req.user = verifiedUser;
     next();
   } catch (error) {
-    res.status(500).json({error: error.message});
+    res.status(401).json({error: error.message});
   }
 }
 
-const generateJWT = async (res, userId) => {
-  const token = jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET, { 
-    expiresIn: "1d"
+/* Generate Access Token */
+const generateAccessJWT = (userId) => {
+  return jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
+};
+
+/* Generate Refresh Token */
+const generateRefreshJWT = (res, userId) => {
+  const token = jwt.sign({userId}, process.env.REFRESH_TOKEN_SECRET, { 
+    expiresIn: "10d"
   });
 
-  /* Store jwt in cookie to send it to client */
+  /* Store refresh token in cookie to send it to client */
   res.cookie("jwt", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
     sameSite: "strict",
-    maxAge: 3600000
+    maxAge: 10 * 24 * 60 * 60 * 1000 // expire in 10 days
   });
+
+  return token;
 };
 
-module.exports = {verifyToken, generateJWT};
+module.exports = {verifyJWT, generateAccessJWT, generateRefreshJWT};

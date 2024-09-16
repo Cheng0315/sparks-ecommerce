@@ -43,6 +43,9 @@ module.exports = {
       is_seller: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
+      },
+      token: {
+        type: Sequelize.STRING
       }
     });
   },
