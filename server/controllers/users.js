@@ -63,9 +63,15 @@ const login = async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) return res.status(400).json({error: "Invalid email or password"});
     
-    delete user.dataValues.password;
-    generateJWT(res, user.id);
-    res.status(200).json(user);
+    const userData = user.toJSON();
+    delete userData.password;
+
+    const accessToken = generateAccessJWT(user.id);
+    const refreshToken = generateRefreshJWT(res, user.id);
+
+    await user.update({token: refreshToken});
+    userData.token = accessToken;
+    res.status(200).json(userData);
   } catch (error) {
     res.status(500).json({error: error.message});
   }

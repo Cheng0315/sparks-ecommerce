@@ -23,7 +23,7 @@ const verifyJWT = async (req, res, next) => {
 
 /* Generate Access Token */
 const generateAccessJWT = (userId) => {
-  return jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
+  return jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15s" });
 };
 
 /* Generate Refresh Token */
