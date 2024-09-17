@@ -34,7 +34,7 @@ const register = async (req, res) => {
         password: hashedPassword
       });
 
-      /* If user exists, generate tokens */
+      /* Generate tokens after creating new user */
       if (newUser) {
         const userData = newUser.toJSON();
         delete userData.password;
@@ -42,8 +42,8 @@ const register = async (req, res) => {
         const accessToken = generateAccessJWT(newUser.id);
         const refreshToken = generateRefreshJWT(res, newUser.id);
 
-        await newUser.update({token: refreshToken});
-        userData.token = accessToken;
+        await newUser.update({token: refreshToken}); // add refresh token to user's token field in database
+        userData.token = accessToken; // add access token to userData obj to be sent to user
         res.status(201).json(userData);
       }
     }
@@ -69,8 +69,8 @@ const login = async (req, res) => {
     const accessToken = generateAccessJWT(user.id);
     const refreshToken = generateRefreshJWT(res, user.id);
 
-    await user.update({token: refreshToken});
-    userData.token = accessToken;
+    await user.update({token: refreshToken}); // add refresh token to user's token field in database
+    userData.token = accessToken; // add access token to userData obj to be sent to user
     res.status(200).json(userData);
   } catch (error) {
     res.status(500).json({error: error.message});
