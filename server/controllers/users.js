@@ -21,7 +21,7 @@ const register = async (req, res) => {
 
     /* create user if email and username doesn't exist in database */
     if (user) {
-      return res.status(409).json({error: "Email or username already exist. Please try logging in or use a different email or username"});
+      return res.status(409).json({errorMessage: "Email or username already exist. Please try logging in or use a different email or username"});
     } else {
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
@@ -38,17 +38,17 @@ const register = async (req, res) => {
       if (newUser) {
         const userData = newUser.toJSON();
         delete userData.password;
+        delete userData.token;
 
         const accessToken = generateAccessJWT(newUser.id);
         const refreshToken = generateRefreshJWT(res, newUser.id);
 
         await newUser.update({token: refreshToken}); // add refresh token to user's token field in database
-        userData.token = accessToken; // add access token to userData obj to be sent to user
-        res.status(201).json(userData);
+        res.status(201).json({token: accessToken, user: userData});
       }
     }
   } catch (error) {
-    res.status(500).json({error: error.message});
+    res.status(500).json({errorMessage: error.message});
   }
 }
 
@@ -58,10 +58,10 @@ const login = async (req, res) => {
   try {
     const {email, password} = req.body;
     const user = await User.findOne({where: {email}});
-    if (!user) return res.status(400).json({error: "Invalid email or password"});
+    if (!user) return res.status(400).json({errorMessage: "Invalid email or password"});
     
     const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) return res.status(400).json({error: "Invalid email or password"});
+    if (!passwordMatch) return res.status(400).json({errorMessage: "Invalid email or password"});
     
     const userData = user.toJSON();
     delete userData.password;
@@ -73,7 +73,7 @@ const login = async (req, res) => {
     userData.token = accessToken; // add access token to userData obj to be sent to user
     res.status(200).json(userData);
   } catch (error) {
-    res.status(500).json({error: error.message});
+    res.status(500).json({errorMessage: error.message});
   }
 }
 
@@ -87,10 +87,10 @@ const getUser = async (req, res) => {
       attributes: { exclude: ['password'] }
     });
 
-    if (!user) return res.status(404).json({error: "Invalid user id"});
+    if (!user) return res.status(404).json({errorMessage: "Invalid user id"});
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json({error: error.message});
+    res.status(404).json({errorMessage: error.message});
   }
 }
 
