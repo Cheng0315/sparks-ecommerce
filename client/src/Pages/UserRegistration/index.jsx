@@ -1,10 +1,8 @@
 import { useFormik } from "formik";
-import axios from "axios";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setRegister } from "../../features/auth/authSlice.js";
-import { useNavigate } from 'react-router-dom';
-const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
-
+import { useNavigate } from "react-router-dom";
+import {registerUser} from "../../services/auth/authService.js"
 
 const UserRegistrationPage = () => {
   const dispatch = useDispatch();
@@ -20,15 +18,17 @@ const UserRegistrationPage = () => {
       email: "",
       password: ""
     },
-    /* Send POST request to the server to register the user */
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(`${serverURL}/api/users/register`, values);
-        if (response) {
+        /* Call the registerUser function to register the user*/
+        const data = await registerUser(values);
+
+        /* Update the user and token in the Redux store */
+        if (data) {
           dispatch(
             setRegister ({
-              user: response.data.user,
-              token: response.data.token
+              user: data.user,
+              token: data.token
             })
           );
           navigate("/")
