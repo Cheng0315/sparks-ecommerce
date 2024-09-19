@@ -1,9 +1,16 @@
-import {useFormik} from "formik";
+import { useFormik } from "formik";
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { setRegister } from "../../features/auth/authSlice.js";
+import { useNavigate } from 'react-router-dom';
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 
 const UserRegistrationPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
   /* Initialize formik with initial values */
   const formik = useFormik({
     initialValues: {
@@ -17,6 +24,15 @@ const UserRegistrationPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(`${serverURL}/api/users/register`, values);
+        if (response) {
+          dispatch(
+            setRegister ({
+              user: response.data.user,
+              token: response.data.token
+            })
+          );
+          navigate("/")
+        }
       } catch (error) {
         console.error('Unable to register due to the following error: ', error);
       }
