@@ -1,7 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import HomePage from "./pages/homePage";
-import UserRegistrationPage from "./pages/userRegistrationPage";
-import LoginPage from "./pages/loginPage";
+import { HomePage, UserRegistrationPage, LoginPage } from './pages';
 
 function App() {
   return (
