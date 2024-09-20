@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { setRegister } from "../../features/auth/authSlice.js";
+import { setAuth } from "../../features/auth/authSlice.js";
 import { useNavigate } from "react-router-dom";
 import {registerUser} from "../../services/auth/authService.js"
 
@@ -26,12 +26,12 @@ const UserRegistrationPage = () => {
         /* Update the user and token in the Redux store */
         if (data) {
           dispatch(
-            setRegister ({
+            setAuth ({
               user: data.user,
               token: data.token
             })
           );
-          navigate("/")
+          navigate("/");
         }
       } catch (error) {
         console.error('Unable to register due to the following error: ', error);
