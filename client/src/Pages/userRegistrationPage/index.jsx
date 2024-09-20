@@ -20,7 +20,7 @@ const UserRegistrationPage = () => {
     },
     onSubmit: async (values) => {
       try {
-        /* Call the registerUser function to register the user*/
+        /* Call the registerUser service to register the user*/
         const data = await registerUser(values);
 
         /* Update the user and token in the Redux store */

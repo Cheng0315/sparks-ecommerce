@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import {login} from "../../services/auth/authService.js"
 
 const LoginPage = () => {
 
@@ -9,7 +10,12 @@ const LoginPage = () => {
       password: ""
     },
     onSubmit: async (values) => {
-    
+      try {
+        /* Call the login service to log the user in */
+      const data = await login(values);
+      } catch (error) {
+        console.error('Unable to register due to the following error: ', error);
+      }
     }
   })
   
