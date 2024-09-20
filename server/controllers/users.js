@@ -65,13 +65,16 @@ const login = async (req, res) => {
     
     const userData = user.toJSON();
     delete userData.password;
+    delete userData.token;
 
     const accessToken = generateAccessJWT(user.id);
     const refreshToken = generateRefreshJWT(res, user.id);
 
     await user.update({token: refreshToken}); // add refresh token to user's token field in database
-    userData.token = accessToken; // add access token to userData obj to be sent to user
-    res.status(200).json(userData);
+    res.status(200).json({
+      user: userData,
+      token: accessToken
+    });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});
   }

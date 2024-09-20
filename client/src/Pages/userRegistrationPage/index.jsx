@@ -9,7 +9,7 @@ const UserRegistrationPage = () => {
   const navigate = useNavigate();
 
 
-  /* Initialize formik with initial values */
+  /* Initialize formik with initial values registration form */
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -67,4 +67,4 @@ const UserRegistrationPage = () => {
   )
 }
 
-export default UserRegistrationPage
+export default UserRegistrationPage;
