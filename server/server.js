@@ -2,6 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const env = require("dotenv");
 const userRoutes = require("./routes/users");
+const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const corsOptions = {
   origin: ["http://localhost:5173"],
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors(corsOptions));
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
+app.use(cookieParser());
 
 /* Routes */
 app.use("/api/users", userRoutes);

@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const {User} = require("../models");
-const {generateAccessJWT, generateRefreshJWT} = require("../middleware/auth.js");
+const {generateAccessJWT, generateRefreshJWT, verifyRefreshToken} = require("../middleware/auth.js");
 
 /* Register the user */
 /* @route = POST /api/users/register */
@@ -98,4 +98,35 @@ const getUser = async (req, res) => {
   }
 }
 
-module.exports = {register, login, getUser};
+
+/* Renew access token and refresh token */
+/* @route = POST /api/users/renew-tokens */
+const renewTokens = async (req, res) => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) return res.status(401).json({errorMessage: "Unauthorized"});
+
+    verifyRefreshToken(refreshToken);
+    const user = await User.findOne({
+      where: { token: refreshToken },
+      attributes: { exclude: ["password", "token"] }
+    });
+
+    if (!user) return res.status(401).json({errorMessage: "Unauthorized"});
+
+    const userData = user.toJSON();
+    
+    const newAccessToken = generateAccessJWT(user.id);
+    const newRefreshToken = generateRefreshJWT(res, user.id);
+
+    await user.update({token: newRefreshToken}); // update refresh token in user's token field in database
+    return res.status(200).json({
+      user: userData,
+      token: newAccessToken
+    });
+  } catch (error) {
+    return res.status(403).json({errorMessage: error.message});
+  }
+}
+
+module.exports = {register, login, getUser, renewTokens};

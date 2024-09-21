@@ -8,7 +8,7 @@ const authAxios = (token) => {
     withCredentials: true,
   });
 
-  /* Set Bearer token in headers */
+  /* Set Bearer access token in headers */
   axiosInstance.interceptors.request.use((config) => {
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;

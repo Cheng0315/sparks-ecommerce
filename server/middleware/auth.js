@@ -21,6 +21,14 @@ const verifyJWT = async (req, res, next) => {
   }
 }
 
+const verifyRefreshToken = (refreshToken) => {
+  try {
+    return jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+  } catch (error) {
+    throw error;
+  }
+}
+
 /* Generate Access Token */
 const generateAccessJWT = (userId) => {
   return jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15s" });
@@ -33,7 +41,7 @@ const generateRefreshJWT = (res, userId) => {
   });
 
   /* Store refresh token in cookie to send it to client */
-  res.cookie("jwt", token, {
+  res.cookie("refreshToken", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
     sameSite: "strict",
@@ -43,4 +51,4 @@ const generateRefreshJWT = (res, userId) => {
   return token;
 };
 
-module.exports = {verifyJWT, generateAccessJWT, generateRefreshJWT};
+module.exports = {verifyJWT, generateAccessJWT, generateRefreshJWT, verifyRefreshToken};
