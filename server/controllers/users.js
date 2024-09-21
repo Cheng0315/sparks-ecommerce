@@ -87,11 +87,12 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findOne({
       where: { id },
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ["password", "token", "newsletterSubscription", "newsletterCouponUsed"] }
     });
 
     if (!user) return res.status(404).json({errorMessage: "Invalid user id"});
-    res.status(200).json(user);
+    const userData = user.toJSON();
+    res.status(200).json(userData);
   } catch (error) {
     res.status(404).json({errorMessage: error.message});
   }

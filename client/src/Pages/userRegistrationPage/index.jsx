@@ -31,8 +31,8 @@ const UserRegistrationPage = () => {
               token: data.token
             })
           );
-          navigate("/");
         }
+        navigate("/");
       } catch (error) {
         console.error('Unable to register due to the following error: ', error);
       }
