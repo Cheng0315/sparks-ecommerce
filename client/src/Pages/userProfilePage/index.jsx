@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getAndSetViewedUser } from "../../services/api/userApi.js";
 
+
 const UserProfilePage = () => {
   const [viewedUser, setViewedUser] = useState(null);
   const token = useSelector((state) => state.auth.token);
   const { id } = useParams();
 
   useEffect(() => {
+    /* Call getAndSetViewedUser function to update the viewedUser state */
     getAndSetViewedUser(id, token, setViewedUser);
   }, [id]);
 
