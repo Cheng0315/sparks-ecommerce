@@ -1,12 +1,8 @@
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { setAuth } from "../../features/auth/authSlice.js";
-import { useNavigate } from "react-router-dom";
-import {registerUser} from "../../services/auth/authService.js"
+import useRegister from "../../hooks/user/useRegister.js";
 
 const UserRegistrationPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const register = useRegister();
 
 
   /* Initialize formik with initial values registration form */
@@ -18,26 +14,9 @@ const UserRegistrationPage = () => {
       email: "",
       password: ""
     },
-    onSubmit: async (values) => {
-      try {
-        /* Call the registerUser service to register the user*/
-        const data = await registerUser(values);
-
-        /* Update the user and token in the Redux store */
-        if (data) {
-          dispatch(
-            setAuth ({
-              user: data.user,
-              token: data.token
-            })
-          );
-          navigate("/");
-        }
-      } catch (error) {
-        console.error('Unable to register due to the following error: ', error);
-      }
-    }
-  })
+    /* Called register hook to register the user */
+    onSubmit: register
+  });
   
   return (
     /* Registration form */

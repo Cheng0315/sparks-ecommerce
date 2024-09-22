@@ -18,4 +18,4 @@ const useGetAndSetViewedUser = (id, setViewedUser) => {
   }, [id]);
 };
 
-export {useGetAndSetViewedUser};
+export default useGetAndSetViewedUser;
