@@ -104,7 +104,7 @@ const getUser = async (req, res) => {
 const renewTokens = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.status(401).json({errorMessage: "Unauthorized"});
+    if (!refreshToken) return res.status(403).json({errorMessage: "Unauthorized"});
 
     verifyRefreshToken(refreshToken);
     const user = await User.findOne({
@@ -112,7 +112,7 @@ const renewTokens = async (req, res) => {
       attributes: { exclude: ["password", "token"] }
     });
 
-    if (!user) return res.status(401).json({errorMessage: "Unauthorized"});
+    if (!user) return res.status(404).json({errorMessage: "Unauthorized"});
 
     const userData = user.toJSON();
     
@@ -120,12 +120,12 @@ const renewTokens = async (req, res) => {
     const newRefreshToken = generateRefreshJWT(res, user.id);
 
     await user.update({token: newRefreshToken}); // update refresh token in user's token field in database
-    return res.status(200).json({
+    res.status(200).json({
       user: userData,
       token: newAccessToken
     });
   } catch (error) {
-    return res.status(403).json({errorMessage: error.message});
+    res.status(500).json({errorMessage: "Error renewing tokens"});
   }
 }
 
