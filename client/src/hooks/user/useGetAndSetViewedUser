@@ -1,0 +1,21 @@
+import { authAxios } from "../../services/api/authAxios";
+import { useEffect } from "react";
+
+const useGetAndSetViewedUser = (id, setViewedUser) => {
+  const authorizedAxios = authAxios();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await authorizedAxios.get(`/api/users/${id}`);
+        setViewedUser(response.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error.response.data.errorMessage);
+      }
+    };
+
+    fetchUser();
+  }, [id]);
+};
+
+export {useGetAndSetViewedUser};

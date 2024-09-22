@@ -1,9 +1,13 @@
 import axios from 'axios';
-const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 import { setAuth } from "../../features/auth/authSlice.js";
+import { useSelector, useDispatch } from 'react-redux';
+const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 /* Axios instance for making request to backend with authorization token */
-const authAxios = (token, dispatch) => {
+const authAxios = () => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  
   const axiosInstance = axios.create({
     baseURL: serverURL,
     withCredentials: true,

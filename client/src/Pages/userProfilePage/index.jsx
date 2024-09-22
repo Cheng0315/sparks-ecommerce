@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAndSetViewedUser } from "../../services/api/userApi.js";
+import { useGetAndSetViewedUser } from "../../hooks/user/useGetAndSetViewedUser";
 
 const UserProfilePage = () => {
   const [viewedUser, setViewedUser] = useState(null);
-  const token = useSelector((state) => state.auth.token);
   const { id } = useParams();
-  const dispatch = useDispatch();
 
-  /* Call getAndSetViewedUser to update viewedUser based on id change*/
-  useEffect(() => {
-    getAndSetViewedUser(id, token, setViewedUser, dispatch);
-  }, [id]);
+  /* Call useGetAndSetViewedUser hook to update viewedUser based on id change*/
+  useGetAndSetViewedUser(id, setViewedUser);
 
-  if (!viewedUser) return <div>Loading user data or unauthorized access.</div>;
+  if (!viewedUser) return <div>Loading user data...</div>;
 
   return (
     <div>
