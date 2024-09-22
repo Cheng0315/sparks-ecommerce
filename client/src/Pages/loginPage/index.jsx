@@ -1,12 +1,8 @@
 import { useFormik } from "formik";
-import { login } from "../../services/auth/authService.js"
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setAuth } from "../../features/auth/authSlice.js";
+import useLogin from "../../hooks/user/useLogin.js";
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const login = useLogin()
 
   /* Initialize formik with initial values for login form*/
   const formik = useFormik({
@@ -14,25 +10,7 @@ const LoginPage = () => {
       email: "",
       password: ""
     },
-    onSubmit: async (values) => {
-      try {
-        /* Call the login service to log the user in */
-        const data = await login(values);
-
-        /* Update the user and token in the Redux store */
-        if (data) {
-          dispatch(
-            setAuth ({
-              user: data.user,
-              token: data.token
-            })
-          );
-          navigate("/");
-        }
-      } catch (error) {
-        console.error('Unable to login due to the following error: ', error);
-      }
-    }
+    onSubmit: login
   })
   
   return (
