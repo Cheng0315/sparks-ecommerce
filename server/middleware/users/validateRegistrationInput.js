@@ -30,4 +30,4 @@ const validateRegistrationInput = (req, res, next) => {
   next();
 };
 
-module.exports = {validateRegistrationInput};
+module.exports = validateRegistrationInput;
