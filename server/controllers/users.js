@@ -102,11 +102,9 @@ const getUser = async (req, res) => {
 /* Renew access token and refresh token */
 /* @route = POST /api/users/renew-tokens */
 const renewTokens = async (req, res) => {
-  try {
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.status(403).json({errorMessage: "Unauthorized"});
+  const refreshToken = req.cookies.refreshToken;
 
-    verifyRefreshToken(refreshToken);
+  try {
     const user = await User.findOne({
       where: { token: refreshToken },
       attributes: { exclude: ["password", "token"] }
@@ -119,14 +117,36 @@ const renewTokens = async (req, res) => {
     const newAccessToken = generateAccessJWT(user.id);
     const newRefreshToken = generateRefreshJWT(res, user.id);
 
-    await user.update({token: newRefreshToken}); // update refresh token in user's token field in database
+    user.token = newRefreshToken;
+    await user.save(); // update refresh token in user's token field in database
     res.status(200).json({
       user: userData,
       token: newAccessToken
     });
   } catch (error) {
-    res.status(500).json({errorMessage: "Error renewing tokens"});
+    console.error('Error:', error);
   }
 }
 
-module.exports = {register, login, getUser, renewTokens};
+/* Logout the user*/
+/* @route = DELETE /api/users/logout */
+const logout = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+
+  try {
+    const user = await User.findOne({
+      where: { token: refreshToken },
+      attributes: { exclude: ["password", "token"] }
+    });
+
+    if (!user) return res.status(404).json({errorMessage: "User not found"});
+    
+    user.token = null;
+    await user.save();
+    res.status(200).send({message: "Successfully logged out"});
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+}
+
+module.exports = {register, login, getUser, renewTokens, logout};

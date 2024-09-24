@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const {register, login, getUser, renewTokens} = require("../controllers/users.js");
+const {register, login, getUser, renewTokens, logout} = require("../controllers/users.js");
 const {validateRegistrationInput} = require("../middleware/validateUserInput.js");
-const {verifyAccessToken} = require("../middleware/auth.js");
+const {verifyAccessToken, verifyRefreshToken} = require("../middleware/auth.js");
 
 
 /* Auth */
 router.post("/register", validateRegistrationInput, register);
 router.post("/login", login);
 router.post("/renew-tokens", renewTokens);
+router.delete("/logout", verifyRefreshToken, logout);
 
 /* Create */
 

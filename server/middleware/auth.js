@@ -12,16 +12,22 @@ const verifyAccessToken = async (req, res, next) => {
       next();
     });
   } catch (error) {
-    res.status(401).json({error: error.message});
+    res.status(401).json({errorMessage: "Failed to verify token"});
   }
 }
 
 /* Authenticate refresh token */
-const verifyRefreshToken = (refreshToken) => {
+const verifyRefreshToken = async (req, res, next) => {
   try {
-    return jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) return res.status(401).json({errorMessage: "Unauthorized"});
+
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) return res.status(403).json({errorMessage: "User not found"});
+      next();
+    });
   } catch (error) {
-    throw error;
+    res.status(401).json({errorMessage: "Failed to verify token"});
   }
 }
 

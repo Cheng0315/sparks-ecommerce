@@ -32,7 +32,6 @@ const authAxios = () => {
     (response) => response,
     async (error) => {
       const initialRequest = error.config;
-      console.log("In axios auth");
       if (error.response && error.response.status === 401 && !initialRequest.retryRequest) {
         initialRequest.retryRequest = true;
         try {
