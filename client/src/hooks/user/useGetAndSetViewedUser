@@ -5,6 +5,7 @@ const useGetAndSetViewedUser = (id, setViewedUser) => {
   const authorizedAxios = authAxios();
 
   useEffect(() => {
+    /* Create an instance of AbortController to cancel network request when needed */
     const controller = new AbortController();
 
     const getAndSetViewedUSer = async () => {
@@ -23,6 +24,7 @@ const useGetAndSetViewedUser = (id, setViewedUser) => {
     getAndSetViewedUSer();
 
     return () => {
+      /* Cancel ongoing network request when the component unmount */
       controller.abort();
     }
   }, [id]);

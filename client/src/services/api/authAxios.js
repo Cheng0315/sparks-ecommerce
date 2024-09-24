@@ -3,7 +3,13 @@ import { setAuth } from "../../features/auth/authSlice.js";
 import { useSelector, useDispatch } from 'react-redux';
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
-/* Axios instance for making request to backend with authorization token */
+/* Axios instance for making request the the server with credentials */
+const apiAxios = axios.create({
+  baseURL: serverURL,
+  withCredentials: true,
+});
+
+/* Axios instance for making request to the server with credentials and interceptors */
 const authAxios = () => {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
@@ -50,4 +56,4 @@ const authAxios = () => {
   return axiosInstance;
 };
 
-export { authAxios };
+export { authAxios, apiAxios };
