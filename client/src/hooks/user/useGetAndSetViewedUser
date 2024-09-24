@@ -5,16 +5,26 @@ const useGetAndSetViewedUser = (id, setViewedUser) => {
   const authorizedAxios = authAxios();
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const controller = new AbortController();
+
+    const getAndSetViewedUSer = async () => {
       try {
-        const response = await authorizedAxios.get(`/api/users/${id}`);
+        const response = await authorizedAxios.get(`/api/users/${id}`, {
+          signal: controller.signal
+        });
         setViewedUser(response.data);
       } catch (error) {
-        console.error('Error fetching user data:', error.response.data.errorMessage);
+        if (error.name !== 'CanceledError') {
+          console.error('Error fetching user data:', error);
+        }
       }
     };
 
-    fetchUser();
+    getAndSetViewedUSer();
+
+    return () => {
+      controller.abort();
+    }
   }, [id]);
 };
 

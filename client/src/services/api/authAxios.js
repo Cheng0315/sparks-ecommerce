@@ -26,7 +26,8 @@ const authAxios = () => {
     (response) => response,
     async (error) => {
       const initialRequest = error.config;
-      if (error.response.status === 401 && !initialRequest.retryRequest) {
+      console.log("In axios auth");
+      if (error.response && error.response.status === 401 && !initialRequest.retryRequest) {
         initialRequest.retryRequest = true;
         try {
           const { data } = await axiosInstance.post("/api/users/renew-tokens");
