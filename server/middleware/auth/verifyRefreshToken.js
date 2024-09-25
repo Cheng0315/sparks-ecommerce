@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const verifyRefreshToken = async (req, res, next) => {
   try {
     const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.status(401).json({errorMessage: "Unauthorized"});
+    if (!refreshToken) return res.status(403).json({errorMessage: "Unauthorized"});
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) return res.status(403).json({errorMessage: "User not found"});

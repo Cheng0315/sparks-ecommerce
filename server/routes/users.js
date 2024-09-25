@@ -8,7 +8,7 @@ const {verifyAccessToken, verifyRefreshToken} = require("../middleware/auth");
 /* Auth */
 router.post("/register", validateRegistrationInput, register);
 router.post("/login", login);
-router.post("/renew-tokens", renewTokens);
+router.post("/renew-tokens", verifyRefreshToken, renewTokens);
 router.delete("/logout", verifyRefreshToken, logout);
 
 /* Create */

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from 'react-router-dom';
-import useGetAndSetViewedUser from "../../hooks/user/useGetAndSetViewedUser";
+import useGetAndSetViewedUser from "../../hooks/user/useGetAndSetViewedUser.js";
 
 const UserProfilePage = () => {
   const [viewedUser, setViewedUser] = useState(null);

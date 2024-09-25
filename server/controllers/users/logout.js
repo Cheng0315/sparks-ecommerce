@@ -13,6 +13,7 @@ const logout = async (req, res) => {
 
     if (!user) return res.status(404).json({errorMessage: "User not found"});
     
+    res.clearCookie("refreshToken");
     user.token = null;
     await user.save();
     res.status(200).send({message: "Successfully logged out"});
