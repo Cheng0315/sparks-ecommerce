@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   /* user object from redux store */
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
   const handleClick = () => {

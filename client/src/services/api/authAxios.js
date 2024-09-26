@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { setAuth } from "../../features/auth/authSlice.js";
 import { useSelector, useDispatch } from 'react-redux';
+import { setToken, setUser } from "../../features/slices";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 /* Axios instance for making request the the server with credentials */
@@ -11,7 +11,7 @@ const apiAxios = axios.create({
 
 /* Axios instance for making request to the server with credentials and interceptors */
 const authAxios = () => {
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.token.token);
   const dispatch = useDispatch();
   
   const axiosInstance = axios.create({
@@ -35,14 +35,10 @@ const authAxios = () => {
       if (error.response && error.response.status === 401 && !initialRequest.retryRequest) {
         initialRequest.retryRequest = true;
         try {
-          const { data } = await axiosInstance.post("/api/users/renew-tokens");
-          dispatch(
-            setAuth ({
-              user: data.user,
-              token: data.token
-            })
-          );
-          initialRequest.headers['Authorization'] = `Bearer ${data.token}`;
+          const response = await axiosInstance.post("/api/users/renew-tokens");
+          dispatch(setUser({user: response.data.user}));
+          dispatch(setToken({token: response.data.token}));
+          initialRequest.headers['Authorization'] = `Bearer ${response.data.token}`;
           return axiosInstance(initialRequest);
         } catch (refreshError) {
           return Promise.reject(refreshError);

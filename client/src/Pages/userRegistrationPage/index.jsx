@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import useRegister from "../../hooks/user/useRegister.js";
+import useRegister from "../../hooks/users/useRegister.js";
 
 const UserRegistrationPage = () => {
   const register = useRegister();
