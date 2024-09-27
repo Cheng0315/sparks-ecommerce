@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import useRegister from "../../hooks/users/useRegister.js";
+import { userRegistrationSchema } from '../../validationSchemas'; 
 
 const UserRegistrationPage = () => {
   const register = useRegister();
@@ -14,7 +15,9 @@ const UserRegistrationPage = () => {
       email: "",
       password: ""
     },
-    /* Called register hook to register the user */
+    /* Add YUP user registration validation schema */
+    validationSchema: userRegistrationSchema,
+    /* Call register hook to register the user */
     onSubmit: register
   });
   
@@ -23,23 +26,38 @@ const UserRegistrationPage = () => {
     <form onSubmit={formik.handleSubmit}>
       <div className="field">
         <label>First Name:</label>
-        <input type="text" name="firstName" value={formik.values.firstName} onChange={formik.handleChange} />
+        <input type="text" name="firstName" value={formik.values.firstName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        {formik.touched.firstName && formik.errors.firstName ? (
+          <div className="error">{formik.errors.firstName}</div>
+        ) : null}
       </div>
       <div className="field">
         <label>Last Name:</label>
-        <input type="text" name="lastName" value={formik.values.lastName} onChange={formik.handleChange} />
+        <input type="text" name="lastName" value={formik.values.lastName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        {formik.touched.lastName && formik.errors.lastName ? (
+          <div className="error">{formik.errors.lastName}</div>
+        ) : null}
       </div>
       <div className="field">
         <label>Username:</label>
-        <input type="text" name="username" value={formik.values.username} onChange={formik.handleChange} />
+        <input type="text" name="username" value={formik.values.username} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        {formik.touched.username && formik.errors.username ? (
+          <div className="error">{formik.errors.username}</div>
+        ) : null}
       </div>
       <div className="field">
         <label>Email:</label>
-        <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} />
+        <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        {formik.touched.email && formik.errors.email ? (
+          <div className="error">{formik.errors.email}</div>
+        ) : null}
       </div>
       <div className="field">
         <label>Password:</label>
-        <input type="password" name="password" value={formik.values.password} onChange={formik.handleChange} />
+        <input type="password" name="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        {formik.touched.password && formik.errors.password ? (
+          <div className="error">{formik.errors.password}</div>
+        ) : null}
       </div>
       <button type="submit">Submit</button>
     </form>

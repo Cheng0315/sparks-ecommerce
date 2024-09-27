@@ -13,7 +13,16 @@ const Navbar = () => {
         <div className="text-white text-lg font-bold">Sparks eCommerce</div>
         <div className="space-x-4">
           <Link to="/" className="text-gray-300 hover:text-white">Home</Link>
-          {user ? <button onClick={logout} className="text-gray-300 hover:text-white">Logout</button> : ""}
+          {user ? (
+            <button onClick={logout} className="text-gray-300 hover:text-white">
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
+              <Link to="/register" className="text-gray-300 hover:text-white">Register</Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
