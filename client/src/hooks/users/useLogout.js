@@ -9,14 +9,14 @@ const useLogout = () => {
   const navigate = useNavigate();
 
   const logout = async () => {
-    try {
+    /* Clear user and access token on frontend */
+    dispatch(clearUser());
+    dispatch(clearToken());
 
+    try {
       /* Make request to backend to delete refresh token on frontend and backend*/
       const response = await apiAxios.delete("/api/users/logout");
       
-      /* Clear user and access token on frontend */
-      dispatch(clearUser());
-      dispatch(clearToken());
       navigate("/");
     } catch (error) {
       console.error("Unable to logout due to the following error: ", error);

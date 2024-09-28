@@ -13,14 +13,16 @@ const login = async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) return res.status(400).json({errorMessage: "Invalid email or password"});
     
+    const accessToken = generateAccessJWT(user.id);
+    const refreshToken = generateRefreshJWT(res, user.id);
+
+    user.token = refreshToken; // add refresh token to user's token field in database
+    await user.save();
+
     const userData = user.toJSON();
     delete userData.password;
     delete userData.token;
 
-    const accessToken = generateAccessJWT(user.id);
-    const refreshToken = generateRefreshJWT(res, user.id);
-
-    await user.update({token: refreshToken}); // add refresh token to user's token field in database
     res.status(200).json({
       user: userData,
       token: accessToken
