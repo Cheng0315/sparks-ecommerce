@@ -7,7 +7,7 @@ const { sanitizeUser } = require("../../utils/users")
 const updatePassword = async (req, res) => {
   try {
     const { newPassword } = req.body;
-    const { id } = req.params;
+    const id = req.id;
 
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(newPassword, salt);

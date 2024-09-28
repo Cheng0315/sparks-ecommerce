@@ -7,8 +7,7 @@ const updateInfo = async (req, res) => {
   try {
     const { firstName, lastName, username } = req.body;
     
-    const id = parseInt(req.params.id);
-    if (!Number.isInteger(id)) return res.status(400).json({errorMessage: "Bad Request"});
+    const id = req.id;
 
     const user = await User.findOne({ where: { id }});
 
