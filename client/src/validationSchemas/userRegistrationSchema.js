@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-/* Validations for user registration form */
+/* Validation for user registration form */
 const userRegistrationSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First name is required")

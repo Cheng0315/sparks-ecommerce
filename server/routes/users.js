@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {register, login, getUser, renewTokens, logout} = require("../controllers/users");
+const {register, login, getUser, renewTokens, logout, updatePassword} = require("../controllers/users");
 const {validateRegistrationInput} = require("../middleware/users");
-const {verifyAccessToken, verifyRefreshToken} = require("../middleware/auth");
+const {verifyAccessToken, verifyRefreshToken, validateNewPassword, verifyPassword} = require("../middleware/auth");
 
 
 /* Auth */
@@ -17,6 +17,7 @@ router.delete("/logout", verifyRefreshToken, logout);
 router.get("/:id", verifyAccessToken, getUser);
 
 /* Update */
+router.patch("/:id/update-password", verifyAccessToken, validateNewPassword, verifyPassword, updatePassword);
 
 /* Delete */
 
