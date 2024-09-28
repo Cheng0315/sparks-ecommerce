@@ -6,6 +6,7 @@ const register = require("./register");
 const renewTokens = require("./renewTokens");
 const updatePassword = require("./updatePassword");
 const updateEmail = require("./updateEmail");
+const updateInfo = require("./updateInfo")
 
 module.exports = {
   getUser,
@@ -14,5 +15,6 @@ module.exports = {
   register,
   renewTokens,
   updatePassword,
-  updateEmail
+  updateEmail,
+  updateInfo
 };
