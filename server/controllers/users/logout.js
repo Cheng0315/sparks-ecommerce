@@ -1,4 +1,4 @@
-const {User} = require("../../models");
+const { User } = require("../../models");
 
 /* Logout the user*/
 /* @route = DELETE /api/users/logout */

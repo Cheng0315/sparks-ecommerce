@@ -4,7 +4,9 @@ const bcrypt = require("bcrypt");
 /* Verify password */
 const verifyPassword = async (req, res, next) => {
   const { password } = req.body;
-  const { id } = req.params;
+  const id = parseInt(req.params.id);
+  
+  if (!Number.isInteger(id)) return res.status(400).json({errorMessage: "Bad Request"});
 
   const user = await User.findOne({where: { id }});
   if (!user) return res.status(404).json({errorMessage: "User not found"});

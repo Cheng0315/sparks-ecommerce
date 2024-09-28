@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-const {User} = require("../../models");
-const {generateAccessJWT, generateRefreshJWT} = require("../../utils/jwtUtils");
+const { User } = require("../../models");
+const { generateAccessJWT, generateRefreshJWT } = require("../../utils/jwtUtils");
 
 /* User login */
 /* @route = POST /api/users/login */
