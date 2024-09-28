@@ -1,4 +1,5 @@
 const { User } = require("../../models");
+const { sanitizeUser } = require("../../utils/users")
 
 /* Update email */
 /* @route = PATCH /api/users/:id/update-email */
@@ -12,12 +13,10 @@ const updateEmail = async (req, res) => {
     user.email = email;
     await user.save();
 
-    const userData = user.toJSON();
-    delete userData.password;
-    delete userData.token;
-    
+    const sanitizedUser = sanitizeUser(user); //remove user's password and token
+
     res.status(200).json({
-      user: userData
+      user: sanitizedUser
     });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});

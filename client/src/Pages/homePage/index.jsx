@@ -11,7 +11,6 @@ const HomePage = () => {
   }
   return (
     <div onClick={handleClick}>Welcome { user ? user.firstName : ""}</div>
-    
   )
 }
 

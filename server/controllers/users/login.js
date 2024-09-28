@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { User } = require("../../models");
 const { generateAccessJWT, generateRefreshJWT } = require("../../utils/jwtUtils");
+const { sanitizeUser } = require("../../utils/users")
 
 /* User login */
 /* @route = POST /api/users/login */
@@ -19,12 +20,10 @@ const login = async (req, res) => {
     user.token = refreshToken; // add refresh token to user's token field in database
     await user.save();
 
-    const userData = user.toJSON();
-    delete userData.password;
-    delete userData.token;
+    const sanitizedUser = sanitizeUser(user); // remove user's token and password
 
     res.status(200).json({
-      user: userData,
+      user: sanitizedUser,
       token: accessToken
     });
   } catch (error) {

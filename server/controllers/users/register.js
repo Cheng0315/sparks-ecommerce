@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const { User } = require("../../models");
 const { generateAccessJWT, generateRefreshJWT } = require("../../utils/jwtUtils");
+const { sanitizeUser } = require("../../utils/users")
 
 /* Register the user */
 /* @route = POST /api/users/register */
@@ -42,11 +43,9 @@ const register = async (req, res) => {
         newUser.token = refreshToken; // add refresh token to user's token field in database
         newUser.save();
 
-        const userData = newUser.toJSON();
-        delete userData.password;
-        delete userData.token;
+        const sanitizedUser = sanitizeUser(newUser);
 
-        res.status(201).json({token: accessToken, user: userData});
+        res.status(201).json({user: sanitizedUser, token: accessToken});
       }
     }
   } catch (error) {

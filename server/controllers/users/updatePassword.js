@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { User } = require("../../models");
+const { sanitizeUser } = require("../../utils/users")
 
 /* Update password */
 /* @route = PATCH /api/users/:id/update-password */
@@ -16,12 +17,10 @@ const updatePassword = async (req, res) => {
     user.password = hashedPassword;
     await user.save();
 
-    const userData = user.toJSON();
-    delete userData.password;
-    delete userData.token;
+    const sanitizedUser = sanitizeUser(user); //remove user's password and token
 
     res.status(200).json({
-      user: userData
+      user: sanitizedUser
     });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});
