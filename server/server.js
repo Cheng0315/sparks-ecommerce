@@ -4,6 +4,7 @@ const env = require("dotenv");
 const userRoutes = require("./routes/users");
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
+const { generalRateLimiter } = require('./middleware/auth');
 const corsOptions = {
   origin: [process.env.ORIGIN_SERVER],
   credentials: true
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors(corsOptions));
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(cookieParser());
+app.use(generalRateLimiter);
 
 /* Routes */
 app.use("/api/users", userRoutes);
