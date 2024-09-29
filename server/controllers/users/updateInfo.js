@@ -6,9 +6,9 @@ const { sanitizeUser } = require("../../utils/users")
 const updateInfo = async (req, res) => {
   try {
     const { firstName, lastName, username } = req.body;
-    const id = req.id;
+    const userId = req.userId;
     
-    const user = await User.findOne({ where: { id }});
+    const user = await User.findOne({ where: { userId }});
 
     user.firstName = firstName;
     user.lastName = lastName;

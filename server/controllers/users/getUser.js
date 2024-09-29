@@ -2,12 +2,12 @@ const { User } = require("../../models");
 
 
 /* View user's profile */
-/* @route = GET /api/users/:id */
+/* @route = GET /api/users/:userId */
 const getUser = async (req, res) => {
   try {
-    const id = req.id;
+    const userId = req.userId;
     const user = await User.findOne({
-      where: { id },
+      where: { userId },
       attributes: { exclude: ["password", "token", "newsletterSubscription", "newsletterCouponUsed"] }
     });
 

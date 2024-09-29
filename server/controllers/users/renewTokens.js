@@ -12,8 +12,8 @@ const renewTokens = async (req, res) => {
 
     if (!user) return res.status(404).json({errorMessage: "Unauthorized"});
     
-    const newAccessToken = generateAccessJWT(user.id);
-    const newRefreshToken = generateRefreshJWT(res, user.id);
+    const newAccessToken = generateAccessJWT(user.userId);
+    const newRefreshToken = generateRefreshJWT(res, user.userId);
 
     user.token = newRefreshToken;
     await user.save(); // update refresh token in user's token field in database

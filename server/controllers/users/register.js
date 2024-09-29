@@ -34,11 +34,11 @@ const register = async (req, res) => {
         email,
         password: hashedPassword
       });
-
+     
       /* Generate tokens after creating new user */
       if (newUser) {
-        const accessToken = generateAccessJWT(newUser.id);
-        const refreshToken = generateRefreshJWT(res, newUser.id);
+        const accessToken = generateAccessJWT(newUser.userId);
+        const refreshToken = generateRefreshJWT(res, newUser.userId);
 
         newUser.token = refreshToken; // add refresh token to user's token field in database
         newUser.save();

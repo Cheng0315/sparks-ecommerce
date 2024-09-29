@@ -6,9 +6,9 @@ const { sanitizeUser } = require("../../utils/users")
 const updateEmail = async (req, res) => {
   try {
     const { email } = req.body;
-    const id = req.id;
+    const userId = req.userId;
 
-    const user = await User.findOne({ where: { id }});
+    const user = await User.findOne({ where: { userId }});
 
     user.email = email;
     await user.save();

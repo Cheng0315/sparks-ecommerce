@@ -12,7 +12,7 @@ function App() {
           <Route path="/register" element={<UserRegistrationPage />}/>
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/my-account" element={<MyAccountPage />}/>
-          <Route path="/users/:id" element={<UserProfilePage />}/>
+          <Route path="/users/:userId" element={<UserProfilePage />}/>
         </Routes>
       </BrowserRouter>
     </div>

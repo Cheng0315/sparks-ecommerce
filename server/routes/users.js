@@ -14,12 +14,12 @@ router.delete("/logout", strictRateLimiter, verifyRefreshToken, logout);
 /* Create */
 
 /* Read */
-router.get("/:id", validateParamsId, verifyAccessToken, getUser);
+router.get("/:userId", validateParamsId, verifyAccessToken, getUser);
 
 /* Update */
-router.patch("/:id/change-password", strictRateLimiter, validateParamsId, verifyAccessToken, validateNewPassword, verifyPassword, updatePassword);
-router.patch("/:id/update-email", strictRateLimiter, validateParamsId, verifyAccessToken, validateNewEmail, verifyPassword, updateEmail);
-router.patch("/:id/update-info", strictRateLimiter, validateParamsId, verifyAccessToken, validateUserUpdateInfo, updateInfo);
+router.patch("/:userId/change-password", strictRateLimiter, validateParamsId, verifyAccessToken, validateNewPassword, verifyPassword, updatePassword);
+router.patch("/:userId/update-email", strictRateLimiter, validateParamsId, verifyAccessToken, validateNewEmail, verifyPassword, updateEmail);
+router.patch("/:userId/update-info", strictRateLimiter, validateParamsId, verifyAccessToken, validateUserUpdateInfo, updateInfo);
 
 /* Delete */
 

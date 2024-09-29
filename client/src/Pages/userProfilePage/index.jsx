@@ -4,10 +4,10 @@ import useGetAndSetViewedUser from "../../hooks/users/useGetAndSetViewedUser.js"
 
 const UserProfilePage = () => {
   const [viewedUser, setViewedUser] = useState(null);
-  const { id } = useParams();
+  const { userId } = useParams();
 
   /* Call useGetAndSetViewedUser hook to update viewedUser based on id change*/
-  useGetAndSetViewedUser(id, setViewedUser);
+  useGetAndSetViewedUser(userId, setViewedUser);
 
   if (!viewedUser) return <div>Loading user data...</div>;
 
