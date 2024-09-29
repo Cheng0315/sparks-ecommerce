@@ -15,10 +15,10 @@ router.delete("/logout", verifyRefreshToken, logout);
 /* Create */
 
 /* Read */
-router.get("/:id", verifyAccessToken, getUser);
+router.get("/:id", validateParamsId, verifyAccessToken, getUser);
 
 /* Update */
-router.patch("/:id/update-password", validateParamsId, verifyAccessToken, validateNewPassword, verifyPassword, updatePassword);
+router.patch("/:id/change-password", validateParamsId, verifyAccessToken, validateNewPassword, verifyPassword, updatePassword);
 router.patch("/:id/update-email", validateParamsId, verifyAccessToken, verifyPassword, updateEmail);
 router.patch("/:id/update-info", validateParamsId, verifyAccessToken, validateUserUpdateInfo, updateInfo);
 

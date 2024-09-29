@@ -5,7 +5,7 @@ const { User } = require("../../models");
 /* @route = GET /api/users/:id */
 const getUser = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.id;
     const user = await User.findOne({
       where: { id },
       attributes: { exclude: ["password", "token", "newsletterSubscription", "newsletterCouponUsed"] }

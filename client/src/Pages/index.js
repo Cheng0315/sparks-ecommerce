@@ -3,3 +3,4 @@ export { default as HomePage } from "./homePage";
 export { default as UserRegistrationPage } from "./userRegistrationPage";
 export { default as LoginPage } from "./loginPage";
 export { default as UserProfilePage } from "./userProfilePage";
+export { default as MyAccountPage } from "./myAccountPage";
