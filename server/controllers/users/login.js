@@ -7,9 +7,8 @@ const { sanitizeUser } = require("../../utils/users")
 /* @route = POST /api/users/login */
 const login = async (req, res) => {
   try {
-    const email = req.body.email.toLowerCase();
-    const password = req.body.password;
-    
+    const { email, password } = req.body;
+
     const user = await User.findOne({where: {email}});
     if (!user) return res.status(400).json({errorMessage: "Invalid email or password"});
     
