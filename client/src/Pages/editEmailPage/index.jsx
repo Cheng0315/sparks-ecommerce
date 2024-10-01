@@ -1,25 +1,28 @@
 import { useFormik } from "formik";
-import { useLogin } from "../../hooks/users";
-import { loginSchema } from '../../validationSchemas'; 
+import { useUpdateUserEmail } from "../../hooks/users";
+import { loginSchema } from '../../validationSchemas';
+import { useSelector } from 'react-redux';
 
-const LoginPage = () => {
-  const login = useLogin()
+const EditEmailPage = () => {
+  const user = useSelector((state) => state.user.user);
+  const updateUserEmail = useUpdateUserEmail();
 
-  /* Initialize formik with initial values for login form*/
+  /* Initialize formik with initial values for edit email form */
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: user.email,
       password: ""
     },
-    /* Add YUP login validation schema */
+    /* Add YUP validation schema for email and password */
     validationSchema: loginSchema,
-    /* Call login hook to log the user in */
-    onSubmit: login
+    /* Call useEditUserEmail hook to make a request to server to update email */
+    onSubmit: updateUserEmail
   })
   
   return (
-    /* Login form */
+    /* Edit email form */
     <form onSubmit={formik.handleSubmit}>
+      <h4 className="text-2xl font-bold">Edit Email</h4>
       <div className="field">
         <label className="block">Email:</label>
         <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
@@ -34,9 +37,9 @@ const LoginPage = () => {
           <div className="error">{formik.errors.password}</div>
         ) : null}
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Update</button>
     </form>
   )
 }
 
-export default LoginPage;
+export default EditEmailPage;

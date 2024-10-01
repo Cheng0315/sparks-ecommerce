@@ -14,9 +14,12 @@ const Navbar = () => {
         <div className="space-x-4">
           <Link to="/" className="text-gray-300 hover:text-white">Home</Link>
           {user ? (
-            <button onClick={logout} className="text-gray-300 hover:text-white">
-              Logout
-            </button>
+            <>
+            <Link to="/my-account" className="text-gray-300 hover:text-white">My Account</Link>
+              <button onClick={logout} className="text-gray-300 hover:text-white">
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>

@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, MyAccountPage} from './pages';
+import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, MyAccountPage, EditEmailPage } from './pages';
 import { Navbar } from "./components";
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/my-account" element={<MyAccountPage />}/>
           <Route path="/users/:userId" element={<UserProfilePage />}/>
+          <Route path="/my-account/edit-email" element={<EditEmailPage />}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const MyAccountPage = () => {
   const user = useSelector((state) => state.user.user);
@@ -20,7 +20,7 @@ const MyAccountPage = () => {
       <h4 className="text-2xl font-bold">Welcom to your account</h4>
       <div>
         <div>
-          <div>Name <a href="/" className="text-blue-500 underline hover:text-blue-700">Edit</a></div>
+          <div>Name <Link to="/" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
           <div>{user.firstName} {user.lastName} </div>
         </div>
         <div>
@@ -29,11 +29,11 @@ const MyAccountPage = () => {
         </div>
       </div>
       <div>
-        <div>Email <a href="/" className="text-blue-500 underline hover:text-blue-700">Edit</a></div>
+        <div>Email <Link to="/my-account/edit-email" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
         <div>{user.email}</div>
       </div>
       <div>
-        <div>Password <a href="/" className="text-blue-500 underline hover:text-blue-700">Edit</a></div>
+        <div>Password <Link to="/" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
         <div>********</div>
       </div>
     </div>

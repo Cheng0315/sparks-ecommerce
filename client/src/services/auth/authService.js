@@ -1,4 +1,4 @@
-import {apiAxios} from '../api/authAxios';
+import { apiAxios } from '../api/authAxios';
 
 /* User registration service */
 const registerUser = async (userData) => {
