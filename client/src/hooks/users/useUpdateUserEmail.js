@@ -14,13 +14,13 @@ const useUpdateUserEmail = () => {
   const updateUserEmail = async (values) => {
     try {
       /* Make request to server to update user's email */
-      const userData = await authorizedAxios.patch(`/api/users/${user.userId}/update-email`, values);
+      const response = await authorizedAxios.patch(`/api/users/${user.userId}/update-email`, values);
 
-      /* If email update is successful, update the user */
-      if (userData) {
-         dispatch(setUser({user: userData.data.user}));
-        
-      /* Redirect to home page after succesful email update */
+      /* If email update is successful, update the user state and display success message to user*/
+      if (response) {
+        dispatch(setUser({user: response.data.user}));
+        console.log(response.data.message);
+      /* Redirect to account page after succesful email update */
         navigate("/account");
        }
     } catch (error) {

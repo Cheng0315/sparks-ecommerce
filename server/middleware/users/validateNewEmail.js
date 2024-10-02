@@ -7,6 +7,7 @@ const validateNewEmail = [
   body("email")
     .isEmail().withMessage("Invalid email")
     .normalizeEmail()
+    .escape()
     .matches(getEmailRegex()).withMessage("Invalid email"),
   async (req, res, next) => {
     try {

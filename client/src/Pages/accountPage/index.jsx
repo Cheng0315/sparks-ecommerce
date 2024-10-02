@@ -33,7 +33,7 @@ const AccountPage = () => {
         <div>{user.email}</div>
       </div>
       <div>
-        <div>Password <Link to="/" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
+        <div>Password <Link to="/account/change-password" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
         <div>********</div>
       </div>
     </div>

@@ -20,9 +20,11 @@ const validateRegistrationInput = [
   body("email")
     .isEmail().withMessage("Invalid email")
     .normalizeEmail()
+    .escape()
     .matches(getEmailRegex()).withMessage("Invalid email"),
   body("password")
     .trim()
+    .escape()
     .matches(getPasswordRegex()).withMessage("Invalid Password"),
   (req, res, next) => {
     try {

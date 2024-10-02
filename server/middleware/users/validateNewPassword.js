@@ -3,9 +3,14 @@ const { body, validationResult } = require("express-validator");
 
 /* Validate new password */
 const validateNewPassword = [
-  body("password")
+  body("newPassword")
     .trim()
-    .matches(getPasswordRegex()).withMessage("Invalid Password"),
+    .escape()
+    .matches(getPasswordRegex()).withMessage("Invalid New Password"),
+  body("confirmPassword")
+    .trim()
+    .escape()
+    .matches(getPasswordRegex()).withMessage("Invalid Confirm Password"),
   (req, res, next) => {
     try {
       const errors = validationResult(req);

@@ -16,7 +16,8 @@ const updateEmail = async (req, res) => {
     const sanitizedUser = sanitizeUser(user); //remove user's password and token
 
     res.status(200).json({
-      user: sanitizedUser
+      user: sanitizedUser,
+      message: "Sucessfully update email"
     });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});
