@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 
-const MyAccountPage = () => {
+const AccountPage = () => {
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const MyAccountPage = () => {
         </div>
       </div>
       <div>
-        <div>Email <Link to="/my-account/edit-email" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
+        <div>Email <Link to="/account/edit-email" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
         <div>{user.email}</div>
       </div>
       <div>
@@ -40,4 +40,4 @@ const MyAccountPage = () => {
   );
 }
 
-export default MyAccountPage;
+export default AccountPage;

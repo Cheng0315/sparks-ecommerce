@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, MyAccountPage, EditEmailPage } from './pages';
+import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage } from './pages';
 import { Navbar } from "./components";
 
 function App() {
@@ -11,9 +11,9 @@ function App() {
           <Route path="/" element={<HomePage />}/>
           <Route path="/register" element={<UserRegistrationPage />}/>
           <Route path="/login" element={<LoginPage />}/>
-          <Route path="/my-account" element={<MyAccountPage />}/>
+          <Route path="/account" element={<AccountPage />}/>
           <Route path="/users/:userId" element={<UserProfilePage />}/>
-          <Route path="/my-account/edit-email" element={<EditEmailPage />}/>
+          <Route path="/account/edit-email" element={<EditEmailPage />}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link to="/" className="text-gray-300 hover:text-white">Home</Link>
           {user ? (
             <>
-            <Link to="/my-account" className="text-gray-300 hover:text-white">My Account</Link>
+            <Link to="/account" className="text-gray-300 hover:text-white">Account</Link>
               <button onClick={logout} className="text-gray-300 hover:text-white">
                 Logout
               </button>

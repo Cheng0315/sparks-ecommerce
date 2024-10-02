@@ -21,7 +21,7 @@ const useUpdateUserEmail = () => {
          dispatch(setUser({user: userData.data.user}));
         
       /* Redirect to home page after succesful email update */
-        navigate("/my-account");
+        navigate("/account");
        }
     } catch (error) {
       console.error("Unable to update email due to the following error: ", error);

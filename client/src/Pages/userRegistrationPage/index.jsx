@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
-import useRegister from "../../hooks/users/useRegister.js";
+import { useRegisterUser } from "../../hooks/users";
 import { userRegistrationSchema } from '../../validationSchemas'; 
 
 const UserRegistrationPage = () => {
-  const register = useRegister();
+  const registerUser = useRegisterUser();
 
 
   /* Initialize formik with initial values registration form */
@@ -18,7 +18,7 @@ const UserRegistrationPage = () => {
     /* Add YUP user registration validation schema */
     validationSchema: userRegistrationSchema,
     /* Call register hook to register the user */
-    onSubmit: register
+    onSubmit: registerUser
   });
   
   return (

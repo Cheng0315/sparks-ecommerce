@@ -1,22 +1,22 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../services/auth/authService.js";
 import { setToken, setUser } from "../../features/slices";
+import { apiAxios } from "../../services/api/authAxios";
 
 /* custom hook for handling user registration */
-const useRegister = () => {
+const useRegisterUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const register = async (values) => {
+  const registerUser = async (values) => {
     try {
       /* Call registerUser function to make request to server to register the user */
-      const userData = await registerUser(values);
+      const response = await apiAxios.post(`/api/users/register`, values);
 
       /* If register is successful, update the user and token */
-      if (userData) {
-        dispatch(setUser({user: userData.user}));
-        dispatch(setToken({token: userData.token}));
+      if (response) {
+        dispatch(setUser({user: response.data.user}));
+        dispatch(setToken({token: response.data.token}));
 
         /* Redirect to home page after succesful registration */
         navigate("/");
@@ -26,7 +26,7 @@ const useRegister = () => {
     }
   };
 
-  return register;
+  return registerUser;
 };
 
-export default useRegister;
+export default useRegisterUser;
