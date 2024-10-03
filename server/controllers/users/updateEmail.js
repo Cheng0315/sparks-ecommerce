@@ -17,7 +17,7 @@ const updateEmail = async (req, res) => {
 
     res.status(200).json({
       user: sanitizedUser,
-      message: "Sucessfully update email"
+      message: "Your email has been successfully updated"
     });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});

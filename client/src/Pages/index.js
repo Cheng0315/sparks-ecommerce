@@ -6,3 +6,4 @@ export { default as UserProfilePage } from "./userProfilePage";
 export { default as AccountPage } from "./accountPage";
 export { default as EditEmailPage } from "./editEmailPage";
 export { default as ChangePasswordPage } from "./changePasswordPage";
+export { default as EditUserInfoPage } from "./editUserInfoPage";

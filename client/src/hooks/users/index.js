@@ -5,3 +5,4 @@ export { default as useGetAndSetViewedUser } from "./useGetAndSetViewedUser.js";
 export { default as useLogout } from "./useLogout.js";
 export { default as useUpdateUserEmail } from "./useUpdateUserEmail.js";
 export { default as useUpdateUserPassword } from "./useUpdateUserPassword.js";
+export { default as useUpdateUserInfo } from "./useUpdateUserInfo.js";

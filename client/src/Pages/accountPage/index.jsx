@@ -20,7 +20,7 @@ const AccountPage = () => {
       <h4 className="text-2xl font-bold">Welcom to your account</h4>
       <div>
         <div>
-          <div>Name <Link to="/" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
+          <div>Name <Link to="/account/edit-info" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
           <div>{user.firstName} {user.lastName} </div>
         </div>
         <div>

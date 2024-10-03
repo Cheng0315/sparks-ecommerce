@@ -9,7 +9,7 @@ const userRegistrationSchema = Yup.object().shape({
   lastName: Yup.string()
     .required("Last name is required")
     .max(30, "Last name must be at most 30 characters")
-    .matches(/^[a-zA-Z]+$/, "First name can only contain letters"),
+    .matches(/^[a-zA-Z]+$/, "Last name can only contain letters"),
   username: Yup.string()
     .required("Username is required")
     .min(3, "Username must be at least 3 characters")
