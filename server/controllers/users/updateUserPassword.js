@@ -4,7 +4,7 @@ const { sanitizeUser } = require("../../utils/users")
 
 /* Update password */
 /* @route = PATCH /api/users/:id/update-password */
-const updatePassword = async (req, res) => {
+const updateUserPassword = async (req, res) => {
   try {
     const { newPassword } = req.body;
     const userId = req.userId;
@@ -25,4 +25,4 @@ const updatePassword = async (req, res) => {
   }
 }
 
-module.exports = updatePassword;
+module.exports = updateUserPassword;

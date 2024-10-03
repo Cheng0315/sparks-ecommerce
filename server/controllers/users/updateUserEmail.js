@@ -3,7 +3,7 @@ const { sanitizeUser } = require("../../utils/users")
 
 /* Update email */
 /* @route = PATCH /api/users/:id/update-email */
-const updateEmail = async (req, res) => {
+const updateUserEmail = async (req, res) => {
   try {
     const { email } = req.body;
     const userId = req.userId;
@@ -24,4 +24,4 @@ const updateEmail = async (req, res) => {
   }
 }
 
-module.exports = updateEmail;
+module.exports = updateUserEmail;

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, getUser, renewTokens, logout, updatePassword, updateEmail, updateInfo } = require("../controllers/users");
+const { register, login, getUser, renewTokens, logout, updateUserPassword, updateUserEmail, updateUserInfo } = require("../controllers/users");
 const { verifyAccessToken, verifyRefreshToken, verifyPassword, strictRateLimiter } = require("../middleware/auth");
 const { validateUserUpdateInfo, validateNewPassword, validateNewEmail, validateRegistrationInput, validateLoginInput } = require("../middleware/users");
 
@@ -16,9 +16,9 @@ router.delete("/logout", strictRateLimiter, verifyRefreshToken, logout);
 router.get("/:userId", verifyAccessToken, getUser);
 
 /* Update */
-router.patch("/:userId/change-password", strictRateLimiter, verifyAccessToken, validateNewPassword, verifyPassword, updatePassword);
-router.patch("/:userId/update-email", strictRateLimiter, verifyAccessToken, validateNewEmail, verifyPassword, updateEmail);
-router.patch("/:userId/update-info", strictRateLimiter, verifyAccessToken, validateUserUpdateInfo, updateInfo);
+router.patch("/:userId/change-password", strictRateLimiter, verifyAccessToken, validateNewPassword, verifyPassword, updateUserPassword);
+router.patch("/:userId/update-email", strictRateLimiter, verifyAccessToken, validateNewEmail, verifyPassword, updateUserEmail);
+router.patch("/:userId/update-info", strictRateLimiter, verifyAccessToken, validateUserUpdateInfo, updateUserInfo);
 
 /* Delete */
 
