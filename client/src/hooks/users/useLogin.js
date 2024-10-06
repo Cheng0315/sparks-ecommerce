@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setToken, setUser } from "../../features/slices";
+import { setAccessToken, setUser } from "../../features/slices";
 import { apiAxios } from "../../services/api/authAxios";
 
 /* custom hook for handling user login */
@@ -16,7 +16,7 @@ const useLogin = () => {
       /* If login is successful, update the user and token */
       if (response) {
         dispatch(setUser({user: response.data.user}));
-        dispatch(setToken({token: response.data.token}));
+        dispatch(setAccessToken({accessToken: response.data.accessToken}));
         
         /* Redirect to home page after succesful login */
         navigate("/");

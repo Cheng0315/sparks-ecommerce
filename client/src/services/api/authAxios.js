@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setToken, setUser } from "../../features/slices";
+import { setAccessToken, setUser } from "../../features/slices";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 /* Axios instance for making request the the server with credentials */
@@ -11,7 +11,7 @@ const apiAxios = axios.create({
 
 /* Axios instance for making request to the server with credentials and interceptors */
 const authAxios = () => {
-  const token = useSelector((state) => state.token.token);
+  const accessToken = useSelector((state) => state.token.accessToken);
   const dispatch = useDispatch();
   
   const axiosInstance = axios.create({
@@ -21,8 +21,8 @@ const authAxios = () => {
 
   /* Set Bearer access token in headers */
   axiosInstance.interceptors.request.use((config) => {
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
     return config;
   })
@@ -37,8 +37,8 @@ const authAxios = () => {
         try {
           const response = await axiosInstance.post("/api/users/renew-tokens");
           dispatch(setUser({user: response.data.user}));
-          dispatch(setToken({token: response.data.token}));
-          initialRequest.headers['Authorization'] = `Bearer ${response.data.token}`;
+          dispatch(setAccessToken({accessToken: response.data.accessToken}));
+          initialRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
           return axiosInstance(initialRequest);
         } catch (refreshError) {
           return Promise.reject(refreshError);

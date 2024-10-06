@@ -2,7 +2,7 @@
 const sanitizeUser = (user) => {
   const sanitizedUser = user.toJSON();
   delete sanitizedUser.password;
-  delete sanitizedUser.token;
+  delete sanitizedUser.refreshToken;
   return sanitizedUser;
 }
 

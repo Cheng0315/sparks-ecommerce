@@ -8,21 +8,21 @@ const renewTokens = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
 
   try {
-    const user = await User.findOne({where: { token: refreshToken }});
+    const user = await User.findOne({where: { refreshToken }});
 
     if (!user) return res.status(404).json({errorMessage: "Unauthorized"});
     
     const newAccessToken = generateAccessJWT(user.userId);
     const newRefreshToken = generateRefreshJWT(res, user.userId);
 
-    user.token = newRefreshToken;
+    user.refreshToken = newRefreshToken;
     await user.save(); // update refresh token in user's token field in database
 
     const sanitizedUser = sanitizeUser(user); //remove user's password and token
 
     res.status(200).json({
       user: sanitizedUser,
-      token: newAccessToken
+      accessToken: newAccessToken
     });
   } catch (error) {
     console.error('Error:', error);

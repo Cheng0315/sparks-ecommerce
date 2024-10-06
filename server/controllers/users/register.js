@@ -40,12 +40,12 @@ const register = async (req, res) => {
         const accessToken = generateAccessJWT(newUser.userId);
         const refreshToken = generateRefreshJWT(res, newUser.userId);
 
-        newUser.token = refreshToken; // add refresh token to user's token field in database
+        newUser.refreshToken = refreshToken; // add refresh token to user's token field in database
         newUser.save();
 
         const sanitizedUser = sanitizeUser(newUser);
 
-        res.status(201).json({user: sanitizedUser, token: accessToken});
+        res.status(201).json({user: sanitizedUser, accessToken: accessToken});
       }
     }
   } catch (error) {

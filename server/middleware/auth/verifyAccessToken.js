@@ -6,10 +6,10 @@ const verifyAccessToken = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
     if (!Number.isInteger(userId))return res.status(400).json({ errorMessage: "Bad Request: Invalid User ID" });
     
-    const token = req.headers['authorization']?.split(' ')[1];
-    if (!token) return res.status(401).json({errorMessage: "Access Denied"});
+    const accessToken = req.headers['authorization']?.split(' ')[1];
+    if (!accessToken) return res.status(401).json({errorMessage: "Access Denied"});
     
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) return res.status(401).json({errorMessage: "Access Denied"});
       if (userId !== user.userId) return res.status(401).json({errorMessage: "Access Denied"});
       

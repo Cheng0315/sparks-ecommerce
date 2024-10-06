@@ -15,7 +15,7 @@ const useUpdateUserPassword = () => {
 
       /* If password update is successful, display success message to user */
       if (response) {
-        console.log(response.data);
+        console.log(response.data.message);
       /* Redirect to account page after succesful password change */
         navigate("/account");
        }

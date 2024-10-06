@@ -1,20 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 /* Create the slice for access token */
-export const tokenSlice = createSlice({
+const tokenSlice = createSlice({
   name: "token",
-  initialState: { token: null },
+  initialState: { accessToken: null },
   reducers: {
     /* Update the token state */
-    setToken: (state, action) => {
-      state.token = action.payload.token;
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload.accessToken;
     },
     /* Set token state to null */
-    clearToken: (state) => {
-      state.token = null;
+    clearAccessToken: (state) => {
+      state.accessToken = null;
     }
   }
 })
 
-export const {setToken, clearToken} = tokenSlice.actions;
+export const {setAccessToken, clearAccessToken} = tokenSlice.actions;
 export default tokenSlice.reducer;

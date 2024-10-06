@@ -7,14 +7,14 @@ const logout = async (req, res) => {
 
   try {
     const user = await User.findOne({
-      where: { token: refreshToken },
-      attributes: { exclude: ["password", "token"] }
+      where: { refreshToken },
+      attributes: { exclude: ["password", "refreshToken"] }
     });
 
     if (!user) return res.status(404).json({errorMessage: "User not found"});
     
     res.clearCookie("refreshToken");
-    user.token = null;
+    user.refreshToken = null;
     await user.save();
     res.status(200).send({message: "Successfully logged out"});
   } catch (error) {

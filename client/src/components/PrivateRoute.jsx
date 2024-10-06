@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 const PrivateRoute = () => {
-  const accessToken = useSelector((state) => state.token.token);
+  const accessToken = useSelector((state) => state.token.accessToken);
   const [loading, setLoading] = useState(true);
 
   /* Call custom hook to check and renew access token if needed */

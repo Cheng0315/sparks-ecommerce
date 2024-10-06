@@ -44,7 +44,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-      token: {
+      refresh_token: {
         type: Sequelize.STRING
       }
     });

@@ -18,14 +18,14 @@ const login = async (req, res) => {
     const accessToken = generateAccessJWT(user.userId);
     const refreshToken = generateRefreshJWT(res, user.userId);
 
-    user.token = refreshToken; // add refresh token to user's token field in database
+    user.refreshToken = refreshToken; // add refresh token to user's token field in database
     await user.save();
 
     const sanitizedUser = sanitizeUser(user); // remove user's token and password
 
     res.status(200).json({
       user: sanitizedUser,
-      token: accessToken
+      accessToken: accessToken
     });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});

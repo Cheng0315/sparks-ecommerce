@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    token: {
+    refreshToken: {
       type: DataTypes.STRING
     }
   }, {

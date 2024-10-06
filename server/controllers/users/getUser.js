@@ -8,7 +8,7 @@ const getUser = async (req, res) => {
     const userId = req.userId;
     const user = await User.findOne({
       where: { userId },
-      attributes: { exclude: ["password", "token", "newsletterSubscription", "newsletterCouponUsed"] }
+      attributes: { exclude: ["password", "refreshToken", "newsletterSubscription", "newsletterCouponUsed"] }
     });
 
     if (!user) return res.status(404).json({errorMessage: "Invalid user id"});

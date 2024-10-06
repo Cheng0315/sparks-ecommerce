@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { apiAxios } from "../../services/api/authAxios";
-import { clearToken, clearUser } from "../../features/slices";
+import { clearAccessToken, clearUser } from "../../features/slices";
 
 /* custom hook for handling user logout */
 const useLogout = () => {
@@ -11,7 +11,7 @@ const useLogout = () => {
   const logout = async () => {
     /* Clear user and access token on frontend */
     dispatch(clearUser());
-    dispatch(clearToken());
+    dispatch(clearAccessToken());
 
     try {
       /* Make request to backend to delete refresh token on frontend and backend*/

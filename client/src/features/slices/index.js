@@ -1,11 +1,11 @@
 /* exports all reducers and actions*/
-import tokenReducer, { setToken, clearToken } from "./tokenSlice";
+import tokenReducer, { setAccessToken, clearAccessToken } from "./tokenSlice";
 import userReducer, { setUser, clearUser } from "./userSlice";
 
 export {
   tokenReducer,
-  setToken,
-  clearToken,
+  setAccessToken,
+  clearAccessToken,
   userReducer,
   setUser,
   clearUser

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setToken, setUser, clearUser, clearToken } from "../../features/slices";
+import { setAccessToken, setUser, clearUser, clearAccessToken } from "../../features/slices";
 import { apiAxios } from "../../services/api/authAxios";
 import { useDispatch } from "react-redux";
 
@@ -18,12 +18,12 @@ const useCheckAccessToken = (accessToken, setLoading) => {
 
           if (response) {
             dispatch(setUser({ user: response.data.user }));
-            dispatch(setToken({ token: response.data.token }));
+            dispatch(setAccessToken({ accessToken: response.data.accessToken }));
           }
         }
       } catch (error) {
         dispatch(clearUser());
-        dispatch(clearToken());
+        dispatch(clearAccessToken());
         console.error("Failed to renew tokens", error);
       } finally {
         setLoading(false);
