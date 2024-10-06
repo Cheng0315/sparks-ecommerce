@@ -14,7 +14,9 @@ const useAuthenticateUser = (accessToken, user, setLoading) => {
     const authenticateUser = async () => {
       try {
         if (!accessToken || !user) {
-          const response = await apiAxios.post("/api/users/renew-tokens", { signal: controller.signal });
+          const response = await apiAxios.post("/api/users/renew-tokens", { 
+            signal: controller.signal 
+          });
 
           if (response) {
             dispatch(setUser({ user: response.data.user }));

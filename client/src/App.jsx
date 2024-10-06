@@ -3,23 +3,25 @@ import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage
 import { Navbar } from "./components";
 import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+const App = () =>{
   return (
     <div className="app">
       <BrowserRouter>
         < Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />}/>
-          <Route path="/register" element={<UserRegistrationPage />}/>
-          <Route path="/login" element={<LoginPage />}/>
-          <Route element={<PrivateRoute />}>
-            <Route path="/account/edit-email" element={<EditEmailPage />}/>
-            <Route path="/account/edit-info" element={<EditUserInfoPage />}/>
-            <Route path="/account/change-password" element={<ChangePasswordPage />}/>
-            <Route path="/account" element={<AccountPage />}/>
-          </Route>
-          <Route path="/users/:userId" element={<UserProfilePage />}/>
-        </Routes>
+        <div className="container mx-auto">
+          <Routes>
+            <Route path="/" element={<HomePage />}/>
+            <Route path="/register" element={<UserRegistrationPage />}/>
+            <Route path="/login" element={<LoginPage />}/>
+            <Route path="/users/:userId" element={<UserProfilePage />}/>
+            <Route element={<PrivateRoute />}>
+              <Route path="/account/edit-email" element={<EditEmailPage />}/>
+              <Route path="/account/edit-info" element={<EditUserInfoPage />}/>
+              <Route path="/account/change-password" element={<ChangePasswordPage />}/>
+              <Route path="/account" element={<AccountPage />}/>
+            </Route>
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   )

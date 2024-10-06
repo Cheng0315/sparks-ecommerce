@@ -1,8 +1,7 @@
-import { authAxios } from "../../services/api/authAxios";
+import { apiAxios } from "../../services/api/authAxios";
 import { useEffect } from "react";
 
 const useGetAndSetViewedUser = (userId, setViewedUser) => {
-  const authorizedAxios = authAxios();
 
   useEffect(() => {
     /* Create an instance of AbortController to cancel network request when needed */
@@ -10,10 +9,11 @@ const useGetAndSetViewedUser = (userId, setViewedUser) => {
 
     const getAndSetViewedUSer = async () => {
       try {
-        const response = await authorizedAxios.get(`/api/users/${userId}`, {
+        const response = await apiAxios.get(`/api/users/${userId}`, {
           signal: controller.signal
         });
-        setViewedUser(response.data.user);
+
+        if (response) setViewedUser(response.data.user);
       } catch (error) {
         if (error.name !== 'CanceledError') {
           console.error('Error fetching user data:', error);

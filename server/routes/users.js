@@ -13,7 +13,7 @@ router.delete("/logout", strictRateLimiter, verifyRefreshToken, logout);
 /* Create */
 
 /* Read */
-router.get("/:userId", verifyAccessToken, getUser);
+router.get("/:userId", getUser);
 
 /* Update */
 router.patch("/:userId/change-password", strictRateLimiter, verifyAccessToken, validateNewPassword, verifyPassword, updateUserPassword);
