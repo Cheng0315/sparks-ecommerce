@@ -9,7 +9,7 @@ const UserProfilePage = () => {
   /* Call useGetAndSetViewedUser hook to update viewedUser based on id change*/
   useGetAndSetViewedUser(userId, setViewedUser);
 
-  if (!viewedUser) return <div>Loading user data...</div>;
+  if (!viewedUser) return <div>Loading...</div>;
 
   return (
     <div>

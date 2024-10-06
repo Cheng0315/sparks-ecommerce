@@ -1,15 +1,16 @@
 import { useSelector} from "react-redux";
 import { Outlet, Navigate } from "react-router-dom";
-import { useCheckAccessToken } from "../hooks/users";
+import { useAuthenticateUser } from "../hooks/users";
 import { useState } from "react";
 
 
 const PrivateRoute = () => {
   const accessToken = useSelector((state) => state.token.accessToken);
+  const user = useSelector((state) => state.user.user);
   const [loading, setLoading] = useState(true);
 
   /* Call custom hook to check and renew access token if needed */
-  useCheckAccessToken(accessToken, setLoading);
+  useAuthenticateUser(accessToken, user, setLoading);
 
   if (loading) {
     return <div>Loading...</div>;

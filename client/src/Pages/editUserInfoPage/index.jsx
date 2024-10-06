@@ -7,7 +7,6 @@ const EditUserInfoPage = () => {
   const user = useSelector((state) => state.user.user);
   const updateUserInfo = useUpdateUserInfo();
 
-
   /* Initialize formik with initial values for update user information form */
   const formik = useFormik({
     initialValues: {

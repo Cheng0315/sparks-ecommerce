@@ -1,18 +1,8 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AccountPage = () => {
   const user = useSelector((state) => state.user.user);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user]);
-
-  if (!user) return <div>Loading user data...</div>;
 
   return (
     <div>

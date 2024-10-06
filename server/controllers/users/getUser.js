@@ -13,7 +13,7 @@ const getUser = async (req, res) => {
 
     if (!user) return res.status(404).json({errorMessage: "Invalid user id"});
     const userData = user.toJSON();
-    res.status(200).json(userData);
+    res.status(200).json({user: userData});
   } catch (error) {
     res.status(404).json({errorMessage: error.message});
   }

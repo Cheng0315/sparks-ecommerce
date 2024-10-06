@@ -13,7 +13,7 @@ const useGetAndSetViewedUser = (userId, setViewedUser) => {
         const response = await authorizedAxios.get(`/api/users/${userId}`, {
           signal: controller.signal
         });
-        setViewedUser(response.data);
+        setViewedUser(response.data.user);
       } catch (error) {
         if (error.name !== 'CanceledError') {
           console.error('Error fetching user data:', error);
