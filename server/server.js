@@ -1,7 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const env = require("dotenv");
-const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/user");
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const { generalRateLimiter } = require('./middleware/auth');

@@ -1,6 +1,6 @@
 const { User } = require("../../models");
 const { generateAccessJWT, generateRefreshJWT } = require("../../utils/jwtUtils");
-const { sanitizeUser } = require("../../utils/users")
+const { sanitizeUser } = require("../../utils/user")
 
 /* Renew access token and refresh token */
 /* @route = POST /api/users/renew-tokens */

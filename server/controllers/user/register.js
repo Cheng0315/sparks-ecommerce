@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const { User } = require("../../models");
 const { generateAccessJWT, generateRefreshJWT } = require("../../utils/jwtUtils");
-const { sanitizeUser } = require("../../utils/users")
+const { sanitizeUser } = require("../../utils/user")
 
 /* Register the user */
 /* @route = POST /api/users/register */

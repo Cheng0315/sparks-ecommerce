@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useRegisterUser } from "../../hooks/users";
+import { useRegisterUser } from "../../hooks/user";
 import { userRegistrationSchema } from '../../validationSchemas'; 
 
 const UserRegistrationPage = () => {

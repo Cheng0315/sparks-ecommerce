@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, getUser, renewTokens, logout, updateUserPassword, updateUserEmail, updateUserInfo } = require("../controllers/users");
+const { register, login, getUser, renewTokens, logout, updateUserPassword, updateUserEmail, updateUserInfo } = require("../controllers/user");
 const { verifyAccessToken, verifyRefreshToken, verifyPassword, strictRateLimiter } = require("../middleware/auth");
-const { validateUserUpdateInfo, validateNewPassword, validateNewEmail, validateRegistrationInput, validateLoginInput } = require("../middleware/users");
+const { validateUserUpdateInfo, validateNewPassword, validateNewEmail, validateRegistrationInput, validateLoginInput } = require("../middleware/user");
 
 /* Auth */
 router.post("/register", strictRateLimiter, validateRegistrationInput, register);

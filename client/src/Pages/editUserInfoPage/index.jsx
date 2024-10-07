@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useUpdateUserInfo } from "../../hooks/users";
+import { useUpdateUserInfo } from "../../hooks/user";
 import { editUserInfoSchema } from '../../validationSchemas'; 
 import { useSelector } from 'react-redux';
 

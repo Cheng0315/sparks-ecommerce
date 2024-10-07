@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { sanitizeUser } = require("../../utils/users")
+const { sanitizeUser } = require("../../utils/user")
 
 /* Update first name, last name, and username */
 /* @route = PATCH /api/users/:id/update-info */

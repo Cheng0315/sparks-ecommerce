@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useLogout } from "../hooks/users";
+import { useLogout } from "../hooks/user";
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {

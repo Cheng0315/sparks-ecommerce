@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { sanitizeUser } = require("../../utils/users")
+const { sanitizeUser } = require("../../utils/user")
 
 /* Update email */
 /* @route = PATCH /api/users/:id/update-email */

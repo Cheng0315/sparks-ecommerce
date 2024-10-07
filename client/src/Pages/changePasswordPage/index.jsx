@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
- import { useUpdateUserPassword } from "../../hooks/users";
+ import { useUpdateUserPassword } from "../../hooks/user";
 import { changePasswordSchema } from '../../validationSchemas';
 
 const ChangePasswordPage = () => {

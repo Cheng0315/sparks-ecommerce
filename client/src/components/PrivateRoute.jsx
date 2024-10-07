@@ -1,6 +1,6 @@
 import { useSelector} from "react-redux";
 import { Outlet, Navigate } from "react-router-dom";
-import { useAuthenticateUser } from "../hooks/users";
+import { useAuthenticateUser } from "../hooks/user";
 import { useState } from "react";
 
 
