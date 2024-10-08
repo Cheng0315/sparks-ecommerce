@@ -11,9 +11,10 @@ const renewTokens = async (req, res) => {
     const user = await User.findOne({where: { refreshToken }});
 
     if (!user) return res.status(404).json({errorMessage: "Unauthorized"});
-    
-    const newAccessToken = generateAccessJWT(user.userId);
-    const newRefreshToken = generateRefreshJWT(res, user.userId);
+
+    const userPayload = {userId: user.userId, isSeller: user.isSeller};
+    const newAccessToken = generateAccessJWT(userPayload);
+    const newRefreshToken = generateRefreshJWT(res, userPayload);
 
     user.refreshToken = newRefreshToken;
     await user.save(); // update refresh token in user's token field in database

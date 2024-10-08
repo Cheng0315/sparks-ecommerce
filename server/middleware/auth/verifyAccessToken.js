@@ -9,11 +9,11 @@ const verifyAccessToken = async (req, res, next) => {
     const accessToken = req.headers['authorization']?.split(' ')[1];
     if (!accessToken) return res.status(401).json({errorMessage: "Access Denied"});
     
-    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, userPayload) => {
       if (err) return res.status(401).json({errorMessage: "Access Denied"});
-      if (userId !== user.userId) return res.status(401).json({errorMessage: "Access Denied"});
+      if (userId !== userPayload.userId) return res.status(401).json({errorMessage: "Access Denied"});
       
-      req.userId = user.userId;
+      req.userId = userPayload.userId;
       next();
     });
   } catch (error) {

@@ -6,7 +6,7 @@ const verifyRefreshToken = async (req, res, next) => {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.status(403).json({errorMessage: "Unauthorized"});
 
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, userPayload) => {
       if (err) return res.status(403).json({errorMessage: "User not found"});
       next();
     });

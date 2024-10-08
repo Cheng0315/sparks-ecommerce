@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 /* Generate Access Token */
-const generateAccessJWT = (userId) => {
+const generateAccessJWT = (userPayload) => {
   try {
-    return jwt.sign({userId}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
+    return jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
   } catch (error) {
     throw error;
   }
