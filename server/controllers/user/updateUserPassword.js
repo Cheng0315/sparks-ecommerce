@@ -6,7 +6,7 @@ const { User } = require("../../models");
 const updateUserPassword = async (req, res) => {
   try {
     const { newPassword } = req.body;
-    const userId = req.userId;
+    const userId = req.authUser.userId;;
 
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(newPassword, salt);
