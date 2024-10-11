@@ -40,9 +40,9 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-      is_seller: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+      role: {
+        type: Sequelize.STRING,
+        defaultValue: "user"
       },
       refresh_token: {
         type: Sequelize.STRING

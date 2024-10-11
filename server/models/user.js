@@ -50,9 +50,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    isSeller: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "user"
     },
     refreshToken: {
       type: DataTypes.STRING

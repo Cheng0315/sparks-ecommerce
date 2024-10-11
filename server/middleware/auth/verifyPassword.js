@@ -5,9 +5,7 @@ const bcrypt = require("bcrypt");
 const verifyPassword = async (req, res, next) => {
   try {
     const { password } = req.body;
-    const userId = parseInt(req.userId);
-    
-    if (!Number.isInteger(userId)) return res.status(400).json({errorMessage: "Bad Request"});
+    const userId = parseInt(req.authUser.userId);
 
     const user = await User.findOne({where: { userId }});
     if (!user) return res.status(404).json({errorMessage: "User not found"});

@@ -15,14 +15,14 @@ const login = async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) return res.status(400).json({errorMessage: "Invalid email or password"});
     
-    const userPayload = {userId: user.userId, isSeller: user.isSeller};
+    const userPayload = {userId: user.userId, role: user.role};
     const accessToken = generateAccessJWT(userPayload);
     const refreshToken = generateRefreshJWT(res, userPayload);
 
     user.refreshToken = refreshToken; // add refresh token to user's token field in database
     await user.save();
 
-    const sanitizedUser = sanitizeUser(user); // remove user's token and password
+    const sanitizedUser = sanitizeUser(user); // remove user's refresh token and password
 
     res.status(200).json({
       user: sanitizedUser,

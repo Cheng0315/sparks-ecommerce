@@ -37,7 +37,7 @@ const register = async (req, res) => {
      
       /* Generate tokens after creating new user */
       if (newUser) {
-        const userPayload = {userId: newUser.userId, isSeller: newUser.isSeller};
+        const userPayload = {userId: newUser.userId, role: newUser.role};
         const accessToken = generateAccessJWT(userPayload);
         const refreshToken = generateRefreshJWT(res, userPayload);
 

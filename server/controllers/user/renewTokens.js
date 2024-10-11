@@ -12,7 +12,7 @@ const renewTokens = async (req, res) => {
 
     if (!user) return res.status(404).json({errorMessage: "Unauthorized"});
 
-    const userPayload = {userId: user.userId, isSeller: user.isSeller};
+    const userPayload = {userId: user.userId, role: user.role};
     const newAccessToken = generateAccessJWT(userPayload);
     const newRefreshToken = generateRefreshJWT(res, userPayload);
 
