@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole } from './pages';
 import { Navbar } from "./components";
-import PrivateRoute from './components/PrivateRoute';
+import { PrivateRoute, RedirectIfLoggedIn } from './components';
 
 const App = () =>{
   return (
@@ -11,8 +11,10 @@ const App = () =>{
         <div className="container mx-auto">
           <Routes>
             <Route path="/" element={<HomePage />}/>
-            <Route path="/register" element={<UserRegistrationPage />}/>
-            <Route path="/login" element={<LoginPage />}/>
+            <Route element={<RedirectIfLoggedIn />}>
+              <Route path="/register" element={<UserRegistrationPage />}/>
+              <Route path="/login" element={<LoginPage />}/>
+            </Route>
             <Route path="/users/:userId" element={<UserProfilePage />}/>
             <Route element={<PrivateRoute />}>
               <Route path="/account/edit-email" element={<EditEmailPage />}/>

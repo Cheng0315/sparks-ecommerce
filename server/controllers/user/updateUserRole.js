@@ -26,7 +26,7 @@ const updateUserRole = async (req, res) => {
 
     res.status(200).json({
       user: sanitizedUser,
-      token: accessToken,
+      accessToken: accessToken,
       message: "Your role has been successfully updated"
     });
   } catch (error) {
