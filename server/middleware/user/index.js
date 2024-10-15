@@ -1,4 +1,4 @@
-/* Export all users related middlewares */
+/* Exports all user-related middlewares */
 const validateRegistrationInput = require("./validateRegistrationInput");
 const validateUserUpdateInfo = require("./validateUserUpdateInfo");
 const validateNewPassword = require("./validateNewPassword");

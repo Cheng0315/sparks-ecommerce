@@ -9,7 +9,7 @@ const addProduct = async (req, res) => {
     
     const user = req.authUser;
     if (user.role !== "seller") return res.status(401).json({errorMessage: "Access Denied"});
-
+    
     const newProduct = await Product.create({
       name,
       description,
