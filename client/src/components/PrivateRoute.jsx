@@ -16,7 +16,7 @@ const PrivateRoute = () => {
     return <div>Loading...</div>;
   }
 
-  return accessToken ? <Outlet /> : <Navigate to="/login" />;
+  return accessToken && user ? <Outlet /> : <Navigate to="/login" />;
   
 }
 

@@ -1,7 +1,7 @@
 const { getPasswordRegex, getEmailRegex, getUsernameRegex, getLastNameRegex, getFirstNameRegex } = require("../../utils/regex");
 const { body, validationResult } = require("express-validator");
 
-/* Validate user"s input for registration */
+/* Validate user's input for registration */
 const validateRegistrationInput = [
   body("firstName")
     .trim()
