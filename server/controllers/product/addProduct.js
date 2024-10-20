@@ -4,8 +4,9 @@ const { Product } = require("../../models");
 /* @route = POST /api/products */
 const addProduct = async (req, res) => {
   try {
-    const { name, description, condition, stockQuantity, categoryId } = req.body;
-    const priceInCents = req.body.price * 100;
+    const { name, description, condition, stockQuantity, categoryId, price } = req.productDetails;
+    const { imageUrl } = req.body;
+    const priceInCents = price * 100;
     const user = req.authUser;
     
     const newProduct = await Product.create({
@@ -15,8 +16,8 @@ const addProduct = async (req, res) => {
       priceInCents,
       stockQuantity,
       categoryId,
-      userId: user.userId,
-      imageUrl: "ImageUrl"
+      imageUrl,
+      userId: user.userId
     });
 
     res.status(201).json({
