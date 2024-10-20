@@ -20,3 +20,6 @@ dist/
 # IDE specific files
 .DS_Store
 .vscode/
+
+# Ignore all images in the public/assets directory
+public/assets/*

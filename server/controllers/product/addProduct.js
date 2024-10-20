@@ -5,10 +5,8 @@ const { Product } = require("../../models");
 const addProduct = async (req, res) => {
   try {
     const { name, description, condition, stockQuantity, categoryId } = req.body;
-    const priceInCents = req.body.priceInCents * 100;
-    
+    const priceInCents = req.body.price * 100;
     const user = req.authUser;
-    if (user.role !== "seller") return res.status(401).json({errorMessage: "Access Denied"});
     
     const newProduct = await Product.create({
       name,

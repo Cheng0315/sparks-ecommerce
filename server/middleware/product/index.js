@@ -2,5 +2,5 @@
 const validateProductDetails = require("./validateProductDetails");
 
 module.exports = {
-  validateProductDetails,
+  validateProductDetails
 };

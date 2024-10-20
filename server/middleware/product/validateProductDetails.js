@@ -15,7 +15,7 @@ const validateProductDetails = [
     .escape()
     .isIn(["new", "like new", "refurbished", "used", "open box", "damaged", "for parts"])
     .withMessage("Condition must be one of the following: 'new', 'like new', 'refurbished', 'used', 'open box', 'damaged', 'for parts'."),
-  body("priceInCents")
+  body("price")
     .trim()
     .escape()
     .isFloat({ gt: 0 }).withMessage("Price must be a positive number")
