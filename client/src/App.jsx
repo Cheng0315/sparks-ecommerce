@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole } from './pages';
+import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, AddProductPage } from './pages';
 import { Navbar } from "./components";
 import { PrivateRoute, RedirectIfLoggedIn } from './components';
 
@@ -22,6 +22,7 @@ const App = () =>{
               <Route path="/account/update-role" element={<UpdateUserRole />}/>
               <Route path="/account/change-password" element={<ChangePasswordPage />}/>
               <Route path="/account" element={<AccountPage />}/>
+              <Route path="/products/add-product" element={<AddProductPage />}/>
             </Route>
           </Routes>
         </div>
