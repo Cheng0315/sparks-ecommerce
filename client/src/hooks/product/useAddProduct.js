@@ -6,7 +6,8 @@ const useAddProduct = (productImage) => {
 
   const addProduct = async (values ) => {
     try {
-      const response = await authorizedAxios.post("/api/products/validate-details", values);
+      const { productImage, ...objectDetails } = values;
+      const response = await authorizedAxios.post("/api/products/validate-details", objectDetails);
 
       const formData = new FormData();
       formData.append("image", productImage);

@@ -1,14 +1,12 @@
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
-import { useCallback } from 'react'
-import { useState } from "react";
+import { useCallback, useState, useEffect } from "react"
 import { useAddProduct } from "../../hooks/product";
-import { addProductSchema } from '../../validationSchemas'; 
+import { addProductSchema } from "../../validationSchemas"; 
 
 
 
 const AddProductPage = () => {
-  const [productImage, setProductImage] = useState(null);
   const [previewImageUrl, setPreviewImageUrl] = useState(null);
   const addProduct = useAddProduct
   
@@ -20,25 +18,39 @@ const AddProductPage = () => {
       condition: "",
       price: "",
       stockQuantity: "",
-      categoryId: ""
+      categoryId: "",
+      productImage: ""
     },
     /* Add YUP add product validation schema */
     validationSchema: addProductSchema,
     /* Call addProduct hook to make a request to server to add product */
-    onSubmit: addProduct(productImage)
+    onSubmit: addProduct()
   });
 
   /* Set the product image when user add product image */
   const onDrop = useCallback(acceptedFile => {
-    setProductImage(acceptedFile[0]);
+    formik.setFieldValue("productImage", acceptedFile[0]);
     setPreviewImageUrl(URL.createObjectURL(acceptedFile[0]));
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: 'image/*',
+    accept: {
+      "image/jpeg": [".jpeg", ".jpg"],
+      "image/png": [".png"],
+      "image/gif": [".gif"]
+    },
     maxSize: 2097152 // 2MB
   });
+
+  /* Remove object url when component unmount */
+  useEffect(() => {
+    return () => {
+      if (previewImageUrl) {
+        URL.revokeObjectURL(previewImageUrl);
+      }
+    };
+  }, [previewImageUrl]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -84,21 +96,25 @@ const AddProductPage = () => {
           <div className="error">{formik.errors.categoryId}</div>
         ) : null}
       </div>
-      <div {...getRootProps()} className="flex justify-between border-2 border-dashed border-gray-300 p-6 rounded-lg cursor-pointer hover:border-blue-500">
-      <div className="w-1/4">
-          {previewImageUrl && <><img src={previewImageUrl} alt={formik.values.name} className="w-40 h-40 object-contain" />
-            <p className="mt-2 text-center text-gray-700">{formik.values.name}</p> </>}
-            
+      <div>
+        <div {...getRootProps()} className="flex justify-between border-2 border-dashed border-gray-300 p-6 rounded-lg cursor-pointer hover:border-blue-500">
+          <div className="w-1/4">
+            {previewImageUrl && <><img src={previewImageUrl} name="productImage" alt={formik.values.name} className="w-40 h-40 object-contain" />
+              <p className="mt-2 text-center text-gray-700">{formik.values.name}</p> </>}
+              
+          </div>
+          <div className="w-3/4">
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <p className="text-gray-500">Drop the files here...</p>
+            ) : (
+              <p className="text-gray-500">Drag and drop some file here, or click to select files</p>
+            )}
+          </div>
         </div>
-        <div className="w-3/4">
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p className="text-gray-500">Drop the files here...</p>
-          ) : (
-            <p className="text-gray-500">Drag and drop some file here, or click to select files</p>
-          )}
-        </div>
-        
+        {formik.touched.productImage && formik.errors.productImage ? (
+            <div className="error">{formik.errors.productImage}</div>
+          ) : null}
       </div>
       <button type="submit">Add Product</button>
     </form>
