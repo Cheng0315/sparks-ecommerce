@@ -27,14 +27,14 @@ const EditEmailPage = () => {
         <label className="block">Email:</label>
         <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.email && formik.errors.email ? (
-          <div className="error">{formik.errors.email}</div>
+          <div className="text-red-500">{formik.errors.email}</div>
         ) : null}
       </div>
       <div className="field">
         <label className="block">Password:</label>
         <input type="password" name="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.password && formik.errors.password ? (
-          <div className="error">{formik.errors.password}</div>
+          <div className="text-red-500">{formik.errors.password}</div>
         ) : null}
       </div>
       <button type="submit">Update</button>

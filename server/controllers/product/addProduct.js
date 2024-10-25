@@ -1,4 +1,5 @@
 const { Product } = require("../../models");
+const { sanitizeProduct } = require("../../utils/product")
 
 /* Add product */
 /* @route = POST /api/products */
@@ -20,8 +21,10 @@ const addProduct = async (req, res) => {
       userId: user.userId
     });
 
+    const sanitizedProduct = sanitizeProduct(newProduct);
+
     res.status(201).json({
-      product: newProduct,
+      product: sanitizedProduct,
       message: "Successfully added product"
     });
   } catch (error) {

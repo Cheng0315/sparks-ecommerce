@@ -1,7 +1,7 @@
 import { authAxios } from "../../services/api/authAxios";
 
 /* custom hook for adding product */
-const useAddProduct = (productImage) => {
+const useAddProduct = () => {
   const authorizedAxios = authAxios();
 
   const addProduct = async (values ) => {

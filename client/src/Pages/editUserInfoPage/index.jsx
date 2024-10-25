@@ -27,21 +27,21 @@ const EditUserInfoPage = () => {
         <label>First Name:</label>
         <input type="text" name="firstName" value={formik.values.firstName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.firstName && formik.errors.firstName ? (
-          <div className="error">{formik.errors.firstName}</div>
+          <div className="text-red-500">{formik.errors.firstName}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Last Name:</label>
         <input type="text" name="lastName" value={formik.values.lastName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.lastName && formik.errors.lastName ? (
-          <div className="error">{formik.errors.lastName}</div>
+          <div className="text-red-500">{formik.errors.lastName}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Username:</label>
         <input type="text" name="username" value={formik.values.username} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.username && formik.errors.username ? (
-          <div className="error">{formik.errors.username}</div>
+          <div className="text-red-500">{formik.errors.username}</div>
         ) : null}
       </div>
       <button type="submit">Submit</button>

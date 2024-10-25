@@ -58,42 +58,42 @@ const AddProductPage = () => {
         <label>Name:</label>
         <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.name && formik.errors.name ? (
-          <div className="error">{formik.errors.name}</div>
+          <div className="text-red-500">{formik.errors.name}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Description:</label>
         <textarea name="description" value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.description && formik.errors.description ? (
-          <div className="error">{formik.errors.description}</div>
+          <div className="text-red-500">{formik.errors.description}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Condition:</label>
         <input type="text" name="condition" value={formik.values.condition} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.condition && formik.errors.condition ? (
-          <div className="error">{formik.errors.condition}</div>
+          <div className="text-red-500">{formik.errors.condition}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Price: <span>$</span> </label>
         <input type="number" name="price" value={formik.values.price} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.price && formik.errors.price ? (
-          <div className="error">{formik.errors.price}</div>
+          <div className="text-red-500">{formik.errors.price}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Stock Quantity:</label>
         <input type="number" name="stockQuantity" value={formik.values.stockQuantity} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.stockQuantity && formik.errors.stockQuantity ? (
-          <div className="error">{formik.errors.stockQuantity}</div>
+          <div className="text-red-500">{formik.errors.stockQuantity}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Category ID:</label>
         <input type="number" name="categoryId" value={formik.values.categoryId} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.categoryId && formik.errors.categoryId ? (
-          <div className="error">{formik.errors.categoryId}</div>
+          <div className="text-red-500">{formik.errors.categoryId}</div>
         ) : null}
       </div>
       <div>
@@ -113,7 +113,7 @@ const AddProductPage = () => {
           </div>
         </div>
         {formik.touched.productImage && formik.errors.productImage ? (
-            <div className="error">{formik.errors.productImage}</div>
+            <div className="text-red-500">{formik.errors.productImage}</div>
           ) : null}
       </div>
       <button type="submit">Add Product</button>
