@@ -27,7 +27,7 @@ const validateProductDetails = [
     .toInt(),
   body("categoryId")
     .isInt({ min: 1, max: 18 })
-    .withMessage("Category ID must be between 1 and 18")
+    .withMessage("Category ID must be a number between 1 and 18")
     .toInt(),
   (req, res, next) => {
     try {

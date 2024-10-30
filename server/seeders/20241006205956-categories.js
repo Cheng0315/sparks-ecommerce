@@ -1,67 +1,64 @@
-'use strict';
+"use strict";
 
-/** @type {import('sequelize-cli').Migration} */
+/** @type {import("sequelize-cli").Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('categories', [
+    await queryInterface.bulkInsert("categories", [
       {
-        name: 'Antiques'
+        name: "Antiques"
       },
       {
-        name: 'Appliances'
+        name: "Appliances"
       },
       {
-        name: 'Art'
+        name: "Art"
       },
       {
-        name: 'Automotive'
+        name: "Automotive"
       },
       {
-        name: 'Baby'
+        name: "Baby"
       },
       {
-        name: 'Books'
+        name: "Books"
       },
       {
-        name: 'Fashion & Apparel'
+        name: "DIY & Hardware"
       },
       {
-        name: 'Electronics'
+        name: "Electronics"
       },
       {
-        name: 'Food & Beverages'
+        name: "Fashion & Apparel"
       },
       {
-        name: 'Health & Beauty'
+        name: "Food & Beverages"
       },
       {
-        name: 'Home & Garden'
+        name: "Health & Beauty"
       },
       {
-        name: 'Instruments'
+        name: "Home & Garden"
       },
       {
-        name: 'Movies & Music'
+        name: "Movies & Music"
       },
       {
-        name: 'Office Supplies'
+        name: "Office Supplies"
       },
       {
-        name: 'Pet Supplies'
+        name: "Pet Supplies"
       },
       {
-        name: 'Sports & Outdoors'
+        name: "Sports & Outdoors"
       },
       {
-        name: 'DIY & Hardware'
-      },
-      {
-        name: 'Toys & Games'
+        name: "Toys & Games"
       }
     ], {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('categories', null, {});
+    await queryInterface.bulkDelete("categories", null, {});
   }
 };
