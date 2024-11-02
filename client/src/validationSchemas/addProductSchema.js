@@ -35,7 +35,7 @@ const addProductSchema = Yup.object().shape({
     .min(1, "CategoryId must be a number between 1 and 18")
     .max(18, "CategoryId must be a number between 1 and 18"),
   productImage: Yup.mixed()
-    .required("An image is required")
+    .required("An image of the product is required")
     .test("fileType", "Unsupported File Format", (value) => {
       return value && ["image/jpeg", "image/jpg", "image/png", "image/gif"].includes(value.type);
     })

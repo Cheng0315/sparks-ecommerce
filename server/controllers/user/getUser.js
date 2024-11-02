@@ -5,12 +5,16 @@ const { User } = require("../../models");
 const getUser = async (req, res) => {
   try {
     const userId = parseInt(req.params.userId);
+
+    if (!userId) return res.status(400).json({errorMessage: "Invalid user id"});
+
     const user = await User.findOne({
       where: { userId },
       attributes: { exclude: ["password", "refreshToken", "newsletterSubscription", "newsletterCouponUsed"] }
     });
 
     if (!user) return res.status(404).json({errorMessage: "Invalid user id"});
+    
     const userData = user.toJSON();
     res.status(200).json({user: userData});
   } catch (error) {
