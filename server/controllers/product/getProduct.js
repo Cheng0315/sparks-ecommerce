@@ -7,7 +7,7 @@ const getProduct = async (req, res) => {
   try {
     const productId = parseInt(req.params.productId);
 
-    if (!productId) return res.status(400).json({errorMessage: "Invalid product id"});
+    if (isNaN(productId)) return res.status(400).json({errorMessage: "Invalid product id"});
 
     const product = await Product.findOne({
       where: { productId }

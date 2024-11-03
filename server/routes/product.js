@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { strictRateLimiter, verifyAccessToken } = require("../middleware/auth");
-const { validateProductDetails, uploadProductImage, verifyProductToken } = require("../middleware/product");
+const { validateProductDetails, uploadProductImage, verifyProductToken, validateProductId } = require("../middleware/product");
 const { addProduct, createProductToken, getProduct } = require("../controllers/product");
 
 /* Create */
@@ -9,7 +9,7 @@ router.post("/validate-details", strictRateLimiter, verifyAccessToken, validateP
 router.post("/add-product", strictRateLimiter, verifyAccessToken, uploadProductImage, verifyProductToken, addProduct);
 
 /* Read */
-router.get("/:productId", getProduct)
+router.get("/:productId", validateProductId, getProduct)
 
 /* Update */
 

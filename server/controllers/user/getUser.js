@@ -6,7 +6,7 @@ const getUser = async (req, res) => {
   try {
     const userId = parseInt(req.params.userId);
 
-    if (!userId) return res.status(400).json({errorMessage: "Invalid user id"});
+    if (isNaN(userId)) return res.status(400).json({errorMessage: "Invalid user id"});
 
     const user = await User.findOne({
       where: { userId },
