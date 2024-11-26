@@ -6,21 +6,21 @@ const useAddProduct = () => {
 
   const addProduct = async (values ) => {
     try {
-      const { productImage, ...objectDetails } = values;
-      const response = await authorizedAxios.post("/api/products/validate-details", objectDetails);
-
       const formData = new FormData();
-      formData.append("image", productImage);
-      formData.append("productToken", response.data.productToken);
+      formData.append("name", values.name);
+      formData.append("description", values.description);
+      formData.append("condition", values.condition);
+      formData.append("price", values.price);
+      formData.append("stockQuantity", values.stockQuantity);
+      formData.append("categoryId", values.categoryId);
+      formData.append("productImage", values.productImage);
+
+      const response = await authorizedAxios.post("/api/products", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
 
       if (response) {
-        const responseData = await authorizedAxios.post("/api/products/add-product", formData, {
-          headers: { "Content-Type": "multipart/form-data" }
-        });
-
-        if (responseData) {
-          console.log(responseData.data);
-        }
+        console.log(response.data);
       }
     } catch (error) {
       console.error("Unable to add product due to the following error: ", error);

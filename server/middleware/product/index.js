@@ -1,12 +1,14 @@
 /* Exports all product-related middlewares */
 const validateProductDetails = require("./validateProductDetails");
 const uploadProductImage = require("./uploadProductImage");
-const verifyProductToken = require("./verifyProductToken");
 const validateProductId = require("./validateProductId");
+const parseProductFormData = require("./parseProductFormData");
+const validateProductImage = require("./validateProductImage");
 
 module.exports = {
   validateProductDetails,
   uploadProductImage,
-  verifyProductToken,
-  validateProductId
+  validateProductId,
+  parseProductFormData,
+  validateProductImage
 };

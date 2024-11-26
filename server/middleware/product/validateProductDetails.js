@@ -9,16 +9,16 @@ const validateProductDetails = [
   body("description")
     .trim()
     .escape()
-    .isLength({ min: 5, max: 500 }).withMessage("Description must be between 5 and 500 characters long."),
+    .isLength({ min: 5, max: 500 }).withMessage("Description must be between 5 and 500 characters long"),
   body("condition")
     .trim()
     .escape()
     .isIn(["new", "like new", "refurbished", "used", "open box", "damaged", "for parts"])
-    .withMessage("Condition must be one of the following: 'new', 'like new', 'refurbished', 'used', 'open box', 'damaged', 'for parts'."),
+    .withMessage("Condition must be one of the following: 'new', 'like new', 'refurbished', 'used', 'open box', 'damaged', 'for parts'"),
   body("price")
     .trim()
     .escape()
-    .isFloat({ gt: 0 }).withMessage("Price must be a positive number")
+    .isFloat({ min: 0.01, max: 100000 }).withMessage("Price must be a number between 0.01 and 100000")
     .matches(/^\d+(\.\d{1,2})?$/).withMessage("Price must have at most two decimal places")
     .toFloat(),
   body("stockQuantity")

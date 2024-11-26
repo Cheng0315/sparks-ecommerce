@@ -5,8 +5,7 @@ const { sanitizeProduct } = require("../../utils/product")
 /* @route = POST /api/products */
 const addProduct = async (req, res) => {
   try {
-    const { name, description, condition, stockQuantity, categoryId, price } = req.productDetails;
-    const { imageUrl } = req.body;
+    const { name, description, condition, stockQuantity, categoryId, price, imageUrl } = req.body;
     const priceInCents = price * 100;
     const user = req.authUser;
     
