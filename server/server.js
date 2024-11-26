@@ -1,10 +1,11 @@
 const express = require("express");
 const helmet = require("helmet");
 const env = require("dotenv");
+const path = require("path");
 const { userRoutes, productRoutes } = require("./routes");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const { generalRateLimiter } = require('./middleware/auth');
+const { generalRateLimiter } = require("./middleware/auth");
 const corsOptions = {
   origin: [process.env.ORIGIN_SERVER],
   credentials: true
@@ -19,6 +20,7 @@ app.use(cors(corsOptions));
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(cookieParser());
 app.use(generalRateLimiter);
+app.use("/public/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* Routes */
 app.use("/api/users", userRoutes);

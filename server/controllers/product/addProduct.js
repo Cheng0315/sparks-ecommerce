@@ -24,7 +24,7 @@ const addProduct = async (req, res) => {
 
     res.status(201).json({
       product: sanitizedProduct,
-      message: "Successfully added product"
+      message: `Successfully added ${sanitizedProduct.name}`
     });
   } catch (error) {
     res.status(500).json({errorMessage: error.message});

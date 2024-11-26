@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProduct } from "../../hooks/product";
+const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {
   const [viewedProduct, setViewedProduct] = useState(null);
@@ -14,6 +15,7 @@ const ProductDetailsPage = () => {
   return (
     <div>
       <h2>Product Details</h2>
+      {viewedProduct.imageUrl && <img src={`${serverURL}${viewedProduct.imageUrl}`} alt="Product" />}
       <p>Name: {viewedProduct.name}</p>
       <p>Description: {viewedProduct.description}</p>
       <p>Condition: {viewedProduct.condition}</p>
