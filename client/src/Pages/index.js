@@ -10,3 +10,4 @@ export { default as EditUserInfoPage } from "./editUserInfoPage";
 export { default as UpdateUserRole } from "./updateUserRolePage";
 export { default as AddProductPage } from "./addProductPage";
 export { default as ProductDetailsPage } from "./productDetailsPage";
+export { default as PageNotFound } from "./pageNotFound";
