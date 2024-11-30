@@ -1,7 +1,7 @@
 import { apiAxios } from "../../services/api/authAxios";
 import { useEffect } from "react";
 
-const useGetProduct = (productId, setViewedProduct) => {
+const useGetProduct = (productId, setViewedProduct, setProductNotFound) => {
 
   useEffect(() => {
     /* Create an instance of AbortController to cancel network request when needed */
@@ -17,6 +17,11 @@ const useGetProduct = (productId, setViewedProduct) => {
       } catch (error) {
         if (error.name !== 'CanceledError') {
           console.error('Error fetching user data:', error);
+        }
+
+        /* Check if the error is a 404 (product not found) */
+        if (error.response && error.response.status === 404) { 
+          setProductNotFound(true); 
         }
       }
     };

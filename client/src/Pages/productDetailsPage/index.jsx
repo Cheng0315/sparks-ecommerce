@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useGetProduct } from "../../hooks/product";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {
   const [viewedProduct, setViewedProduct] = useState(null);
+  const [productNotFound, setProductNotFound] = useState(null);
   const { productId } = useParams();
 
   /* Call useGetProduct hook to update viewedProduct based on id change*/
-  useGetProduct(productId, setViewedProduct);
+  useGetProduct(productId, setViewedProduct, setProductNotFound);
+
+  if (productNotFound) return <Navigate to="/page-not-found" />;
 
   if (!viewedProduct) return <div>Loading...</div>;
 
