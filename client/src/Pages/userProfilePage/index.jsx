@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { useGetAndSetViewedUser } from "../../hooks/user";
+import { isValidId } from "../../utils/validations";
 
 const UserProfilePage = () => {
   const [viewedUser, setViewedUser] = useState(null);
   const [viewedUserNotFound, setViewedUserNotFound] = useState(false);
   const { userId } = useParams();
+
+  if (!isValidId(userId)) return <Navigate to="/page-not-found" />;
 
   /* Call useGetAndSetViewedUser hook to update viewedUser based on id change*/
   useGetAndSetViewedUser(userId, setViewedUser, setViewedUserNotFound);
