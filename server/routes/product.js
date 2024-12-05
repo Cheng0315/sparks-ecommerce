@@ -11,6 +11,7 @@ router.post("/", strictRateLimiter, verifyAccessToken, parseProductFormData, val
 router.get("/:productId", validateProductId, getProduct);
 
 /* Update */
+router.patch("/:productId", strictRateLimiter, verifyAccessToken);
 
 /* Delete */
 
