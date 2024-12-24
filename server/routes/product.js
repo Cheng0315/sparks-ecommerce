@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { strictRateLimiter, verifyAccessToken } = require("../middleware/auth");
-const { validateProductDetails, uploadProductImage, validateProductId, parseProductFormData, validateProductImage, parseProductUpdateFormData } = require("../middleware/product");
+const { validateProductDetails, uploadProductImage, validateProductId, parseProductFormData, validateProductImage, parseProductUpdateFormData, verifyProductBelongsToUser, validateProductUpdateDetails } = require("../middleware/product");
 const { addProduct, getProduct } = require("../controllers/product");
 
 /* Create */
@@ -11,7 +11,7 @@ router.post("/", strictRateLimiter, verifyAccessToken, parseProductFormData, val
 router.get("/:productId", validateProductId, getProduct);
 
 /* Update */
-router.patch("/:productId", strictRateLimiter, verifyAccessToken, parseProductUpdateFormData);
+router.patch("/:productId", strictRateLimiter, verifyAccessToken, validateProductId, verifyProductBelongsToUser, parseProductUpdateFormData, validateProductUpdateDetails, validateProductImage);
 
 /* Delete */
 
