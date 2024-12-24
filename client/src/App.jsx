@@ -1,7 +1,7 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, AddProductPage, ProductDetailsPage, PageNotFound } from './pages';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, AddProductPage, ProductDetailsPage, PageNotFound } from "./pages";
 import { Navbar } from "./components";
-import { PrivateRoute, RedirectIfLoggedIn } from './components';
+import { PrivateRoute, RedirectIfLoggedIn } from "./components";
 
 const App = () =>{
   return (

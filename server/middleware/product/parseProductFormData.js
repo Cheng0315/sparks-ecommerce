@@ -26,7 +26,7 @@ const parseProductFormData = (req, res, next) => {
         req.body[field] = singleValues[field]; 
       }
 
-      req.imageFile = files.productImage[0];
+      req.imageFile = Array.isArray(files.productImage) ? files.productImage[0] : files.productImage;
 
       next();
     });
