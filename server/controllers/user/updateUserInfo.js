@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { sanitizeUser } = require("../../utils/user")
+const { sanitizeUser } = require("../../utils/user");
 
 /* Update first name, last name, and username */
 /* @route = PATCH /api/users/:id/update-info */
@@ -7,7 +7,6 @@ const updateUserInfo = async (req, res) => {
   try {
     const { firstName, lastName, username } = req.body;
     const userId = req.authUser.userId;
-    
     const user = await User.findOne({ where: { userId }});
 
     user.firstName = firstName;

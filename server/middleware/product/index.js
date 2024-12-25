@@ -7,6 +7,7 @@ const validateProductImage = require("./validateProductImage");
 const parseProductUpdateFormData = require("./parseProductUpdateFormData");
 const verifyProductBelongsToUser = require("./verifyProductBelongsToUser");
 const validateProductUpdateDetails = require("./validateProductUpdateDetails");
+const updateProductImage = require("./updateProductImage");
 
 module.exports = {
   validateProductDetails,
@@ -16,5 +17,6 @@ module.exports = {
   validateProductImage,
   parseProductUpdateFormData,
   verifyProductBelongsToUser,
-  validateProductUpdateDetails
+  validateProductUpdateDetails,
+  updateProductImage
 };

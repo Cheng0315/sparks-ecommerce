@@ -1,6 +1,6 @@
 const path = require("path");
 const { generateProductFilename } = require("../../utils/product")
-const fs = require('fs');
+const fs = require("fs");
 
 /* Upload product image */
 const uploadProductImage = (req, res, next) => {

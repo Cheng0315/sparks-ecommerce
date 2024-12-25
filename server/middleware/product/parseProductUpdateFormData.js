@@ -7,7 +7,7 @@ const parseProductUpdateFormData = (req, res, next) => {
     const form = new formidable.IncomingForm({ 
       multiples: false, 
       keepExtensions: true,
-      maxFileSize: 2 * 1024 * 1024 
+      maxFileSize: 2 * 1024 * 1024 // 2 MB
     }); 
 
     form.parse(req, (err, fields, files) => {

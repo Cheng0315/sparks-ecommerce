@@ -4,6 +4,7 @@ const { Product } = require("../../models");
 const verifyProductBelongsToUser = async (req, res, next) => {
   try {
     const product = await Product.findOne({ where: { productId : req.params.productId }});
+    if (!product) return res.status(404).json({ errorMessage: "Product not found" });
 
     /* Return 403 if the product does not belongs to the user */
     if (req.authUser.userId !== product.userId) {
