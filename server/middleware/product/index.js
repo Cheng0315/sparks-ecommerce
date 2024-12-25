@@ -18,5 +18,5 @@ module.exports = {
   parseProductUpdateFormData,
   verifyProductBelongsToUser,
   validateProductUpdateDetails,
-  updateProductImage
+  updateProductImage,
 };

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { strictRateLimiter, verifyAccessToken } = require("../middleware/auth");
 const { validateProductDetails, uploadProductImage, validateProductId, parseProductFormData, validateProductImage, parseProductUpdateFormData, verifyProductBelongsToUser, validateProductUpdateDetails, updateProductImage } = require("../middleware/product");
-const { addProduct, getProduct, updateProductDetails } = require("../controllers/product");
+const { addProduct, getProduct, updateProductDetails, deleteProduct } = require("../controllers/product");
 
 /* Create */
 router.post("/", strictRateLimiter, verifyAccessToken, parseProductFormData, validateProductDetails, validateProductImage, uploadProductImage, addProduct);
@@ -14,5 +14,6 @@ router.get("/:productId", validateProductId, getProduct);
 router.patch("/:productId", strictRateLimiter, verifyAccessToken, validateProductId, verifyProductBelongsToUser, parseProductUpdateFormData, validateProductUpdateDetails, validateProductImage, updateProductImage, updateProductDetails);
 
 /* Delete */
+router.delete("/:productId", strictRateLimiter, verifyAccessToken, validateProductId, verifyProductBelongsToUser, deleteProduct);
 
 module.exports = router;
