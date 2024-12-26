@@ -5,6 +5,10 @@ const { sanitizeProduct } = require("../../utils/product");
 /* @route = PATCH /api/products/:productId */
 const updateProductDetails = async (req, res) => {
   try {
+    if (!req.imageFile && Object.keys(req.body).length < 1) {
+      return res.status(400).json({ errorMessage: "Product fields and files cannot be empty" });
+    }
+
     const product = await Product.findOne({ where: { productId: req.params.productId }});
     if (!product) return res.status(404).json({ errorMessage: "Product not found" });
 

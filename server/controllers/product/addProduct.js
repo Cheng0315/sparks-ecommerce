@@ -5,6 +5,10 @@ const { sanitizeProduct } = require("../../utils/product")
 /* @route = POST /api/products */
 const addProduct = async (req, res) => {
   try {
+    if (!req.imageFile) {
+      return res.status(400).json({ errorMessage: "Error: Missing image file" });
+    }
+
     const { name, description, condition, stockQuantity, categoryId, price, imageUrl } = req.body;
     const priceInCents = price * 100;
     const user = req.authUser;

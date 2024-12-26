@@ -5,9 +5,9 @@ const fs = require("fs");
 /* Upload product image */
 const uploadProductImage = (req, res, next) => {
   try {
+    if (!req.imageFile) return next();
+    
     const imageFile = req.imageFile;
-    const user = req.authUser;
-    if (user.role !== "seller") return res.status(401).json({errorMessage: "Access Denied"});
 
     const newFilename = generateProductFilename(imageFile.originalFilename);
     const newPath = path.join(__dirname, "../../public/assets", newFilename);

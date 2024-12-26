@@ -3,9 +3,7 @@ const path = require("path");
 /* Validate product image file*/
 const validateProductImage = (req, res, next) => {
   try {
-    if (!req.imageFile && Object.keys(req.body).length > 0) {
-      return next();
-    }
+    if (!req.imageFile) return next();
     
     const imageFile = req.imageFile;
     const fileTypes = /jpeg|jpg|png|gif/;
