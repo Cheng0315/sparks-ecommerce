@@ -1,8 +1,10 @@
 import { authAxios } from "../../services/api/authAxios";
+import { useNavigate } from "react-router-dom";
 
 /* custom hook for adding product */
 const useAddProduct = () => {
   const authorizedAxios = authAxios();
+  const navigate = useNavigate();
 
   const addProduct = async (values ) => {
     try {
@@ -20,7 +22,7 @@ const useAddProduct = () => {
       });
 
       if (response) {
-        console.log(response.data);
+        navigate(`/products/${response.data.product.productId}`);
       }
     } catch (error) {
       console.error("Unable to add product due to the following error: ", error);

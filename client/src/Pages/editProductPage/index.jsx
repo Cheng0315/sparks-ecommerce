@@ -1,18 +1,24 @@
 import { useFormik } from "formik";
+import { useGetProduct, useUpdateProduct } from "../../hooks/product";
+import { useSelector } from 'react-redux';
+import { useParams, Navigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { useCallback, useState, useEffect } from "react"
-import { useAddProduct } from "../../hooks/product";
-import { addProductSchema } from "../../validationSchemas"; 
+import { isValidId } from "../../utils/validations";
+import { updateProductSchema } from "../../validationSchemas"; 
 
-
-
-const AddProductPage = () => {
+const EditProductPage = () => {
+  const [product, setProduct] = useState(null);
+  const [productNotFound, setProductNotFound] = useState(null);
   const [previewImageUrl, setPreviewImageUrl] = useState(null);
-  const addProduct = useAddProduct()
-  
-  /* Initialize formik with initial values for adding product */
+  const user = useSelector((state) => state.user.user);
+  const updateProduct = useUpdateProduct();
+  const { productId } = useParams();
+
+  /* Initialize formik with initial values for updating product */
   const formik = useFormik({
     initialValues: {
+      productId: productId,
       name: "",
       description: "",
       condition: "",
@@ -22,9 +28,9 @@ const AddProductPage = () => {
       productImage: ""
     },
     /* Add YUP to validate product inputs */
-    validationSchema: addProductSchema,
-    /* Call addProduct hook to make a request to server to add product */
-    onSubmit: addProduct
+    validationSchema: updateProductSchema,
+    /* Call updateProduct hook to make a request to server to update product */
+    onSubmit: updateProduct
   });
 
   /* Set the product image when user add product image */
@@ -43,7 +49,7 @@ const AddProductPage = () => {
     maxSize: 2097152 // 2MB
   });
 
-  /* Remove object url when component unmount */
+  /* Remove product object url when component unmount */
   useEffect(() => {
     return () => {
       if (previewImageUrl) {
@@ -51,26 +57,36 @@ const AddProductPage = () => {
       }
     };
   }, [previewImageUrl]);
+  
+  if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
+  /* Call useGetProduct hook to update the state of product based on id change*/
+  useGetProduct(productId, setProduct, setProductNotFound);
 
+  if (productNotFound) return <Navigate to="/page-not-found" />;
+    
+  if (product && product.userId !== user.userId) return <Navigate to="/page-not-found" />;
+
+  if (!product) return <div>Loading...</div>;
+  
   return (
     <form onSubmit={formik.handleSubmit}>
        <div className="field">
-        <label>Name:</label>
-        <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        <label>Name: </label>
+        <input type="text" name="name" placeholder={product.name} value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.name && formik.errors.name ? (
           <div className="text-red-500">{formik.errors.name}</div>
         ) : null}
       </div>
       <div className="field">
-        <label>Description:</label>
-        <textarea name="description" value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        <label>Description: </label>
+        <textarea name="description" placeholder={product.description} value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.description && formik.errors.description ? (
           <div className="text-red-500">{formik.errors.description}</div>
         ) : null}
       </div>
       <div className="field">
-        <label>Condition:</label>
-        <select name="condition" value={formik.values.condition} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
+        <label>Condition: </label>
+        <select name="condition" value={formik.values.condition ? formik.values.condition : product.condition} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
           <option value="" label="Select condition" />
           <option value="new" label="New" />
           <option value="like new" label="Like New" />
@@ -86,21 +102,21 @@ const AddProductPage = () => {
       </div>
       <div className="field">
         <label>Price: <span>$</span> </label>
-        <input type="number" name="price" value={formik.values.price} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        <input type="number" name="price" placeholder={product.price} value={formik.values.price} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.price && formik.errors.price ? (
           <div className="text-red-500">{formik.errors.price}</div>
         ) : null}
       </div>
       <div className="field">
-        <label>Stock Quantity:</label>
-        <input type="number" name="stockQuantity" value={formik.values.stockQuantity} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+        <label>Stock Quantity: </label>
+        <input type="number" name="stockQuantity" placeholder={product.stockQuantity} value={formik.values.stockQuantity} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.touched.stockQuantity && formik.errors.stockQuantity ? (
           <div className="text-red-500">{formik.errors.stockQuantity}</div>
         ) : null}
       </div>
       <div className="field">
         <label>Category</label>
-        <select name="categoryId" value={formik.values.categoryId} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
+        <select name="categoryId" value={formik.values.categoryId ? formik.values.categoryId : product.categoryId} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
           <option value="" label="Select category" />
           <option value="1" label="Antiques" />
           <option value="2" label="Appliances" />
@@ -143,9 +159,9 @@ const AddProductPage = () => {
             <div className="text-red-500">{formik.errors.productImage}</div>
           ) : null}
       </div>
-      <button type="submit">Add product</button>
+      <button type="submit">Update product</button>
     </form>
   );
 };
 
-export default AddProductPage;
+export default EditProductPage;

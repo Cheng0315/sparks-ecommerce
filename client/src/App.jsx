@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, AddProductPage, ProductDetailsPage, PageNotFound } from "./pages";
+import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, AddProductPage, ProductDetailsPage, PageNotFound, EditProductPage } from "./pages";
 import { Navbar } from "./components";
 import { PrivateRoute, RedirectIfLoggedIn } from "./components";
 
@@ -23,6 +23,7 @@ const App = () =>{
               <Route path="/account/change-password" element={<ChangePasswordPage />}/>
               <Route path="/account" element={<AccountPage />}/>
               <Route path="/products/add-product" element={<AddProductPage />}/>
+              <Route path="/products/:productId/edit" element={<EditProductPage />}/>
             </Route>
             <Route path="/products/:productId" element={<ProductDetailsPage />}/>
             <Route path="/page-not-found" element={<PageNotFound />}/>
