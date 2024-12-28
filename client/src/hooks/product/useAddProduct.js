@@ -1,5 +1,6 @@
 import { authAxios } from "../../services/api/authAxios";
 import { useNavigate } from "react-router-dom";
+import { createFormData } from "../../utils/product";
 
 /* custom hook for adding product */
 const useAddProduct = () => {
@@ -8,20 +9,14 @@ const useAddProduct = () => {
 
   const addProduct = async (values ) => {
     try {
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("description", values.description);
-      formData.append("condition", values.condition);
-      formData.append("price", values.price);
-      formData.append("stockQuantity", values.stockQuantity);
-      formData.append("categoryId", values.categoryId);
-      formData.append("productImage", values.productImage);
+      const allowFields = ["name", "description", "condition", "price", "stockQuantity", "categoryId", "productImage"];
+      const formData = createFormData(values, allowFields)
 
       const response = await authorizedAxios.post("/api/products", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
-      if (response) {
+      if (response && response.data) {
         navigate(`/products/${response.data.product.productId}`);
       }
     } catch (error) {

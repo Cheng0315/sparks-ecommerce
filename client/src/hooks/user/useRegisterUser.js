@@ -14,7 +14,7 @@ const useRegisterUser = () => {
       const response = await apiAxios.post(`/api/users/register`, values);
 
       /* If register is successful, update the user and token */
-      if (response) {
+      if (response && response.data) {
         dispatch(setUser({user: response.data.user}));
         dispatch(setAccessToken({accessToken: response.data.accessToken}));
 

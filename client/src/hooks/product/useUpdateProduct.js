@@ -1,5 +1,6 @@
 import { authAxios } from "../../services/api/authAxios";
 import { useNavigate } from "react-router-dom";
+import { createFormData } from "../../utils/product";
 
 /* custom hook for updating product */
 const useUpdateProduct = () => {
@@ -8,21 +9,15 @@ const useUpdateProduct = () => {
 
   const updateProduct = async (values) => {
     try {
-      const formData = new FormData();
       const allowFields = ["name", "description", "condition", "price", "stockQuantity", "categoryId", "productImage"];
-
-      allowFields.forEach(field => {
-        if (values[field]) {
-          formData.append(field, values[field]);
-        }
-      });
+      const formData = createFormData(values, allowFields)
 
       const response = await authorizedAxios.patch(`/api/products/${values.productId}`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
 
-      if (response) {
+      if (response && response.data) {
         navigate(`/products/${response.data.product.productId}`);
       }
     } catch (error) {

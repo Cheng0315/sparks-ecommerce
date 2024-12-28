@@ -13,7 +13,7 @@ const useGetAndSetViewedUser = (userId, setViewedUser, setViewedUserNotFound) =>
           signal: controller.signal
         });
 
-        if (response) setViewedUser(response.data.user);
+        if (response && response.data) setViewedUser(response.data.user);
       } catch (error) {
         if (error.name !== 'CanceledError') {
           console.error('Error fetching user data:', error);

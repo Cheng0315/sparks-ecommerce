@@ -17,7 +17,7 @@ const useUpdateUserInfo = () => {
       const response = await authorizedAxios.patch(`/api/users/${user.userId}/update-info`, values);
 
       /* If user info update is successful, update the user state and display success message to user*/
-      if (response) {
+      if (response && response.data) {
         dispatch(setUser({user: response.data.user}));
         console.log(response.data.message);
       /* Redirect to account page after succesful user info update */

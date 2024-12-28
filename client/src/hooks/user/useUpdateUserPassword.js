@@ -14,7 +14,7 @@ const useUpdateUserPassword = () => {
       const response = await authorizedAxios.patch(`/api/users/${user.userId}/change-password`, values);
 
       /* If password update is successful, display success message to user */
-      if (response) {
+      if (response && response.data) {
         console.log(response.data.message);
       /* Redirect to account page after succesful password change */
         navigate("/account");

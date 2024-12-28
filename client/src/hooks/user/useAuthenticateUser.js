@@ -18,7 +18,7 @@ const useAuthenticateUser = (accessToken, user, setLoading) => {
             signal: controller.signal 
           });
 
-          if (response) {
+          if (response && response.data) {
             dispatch(setUser({ user: response.data.user }));
             dispatch(setAccessToken({ accessToken: response.data.accessToken }));
           }

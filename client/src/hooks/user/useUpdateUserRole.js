@@ -17,7 +17,7 @@ const useUpdateUserRole = () => {
       const response = await authorizedAxios.patch(`/api/users/${user.userId}/update-role`);
 
       /* If user role update is successful, update the user state, token, and display success message to user */
-      if (response) {
+      if (response && response.data) {
         dispatch(setUser({user: response.data.user}));
         dispatch(setAccessToken({accessToken: response.data.accessToken}));
         console.log(response.data.message);

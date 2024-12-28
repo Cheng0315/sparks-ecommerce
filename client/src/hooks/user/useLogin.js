@@ -14,7 +14,7 @@ const useLogin = () => {
       const response = await apiAxios.post(`/api/users/login`, values);;
 
       /* If login is successful, update the user and token */
-      if (response) {
+      if (response && response.data) {
         dispatch(setUser({user: response.data.user}));
         dispatch(setAccessToken({accessToken: response.data.accessToken}));
         
