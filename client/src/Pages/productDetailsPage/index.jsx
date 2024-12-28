@@ -6,38 +6,38 @@ import { useSelector } from 'react-redux';
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {
-  const [viewedProduct, setViewedProduct] = useState(null);
+  const [product, setProduct] = useState(null);
   const [productNotFound, setProductNotFound] = useState(null);
   const { productId } = useParams();
   const user = useSelector((state) => state.user.user);
   
   if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
 
-  /* Call useGetProduct hook to update viewedProduct based on id change*/
-  useGetProduct(productId, setViewedProduct, setProductNotFound);
+  /* Call useGetProduct hook to update product based on id change*/
+  useGetProduct(productId, setProduct, setProductNotFound);
 
   if (productNotFound) return <Navigate to="/page-not-found" />;
 
-  if (!viewedProduct) return <div>Loading...</div>;
+  if (!product) return <div>Loading...</div>;
 
-  const editProductButton = user && viewedProduct.userId === user.userId ? (
+  const editProductButton = user && product.userId === user.userId ? (
     <Link
-      to={`/products/${viewedProduct.productId}/edit`}
+      to={`/products/${product.productId}/edit`}
       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-center" >
       Edit
-    </Link> 
+    </Link>
   ) : null;
 
   return (
     <div>
       <div>
-        <h2>Product Details</h2>
-        {viewedProduct.imageUrl && <img src={`${serverURL}${viewedProduct.imageUrl}`} alt="Product" />}
-        <p>Name: {viewedProduct.name}</p>
-        <p>Description: {viewedProduct.description}</p>
-        <p>Condition: {viewedProduct.condition}</p>
-        <p>Price: {viewedProduct.price}</p>
-        <p>Stock Quantity: {viewedProduct.stockQuantity}</p>
+        <h2 className="text-center text-2xl font-bold">Product Details</h2>
+        {product.imageUrl && <img src={`${serverURL}${product.imageUrl}`} alt="Product" />}
+        <p>Name: {product.name}</p>
+        <p>Description: {product.description}</p>
+        <p>Condition: {product.condition}</p>
+        <p>Price: {product.price}</p>
+        <p>Stock Quantity: {product.stockQuantity}</p>
       </div>
       <div>
         { editProductButton }

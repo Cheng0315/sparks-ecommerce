@@ -1,6 +1,7 @@
 import { apiAxios } from "../../services/api/authAxios";
 import { useEffect } from "react";
 
+/* custom hook for getting product */
 const useGetProduct = (productId, setViewedProduct, setProductNotFound) => {
 
   useEffect(() => {
