@@ -4,7 +4,7 @@ const { param, validationResult } = require("express-validator");
 const validateProductId = [
   param("productId")
     .isInt()
-    .withMessage("Product ID must be an integer")
+    .withMessage("Product ID must be a positive integer")
     .toInt(),
   (req, res, next) => {
     const errors = validationResult(req);
