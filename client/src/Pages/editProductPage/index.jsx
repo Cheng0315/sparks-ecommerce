@@ -1,19 +1,22 @@
 import { useFormik } from "formik";
-import { useGetProduct, useUpdateProduct, useDeleteProduct } from "../../hooks/product";
+import { useUpdateProduct, useDeleteProduct } from "../../hooks/product";
 import { useSelector } from 'react-redux';
 import { useParams, Navigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { isValidId } from "../../utils/validations";
 import { updateProductSchema } from "../../validationSchemas"; 
+import useFetchData from "../../hooks/useFetchData";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const EditProductPage = () => {
-  const [product, setProduct] = useState(null);
-  const [productNotFound, setProductNotFound] = useState(null);
+  const { productId } = useParams();
+  if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
+
+  const { data, isLoading, error } = useFetchData(`/api/products/${productId}`);
   const [previewImageUrl, setPreviewImageUrl] = useState(null);
   const user = useSelector((state) => state.user.user);
-  const { productId } = useParams();
+
   const updateProduct = useUpdateProduct();
   const deleteProduct = useDeleteProduct();
 
@@ -63,42 +66,38 @@ const EditProductPage = () => {
       }
     };
   }, [previewImageUrl]);
-  
-  if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
-  /* Call useGetProduct hook to update the state of product based on id change*/
-  useGetProduct(productId, setProduct, setProductNotFound);
 
-  if (productNotFound) return <Navigate to="/page-not-found" />;
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) return <Navigate to="/page-not-found" />;
     
-  if (product && product.userId !== user.userId) return <Navigate to="/page-not-found" />;
-
-  if (!product) return <div>Loading...</div>;
+  if (data.product && data.product.userId !== user.userId) return <Navigate to="/page-not-found" />;
   
   return (
     <div>
       <h2 className="text-center text-2xl font-bold">Edit Product</h2>
       <div>
-        {product.imageUrl && <img src={`${serverURL}${product.imageUrl}`} alt="Product" />}
+        {data.product.imageUrl && <img src={`${serverURL}${data.product.imageUrl}`} alt="Product" />}
       </div>
       <div>
         <form onSubmit={formik.handleSubmit}>
           <div className="field">
             <label>Name: </label>
-            <input type="text" name="name" placeholder={product.name} value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <input type="text" name="name" placeholder={data.product.name} value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
             {formik.touched.name && formik.errors.name ? (
               <div className="text-red-500">{formik.errors.name}</div>
             ) : null}
           </div>
           <div className="field">
             <label>Description: </label>
-            <textarea name="description" placeholder={product.description} value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <textarea name="description" placeholder={data.product.description} value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
             {formik.touched.description && formik.errors.description ? (
               <div className="text-red-500">{formik.errors.description}</div>
             ) : null}
           </div>
           <div className="field">
             <label>Condition: </label>
-            <select name="condition" value={formik.values.condition ? formik.values.condition : product.condition} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
+            <select name="condition" value={formik.values.condition ? formik.values.condition : data.product.condition} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
               <option value="" label="Select condition" />
               <option value="new" label="New" />
               <option value="like new" label="Like New" />
@@ -114,21 +113,21 @@ const EditProductPage = () => {
           </div>
           <div className="field">
             <label>Price: <span>$</span> </label>
-            <input type="number" name="price" placeholder={product.price} value={formik.values.price} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <input type="number" name="price" placeholder={data.product.price} value={formik.values.price} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
             {formik.touched.price && formik.errors.price ? (
               <div className="text-red-500">{formik.errors.price}</div>
             ) : null}
           </div>
           <div className="field">
             <label>Stock Quantity: </label>
-            <input type="number" name="stockQuantity" placeholder={product.stockQuantity} value={formik.values.stockQuantity} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <input type="number" name="stockQuantity" placeholder={data.product.stockQuantity} value={formik.values.stockQuantity} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
             {formik.touched.stockQuantity && formik.errors.stockQuantity ? (
               <div className="text-red-500">{formik.errors.stockQuantity}</div>
             ) : null}
           </div>
           <div className="field">
             <label>Category</label>
-            <select name="categoryId" value={formik.values.categoryId ? formik.values.categoryId : product.categoryId} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
+            <select name="categoryId" value={formik.values.categoryId ? formik.values.categoryId : data.product.categoryId} onChange={formik.handleChange} onBlur={formik.handleBlur} className="border rounded p-2 w-full" >
               <option value="" label="Select category" />
               <option value="1" label="Antiques" />
               <option value="2" label="Appliances" />
