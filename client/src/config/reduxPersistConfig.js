@@ -1,11 +1,11 @@
-import storage from 'redux-persist/lib/storage';
+import storage from "redux-persist/lib/storage";
 
 /* Redux Persist Configuration */
 /* Store only user object in local storage */
 const reduxPersistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whitelist: ['user'],
+  whitelist: ["user"],
 };
 
 export default reduxPersistConfig;

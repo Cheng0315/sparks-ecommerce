@@ -3,12 +3,15 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react"
 import { useAddProduct } from "../../hooks/product";
 import { addProductSchema } from "../../validationSchemas"; 
-
-
+import { useSelector } from 'react-redux';
+import { Navigate } from "react-router-dom";
 
 const AddProductPage = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState(null);
+  const user = useSelector((state) => state.user.user);
   const addProduct = useAddProduct()
+
+  if (user.role !== "seller") return <Navigate to="/page-not-found" />;
   
   /* Initialize formik with initial values for adding product */
   const formik = useFormik({
@@ -135,9 +138,9 @@ const AddProductPage = () => {
             <div className="w-3/4">
               <input {...getInputProps()} />
               {isDragActive ? (
-                <p className="text-gray-500">Drop the files here...</p>
+                <p className="text-gray-500">Drop the file here...</p>
               ) : (
-                <p className="text-gray-500">Drag and drop some file here, or click to select files</p>
+                <p className="text-gray-500">Drag and drop some file here, or click to select file</p>
               )}
             </div>
           </div>

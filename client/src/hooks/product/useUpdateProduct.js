@@ -18,7 +18,7 @@ const useUpdateProduct = () => {
 
 
       if (response && response.data) {
-        navigate(`/products/${response.data.product.productId}`);
+        navigate(`/account/products/${response.data.product.productId}`);
       }
     } catch (error) {
       console.error("Unable to update product due to the following error: ", error);

@@ -10,14 +10,14 @@ const getAllProductsBelongToUser = async (req, res) => {
     const products = await Product.findAll({
       where: { userId: req.authUser.userId }
     });
-
+    
     if (!products || products.length === 0) {
       return res.status(404).json({errorMessage: "No products found"});
     }
 
-    const sanitizedProductsArray = products.map(product => sanitizeProduct(product));
+    const sanitizedUserProducts = products.map(product => sanitizeProduct(product));
     
-    res.status(200).json({products: sanitizedProductsArray});
+    res.status(200).json({userProducts: sanitizedUserProducts});
   } catch (error) {
     res.status(500).json({errorMessage: error.message});
   }

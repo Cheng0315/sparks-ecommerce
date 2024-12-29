@@ -161,9 +161,9 @@ const EditProductPage = () => {
               <div className="w-3/4">
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                  <p className="text-gray-500">Drop the files here...</p>
+                  <p className="text-gray-500">Drop the file here...</p>
                 ) : (
-                  <p className="text-gray-500">Drag and drop some file here, or click to select files</p>
+                  <p className="text-gray-500">Drag and drop some file here, or click to select file</p>
                 )}
               </div>
             </div>

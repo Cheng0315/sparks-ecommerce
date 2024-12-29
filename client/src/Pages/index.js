@@ -12,3 +12,4 @@ export { default as AddProductPage } from "./addProductPage";
 export { default as ProductDetailsPage } from "./productDetailsPage";
 export { default as PageNotFound } from "./pageNotFound";
 export { default as EditProductPage } from "./editProductPage";
+export { default as UserProductsPage } from "./userProductsPage";

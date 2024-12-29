@@ -2,7 +2,7 @@ import { apiAxios } from "../../services/api/authAxios";
 import { useEffect } from "react";
 
 /* custom hook for getting product */
-const useGetProduct = (productId, setViewedProduct, setProductNotFound) => {
+const useGetProduct = (productId, setProduct, setProductNotFound) => {
 
   useEffect(() => {
     /* Create an instance of AbortController to cancel network request when needed */
@@ -14,7 +14,7 @@ const useGetProduct = (productId, setViewedProduct, setProductNotFound) => {
           signal: controller.signal
         });
 
-        if (response) setViewedProduct(response.data.product);
+        if (response) setProduct(response.data.product);
       } catch (error) {
         if (error.name !== 'CanceledError') {
           console.error('Error fetching user data:', error);

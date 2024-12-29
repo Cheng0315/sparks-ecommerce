@@ -22,7 +22,7 @@ const ProductDetailsPage = () => {
 
   const editProductButton = user && product.userId === user.userId ? (
     <Link
-      to={`/products/${product.productId}/edit`}
+      to={`/account/products/${product.productId}/edit`}
       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-center" >
       Edit
     </Link>
@@ -32,7 +32,7 @@ const ProductDetailsPage = () => {
     <div>
       <div>
         <h2 className="text-center text-2xl font-bold">Product Details</h2>
-        {product.imageUrl && <img src={`${serverURL}${product.imageUrl}`} alt="Product" />}
+        {product.imageUrl && <img src={`${serverURL}${product.imageUrl}`} alt="Product" className="w-full max-w-md h-auto object-cover mb-4 mx-auto"/>}
         <p>Name: {product.name}</p>
         <p>Description: {product.description}</p>
         <p>Condition: {product.condition}</p>

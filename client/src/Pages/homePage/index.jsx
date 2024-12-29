@@ -7,7 +7,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/users/4");
+    navigate(`/users/${user.userId}`);
   }
   return (
     <div onClick={handleClick}>Welcome { user ? user.firstName : ""}</div>
