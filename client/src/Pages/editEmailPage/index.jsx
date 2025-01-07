@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
-import { useUpdateUserEmail } from "../../hooks/user";
-import { loginSchema } from '../../validationSchemas';
-import { useSelector } from 'react-redux';
+import { useUpdateUserData } from "../../hooks/user";
+import { loginSchema } from "../../validationSchemas";
+import { useSelector } from "react-redux";
 
 const EditEmailPage = () => {
   const user = useSelector((state) => state.user.user);
-  const updateUserEmail = useUpdateUserEmail();
+  const updateUserData = useUpdateUserData();
 
   /* Initialize formik with initial values for edit email form */
   const formik = useFormik({
@@ -16,8 +16,11 @@ const EditEmailPage = () => {
     /* Add YUP validation schema for email and password */
     validationSchema: loginSchema,
     /* Call useEditUserEmail hook to make a request to server to update email */
-    onSubmit: updateUserEmail
-  })
+    onSubmit: (values) => {
+      const url = `/api/users/${user.userId}/update-email`;
+      updateUserData(url, values);
+    }
+  });
   
   return (
     /* Edit email form */

@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
-import { useUpdateUserInfo } from "../../hooks/user";
-import { editUserInfoSchema } from '../../validationSchemas'; 
-import { useSelector } from 'react-redux';
+import { useUpdateUserData } from "../../hooks/user";
+import { editUserInfoSchema } from "../../validationSchemas"; 
+import { useSelector } from "react-redux";
 
 const EditUserInfoPage = () => {
   const user = useSelector((state) => state.user.user);
-  const updateUserInfo = useUpdateUserInfo();
+  const updateUserData = useUpdateUserData();
 
   /* Initialize formik with initial values for update user information form */
   const formik = useFormik({
@@ -17,7 +17,10 @@ const EditUserInfoPage = () => {
     /* Add YUP validation schema for update user information form */
     validationSchema: editUserInfoSchema,
     /* Call updateUserInfo hook to update user info */
-    onSubmit: updateUserInfo
+    onSubmit: (values) => {
+      const url = `/api/users/${user.userId}/update-info`;
+      updateUserData(url, values);
+    }
   });
   
   return (

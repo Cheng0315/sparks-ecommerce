@@ -16,6 +16,7 @@ const Navbar = () => {
             <>
               {user.role === "user" ? <Link to="/account/update-role" className="text-gray-300 hover:text-white">Become A Seller</Link> : ""}
               <Link to="/account" className="text-gray-300 hover:text-white">Account</Link>
+              <Link to="/account/products" className="text-gray-300 hover:text-white">My Products</Link>
               <button onClick={logout} className="text-gray-300 hover:text-white">
                 Logout
               </button>

@@ -4,9 +4,7 @@ const { User } = require("../../models");
 /* @route = GET /api/users/:userId */
 const getUser = async (req, res) => {
   try {
-    const userId = parseInt(req.params.userId);
-
-    if (isNaN(userId)) return res.status(404).json({errorMessage: "Invalid user id"});
+    const userId = req.params.userId;
 
     const user = await User.findOne({
       where: { userId },

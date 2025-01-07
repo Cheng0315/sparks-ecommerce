@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
- import { useUpdateUserPassword } from "../../hooks/user";
-import { changePasswordSchema } from '../../validationSchemas';
+ import { useUpdateUserData } from "../../hooks/user";
+import { changePasswordSchema } from "../../validationSchemas";
+import { useSelector } from "react-redux";
 
 const ChangePasswordPage = () => {
-  const updateUserPassword = useUpdateUserPassword();
+  const user = useSelector((state) => state.user.user);
+  const updateUserData = useUpdateUserData();
 
   /* Initialize formik with initial values for changing password */
   const formik = useFormik({
@@ -15,8 +17,11 @@ const ChangePasswordPage = () => {
     /* Add YUP validation schema for changing password */
     validationSchema: changePasswordSchema,
     /* Call updateUserPassword hook to make a request to server to update password */
-    onSubmit: updateUserPassword
-  })
+    onSubmit: (values) => {
+      const url = `/api/users/${user.userId}/change-password`;
+      updateUserData(url, values);
+    }
+  });
   
   return (
     /* Change password form */

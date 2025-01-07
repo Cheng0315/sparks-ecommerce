@@ -1,16 +1,11 @@
-import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   /* user object from redux store */
   const user = useSelector((state) => state.user.user);
-  const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/users/${user.userId}`);
-  }
   return (
-    <div onClick={handleClick}>Welcome { user ? user.firstName : ""}</div>
+    <div >Welcome { user ? user.firstName : ""}</div>
   )
 }
 

@@ -2,7 +2,10 @@ const { param, validationResult } = require("express-validator");
 
 /* Validate user id */
 const validateUserId = [
-  param("userId").isInt().withMessage("User ID must be an integer"),
+  param("userId")
+    .isInt()
+    .withMessage("User ID must be an integer")
+    .toInt(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
