@@ -5,7 +5,7 @@ const getUsernameRegex = require("./getUsernameRegex")
 const getFirstNameRegex = require("./getFirstNameRegex");
 const getLastNameRegex = require("./getLastNameRegex");
 const getAddressCityRegex = require("./getAddressCityRegex");
-const getAddressPostalCodeRegex = require("./getAddressPostalCodeRegex");
+const getAddressZipCodeRegex = require("./getAddressZipCodeRegex");
 const getAddressStateRegex = require("./getAddressStateRegex");
 const getAddressStreetRegex = require("./getAddressStreetRegex");
 const getAddressUnitRegex = require("./getAddressUnitRegex");
@@ -19,7 +19,7 @@ module.exports = {
   getFirstNameRegex,
   getLastNameRegex,
   getAddressCityRegex,
-  getAddressPostalCodeRegex,
+  getAddressZipCodeRegex,
   getAddressStateRegex,
   getAddressStreetRegex,
   getAddressUnitRegex,

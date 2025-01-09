@@ -44,7 +44,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      postal_code: {
+      zip_code: {
         type: Sequelize.STRING,
         allowNull: false
       }

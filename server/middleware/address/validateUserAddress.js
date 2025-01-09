@@ -1,4 +1,4 @@
-const { getFirstNameRegex, getLastNameRegex, getAddressCityRegex, getAddressPostalCodeRegex, getAddressStateRegex, getAddressStreetRegex, getAddressUnitRegex } = require("../../utils/regex");
+const { getFirstNameRegex, getLastNameRegex, getAddressCityRegex, getAddressZipCodeRegex, getAddressStateRegex, getAddressStreetRegex, getAddressUnitRegex } = require("../../utils/regex");
 const { body, validationResult } = require("express-validator");
 
 /* Validate user address */
@@ -39,11 +39,11 @@ const validateUserAddress = [
     .notEmpty().withMessage("State is required")
     .isLength({ min: 2, max: 50 }).withMessage("State must be between 2 and 50 characters")
     .matches(getAddressStateRegex()).withMessage("State contains invalid characters"),
-  body("postalCode")
+  body("zipCode")
     .trim()
     .escape()
-    .notEmpty().withMessage("Postal code is required")
-    .matches(getAddressPostalCodeRegex()).withMessage("Postal code must be a valid format (e.g., 12345 or 12345-6789)"),
+    .notEmpty().withMessage("Zip code is required")
+    .matches(getAddressZipCodeRegex()).withMessage("Zip code must be a valid format (e.g., 12345 or 12345-6789)"),
   (req, res, next) => {
     try {
       const errors = validationResult(req);
