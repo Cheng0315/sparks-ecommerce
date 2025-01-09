@@ -5,14 +5,16 @@ const { body, validationResult } = require("express-validator");
 const validateRegistrationInput = [
   body("firstName")
     .trim()
-    .isAlpha().withMessage("Invalid firstName")
     .escape()
-    .matches(getFirstNameRegex()).withMessage("Invalid firstName"),
+    .notEmpty().withMessage("First name is required")
+    .isLength({ max: 30 }).withMessage("First name must be less than 30 characters")
+    .matches(getFirstNameRegex()).withMessage("First name contains invalid characters"),
   body("lastName")
     .trim()
-    .isAlpha().withMessage("Invalid lastName")
     .escape()
-    .matches(getLastNameRegex()).withMessage("Invalid lastName"),
+    .notEmpty().withMessage("Last name is required")
+    .isLength({ max: 30 }).withMessage("Last name must be less than 30 characters")
+    .matches(getLastNameRegex()).withMessage("Last name contains invalid characters"),
   body("username")
     .trim()
     .escape()
