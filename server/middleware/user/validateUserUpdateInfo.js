@@ -1,3 +1,4 @@
+const { User } = require("../../models");
 const { getFirstNameRegex, getLastNameRegex, getUsernameRegex } = require("../../utils/regex");
 const { body, validationResult } = require("express-validator");
 
@@ -5,24 +6,36 @@ const { body, validationResult } = require("express-validator");
 const validateUserUpdateInfo = [
   body("firstName")
     .trim()
-    .isAlpha().withMessage("Invalid firstName")
     .escape()
-    .matches(getFirstNameRegex()).withMessage("Invalid firstName"),
+    .notEmpty().withMessage("First name is required")
+    .isLength({ max: 30 }).withMessage("First name must be less than 30 characters")
+    .matches(getFirstNameRegex()).withMessage("First name must contain only letters"),
   body("lastName")
     .trim()
-    .isAlpha().withMessage("Invalid lastName")
     .escape()
-    .matches(getLastNameRegex()).withMessage("Invalid lastName"),
+    .notEmpty().withMessage("Last name is required")
+    .isLength({ max: 30 }).withMessage("Last name must be less than 30 characters")
+    .matches(getLastNameRegex()).withMessage("Last name must contain only letters"),
   body("username")
     .trim()
     .escape()
-    .matches(getUsernameRegex()).withMessage("Invalid username"),
-  (req, res, next) => {
+    .notEmpty().withMessage("Username is required")
+    .isLength({ min: 3, max: 20 }).withMessage("Username must be between 3 and 20 characters")
+    .matches(getUsernameRegex()).withMessage("Username contains invalid characters"),
+  async (req, res, next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errorMessage: errors.array()[0].msg });
       }
+
+      const { username } = req.body;
+      const user = await User.findOne({ where: { username }});
+
+      if (user) {
+        return res.status(409).json({ errorMessage: "Username already in use" });
+      }
+
       next();
     } catch (error) {
       res.status(500).json({ errorMessage: "Internal Server Error" });

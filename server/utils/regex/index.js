@@ -9,6 +9,8 @@ const getAddressPostalCodeRegex = require("./getAddressPostalCodeRegex");
 const getAddressStateRegex = require("./getAddressStateRegex");
 const getAddressStreetRegex = require("./getAddressStreetRegex");
 const getAddressUnitRegex = require("./getAddressUnitRegex");
+const getProductNameRegex = require("./getProductNameRegex");
+const getProductPriceRegex = require("./getProductPriceRegex");
 
 module.exports = {
   getPasswordRegex,
@@ -20,5 +22,7 @@ module.exports = {
   getAddressPostalCodeRegex,
   getAddressStateRegex,
   getAddressStreetRegex,
-  getAddressUnitRegex
+  getAddressUnitRegex,
+  getProductNameRegex,
+  getProductPriceRegex
 };

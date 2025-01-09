@@ -7,7 +7,7 @@ const validateLoginInput = [
     .isEmail().withMessage("Invalid email")
     .normalizeEmail()
     .escape()
-    .matches(getEmailRegex()).withMessage("Invalid email"),
+    .matches(getEmailRegex()).withMessage("Email contains invalid characters"),
   body("password")
     .trim()
     .escape()

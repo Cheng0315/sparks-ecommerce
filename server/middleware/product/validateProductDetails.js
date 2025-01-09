@@ -1,11 +1,14 @@
 const { body, validationResult } = require("express-validator");
+const { getProductNameRegex, getProductPriceRegex } = require("../../utils/regex");
     
 /* Validate product details */
 const validateProductDetails = [
   body("name")
     .trim()
     .escape()
-    .matches(/^[a-zA-Z0-9 ]{3,50}$/).withMessage("Product name must contain only letters, numbers, spaces, and between 3 to 50 characters"),
+    .notEmpty().withMessage("Product name is required")
+    .isLength({ min: 3, max: 50 }).withMessage("Product name must be between 3 and 50 characters")
+    .matches(getProductNameRegex()).withMessage("Product name must contain only letters, numbers, and spaces"),
   body("description")
     .trim()
     .escape()
@@ -18,8 +21,9 @@ const validateProductDetails = [
   body("price")
     .trim()
     .escape()
+    .notEmpty().withMessage("Price is required")
     .isFloat({ min: 0.01, max: 100000 }).withMessage("Price must be a number between 0.01 and 100000")
-    .matches(/^\d+(\.\d{1,2})?$/).withMessage("Price must have at most two decimal places")
+    .matches(getProductPriceRegex()).withMessage("Price must have at most two decimal places")
     .toFloat(),
   body("stockQuantity")
     .isInt({ min: 0, max: 1000 })

@@ -8,26 +8,29 @@ const validateRegistrationInput = [
     .escape()
     .notEmpty().withMessage("First name is required")
     .isLength({ max: 30 }).withMessage("First name must be less than 30 characters")
-    .matches(getFirstNameRegex()).withMessage("First name contains invalid characters"),
+    .matches(getFirstNameRegex()).withMessage("First name must contain only letters"),
   body("lastName")
     .trim()
     .escape()
     .notEmpty().withMessage("Last name is required")
     .isLength({ max: 30 }).withMessage("Last name must be less than 30 characters")
-    .matches(getLastNameRegex()).withMessage("Last name contains invalid characters"),
+    .matches(getLastNameRegex()).withMessage("Last name must contain only letters"),
   body("username")
     .trim()
     .escape()
-    .matches(getUsernameRegex()).withMessage("Invalid username"),
+    .notEmpty().withMessage("Username is required")
+    .isLength({ min: 3, max: 20 }).withMessage("Username must be between 3 and 20 characters")
+    .matches(getUsernameRegex()).withMessage("Username contains invalid characters"),
   body("email")
     .isEmail().withMessage("Invalid email")
     .normalizeEmail()
     .escape()
-    .matches(getEmailRegex()).withMessage("Invalid email"),
+    .matches(getEmailRegex()).withMessage("Email contains invalid characters"),
   body("password")
     .trim()
     .escape()
-    .matches(getPasswordRegex()).withMessage("Invalid Password"),
+    .notEmpty().withMessage("Password is required")
+    .matches(getPasswordRegex()).withMessage("Password must be at least 8 characters and include lowercase letters, uppercase letters, digits, and special characters: @$!%*?&"),
   (req, res, next) => {
     try {
       const errors = validationResult(req);

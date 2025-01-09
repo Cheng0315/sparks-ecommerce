@@ -1,6 +1,6 @@
-/* Last name regex for testing user's last name input */
+/* City regex for testing the city of the user's address */
 const getAddressCityRegex = () => {
-  return /^[a-zA-Z\s-]{2,}$/
+  return /^[a-zA-Z\s-]{2,50}$/
 };
 
 module.exports = getAddressCityRegex;
