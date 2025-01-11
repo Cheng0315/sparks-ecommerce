@@ -15,7 +15,7 @@ const UserAddressesPage = () => {
         <div>
           <h2 className="text-center text-2xl font-bold">You currently don't have any saved addresses.</h2>
           <h2 className="text-center text-2xl font-bold">
-            Click <Link to="/account/products/add-product" className="text-blue-500">here</Link> to add an address!
+            Click <Link to="/account/addresses/add-address" className="text-blue-500">here</Link> to add an address!
           </h2>
         </div>
       )

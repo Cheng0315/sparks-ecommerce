@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole} from "./pages/user";
+import { UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, ManageAccountPage} from "./pages/user";
 import { AddProductPage, ProductDetailsPage, EditProductPage, UserProductsPage  } from "./pages/product";
 import { AddAddressPage, UserAddressesPage  } from "./pages/address";
 import HomePage from "./pages/HomePage";
@@ -26,6 +26,7 @@ const App = () =>{
               <Route path="/account/update-role" element={<UpdateUserRole />}/>
               <Route path="/account/change-password" element={<ChangePasswordPage />}/>
               <Route path="/account" element={<AccountPage />}/>
+              <Route path="/account/manage" element={<ManageAccountPage />}/>
               <Route path="/account/products" element={<UserProductsPage />}/>
               <Route path="/account/products/add-product" element={<AddProductPage />}/>
               <Route path="/account/products/:productId" element={<ProductDetailsPage />}/>

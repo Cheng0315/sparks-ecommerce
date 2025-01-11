@@ -1,36 +1,27 @@
-import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AccountPage = () => {
   const user = useSelector((state) => state.user.user);
-  
-  const accountType = user.role === "user" ? "User" : user.role === "seller" ? "Seller" : "";
 
   return (
     <div>
       <h1 className="text-4xl font-bold">Hi {user.firstName}</h1>
       <h4 className="text-2xl font-bold">Welcom to your account</h4>
-      <div>
-        <div>
-          <div>Account Type</div>
-          <div>{accountType ? accountType : "Loading..."}</div>
-        </div>
-        <div>
-          <div>Name <Link to="/account/edit-info" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
-          <div>{user.firstName} {user.lastName} </div>
-        </div>
-        <div>
-          <div>Username </div>
-          <div>{user.username}</div>
-        </div>
+      <div className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
+        <Link to={"/account/manage"}>
+          <h3 className="text-xl font-semibold">Contact info, email, and password</h3>
+        </Link>
       </div>
-      <div>
-        <div>Email <Link to="/account/edit-email" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
-        <div>{user.email}</div>
+      <div className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
+        <Link to={"/account/products"}>
+          <h3 className="text-xl font-semibold">Your Products</h3>
+        </Link>
       </div>
-      <div>
-        <div>Password <Link to="/account/change-password" className="text-blue-500 underline hover:text-blue-700">Edit</Link></div>
-        <div>********</div>
+      <div className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
+        <Link to={"/account/addresses"}>
+          <h3 className="text-xl font-semibold">Adresses</h3>
+        </Link>
       </div>
     </div>
   );

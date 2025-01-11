@@ -19,7 +19,7 @@ const UserProductsPage = () => {
         <div>
           <h2 className="text-center text-2xl font-bold">You currently have no products listed for sale.</h2>
           <h2 className="text-center text-2xl font-bold">
-            Click <Link to="/account/products/add-product" className="text-blue-500">here</Link> to get started!
+            Click <Link to="/account/products/add-product" className="text-blue-500">here</Link> to add a product!
           </h2>
         </div>
       )
