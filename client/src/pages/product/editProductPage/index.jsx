@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
-import { useUpdateProduct, useDeleteProduct } from "../../hooks/product";
+import { useUpdateProduct, useDeleteProduct } from "../../../hooks/product";
 import { useSelector } from 'react-redux';
 import { useParams, Navigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { isValidId } from "../../utils/validations";
-import { updateProductSchema } from "../../validationSchemas"; 
-import useFetchData from "../../hooks/useFetchData";
+import { isValidId } from "../../../utils/validations";
+import { updateProductSchema } from "../../../validationSchemas"; 
+import useFetchData from "../../../hooks/useFetchData";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const EditProductPage = () => {

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import { useUpdateUserData } from "../../hooks/user";
-import { loginSchema } from "../../validationSchemas";
+import { useUpdateUserData } from "../../../hooks/user";
+import { loginSchema } from "../../../validationSchemas";
 import { useSelector } from "react-redux";
 
 const EditEmailPage = () => {

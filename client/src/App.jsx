@@ -1,5 +1,8 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { HomePage, UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, AddProductPage, ProductDetailsPage, PageNotFound, EditProductPage, UserProductsPage } from "./pages";
+import { UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole} from "./pages/user";
+import { AddProductPage, ProductDetailsPage, EditProductPage, UserProductsPage  } from "./pages/product";
+import HomePage from "./pages/HomePage";
+import PageNotFound from "./pages/PageNotFound";
 import { Navbar } from "./components";
 import { PrivateRoute, RedirectIfLoggedIn } from "./components";
 

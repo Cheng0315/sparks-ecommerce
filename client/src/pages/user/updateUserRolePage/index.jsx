@@ -1,4 +1,4 @@
-import { useUpdateUserData } from "../../hooks/user";
+import { useUpdateUserData } from "../../../hooks/user";
 import { useSelector } from "react-redux";
 
 const UpdateUserRole = () => {

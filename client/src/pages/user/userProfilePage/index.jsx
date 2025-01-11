@@ -1,6 +1,6 @@
 import { useParams, Navigate } from "react-router-dom";
-import { isValidId } from "../../utils/validations";
-import useFetchData from "../../hooks/useFetchData";
+import { isValidId } from "../../../utils/validations";
+import useFetchData from "../../../hooks/useFetchData";
 
 const UserProfilePage = () => {
   const { userId } = useParams();

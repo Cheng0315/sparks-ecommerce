@@ -1,5 +1,5 @@
-import useFetchData from "../../hooks/useFetchData";
-import { ProductCard } from "../../components";
+import useFetchData from "../../../hooks/useFetchData";
+import { ProductCard } from "../../../components";
 import { Link, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

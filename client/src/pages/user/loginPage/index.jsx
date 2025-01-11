@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import { useLogin } from "../../hooks/user";
-import { loginSchema } from '../../validationSchemas'; 
+import { useLogin } from "../../../hooks/user";
+import { loginSchema } from '../../../validationSchemas'; 
 
 const LoginPage = () => {
   const login = useLogin()

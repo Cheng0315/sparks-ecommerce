@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react"
-import { useAddProduct } from "../../hooks/product";
-import { addProductSchema } from "../../validationSchemas"; 
+import { useAddProduct } from "../../../hooks/product";
+import { addProductSchema } from "../../../validationSchemas"; 
 import { useSelector } from 'react-redux';
 import { Navigate } from "react-router-dom";
 

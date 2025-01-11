@@ -1,7 +1,7 @@
 import { useParams, Navigate, Link } from "react-router-dom";
-import { isValidId } from "../../utils/validations";
+import { isValidId } from "../../../utils/validations";
 import { useSelector } from 'react-redux';
-import useFetchData from "../../hooks/useFetchData";
+import useFetchData from "../../../hooks/useFetchData";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {

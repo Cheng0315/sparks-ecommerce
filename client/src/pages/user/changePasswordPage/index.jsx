@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
- import { useUpdateUserData } from "../../hooks/user";
-import { changePasswordSchema } from "../../validationSchemas";
+ import { useUpdateUserData } from "../../../hooks/user";
+import { changePasswordSchema } from "../../../validationSchemas";
 import { useSelector } from "react-redux";
 
 const ChangePasswordPage = () => {
