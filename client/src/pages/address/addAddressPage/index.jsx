@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import { getUSStatesArray } from "../../../utils/address";
 import { addAddressSchema } from "../../../validationSchemas"; 
+import useAddData from "../../../hooks/useAddData";
 
 const AddAddressPage = () => {
-  
+  const addData = useAddData();
   const statesList = getUSStatesArray();
   
   /* Initialize formik with initial values for adding address */
@@ -19,9 +20,9 @@ const AddAddressPage = () => {
     },
     /* Add YUP to validate address inputs */
     validationSchema: addAddressSchema,
-    /* Call addAddress hook to make a add address request to the server */
+    /* Call addAddress hook to make an add-address request to the server */
     onSubmit: (values) => {
-      console.log(values);
+      addData("/api/addresses", values);
     }
   });
 

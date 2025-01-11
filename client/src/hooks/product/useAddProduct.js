@@ -7,7 +7,7 @@ const useAddProduct = () => {
   const authorizedAxios = authAxios();
   const navigate = useNavigate();
 
-  const addProduct = async (values ) => {
+  const addProduct = async (values) => {
     try {
       const allowFields = ["name", "description", "condition", "price", "stockQuantity", "categoryId", "productImage"];
       const formData = createFormData(values, allowFields)
