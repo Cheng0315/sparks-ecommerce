@@ -3,6 +3,7 @@ const router = express.Router();
 const { register, login, getUser, renewTokens, logout, updateUserPassword, updateUserEmail, updateUserInfo, updateUserRole } = require("../controllers/user");
 const { verifyAccessToken, verifyRefreshToken, verifyPassword, strictRateLimiter } = require("../middleware/auth");
 const { validateUserUpdateInfo, validateNewPassword, validateNewEmail, validateRegistrationInput, validateLoginInput, validateUserId } = require("../middleware/user");
+const validateParamId = require("../middleware/validateParamId");
 
 /* Auth */
 router.post("/register", strictRateLimiter, validateRegistrationInput, register);
@@ -13,7 +14,7 @@ router.delete("/logout", strictRateLimiter, verifyRefreshToken, logout);
 /* Create */
 
 /* Read */
-router.get("/:userId", validateUserId, getUser);
+router.get("/:userId", validateParamId("userId"), getUser);
 
 /* Update */
 router.patch("/:userId/change-password", strictRateLimiter, verifyAccessToken, validateNewPassword, verifyPassword, updateUserPassword);

@@ -1,10 +1,10 @@
 const { param, validationResult } = require("express-validator");
 
-/* Validate product id */
-const validateProductId = [
-  param("productId")
+/* Validate param id */
+const validateParamId = (paramName) => [
+  param(paramName)
     .isInt()
-    .withMessage("Product ID must be a positive integer")
+    .withMessage(`${paramName} must be an integer`)
     .toInt(),
   (req, res, next) => {
     const errors = validationResult(req);
@@ -15,4 +15,4 @@ const validateProductId = [
   }
 ];
 
-module.exports = validateProductId;
+module.exports = validateParamId;

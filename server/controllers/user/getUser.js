@@ -11,7 +11,7 @@ const getUser = async (req, res) => {
       attributes: { exclude: ["password", "refreshToken", "newsletterSubscription", "newsletterCouponUsed"] }
     });
 
-    if (!user) return res.status(404).json({errorMessage: "Invalid user id"});
+    if (!user) return res.status(404).json({errorMessage: "User does not exists"});
     
     const userData = user.toJSON();
     res.status(200).json({user: userData});

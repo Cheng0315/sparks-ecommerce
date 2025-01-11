@@ -4,7 +4,6 @@ const validateUserUpdateInfo = require("./validateUserUpdateInfo");
 const validateNewPassword = require("./validateNewPassword");
 const validateNewEmail = require("./validateNewEmail");
 const validateLoginInput = require("./validateLoginInput");
-const validateUserId = require("./validateUserId");
 
 module.exports = {
   validateRegistrationInput,
@@ -12,5 +11,4 @@ module.exports = {
   validateNewPassword,
   validateNewEmail,
   validateLoginInput,
-  validateUserId
 };
