@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { getUSStatesArray } from "../../../utils/address";
+import { addAddressSchema } from "../../../validationSchemas"; 
 
 const AddAddressPage = () => {
   
@@ -16,6 +17,9 @@ const AddAddressPage = () => {
       state: "",
       zipCode: ""
     },
+    /* Add YUP to validate address inputs */
+    validationSchema: addAddressSchema,
+    /* Call addAddress hook to make a add address request to the server */
     onSubmit: (values) => {
       console.log(values);
     }
