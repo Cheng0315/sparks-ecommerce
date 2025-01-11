@@ -9,7 +9,7 @@ const getProduct = async (req, res) => {
       where: { productId: req.params.productId } 
     });
 
-    if (!product) return res.status(404).json({errorMessage: "No product found"});
+    if (!product) return res.status(404).json({errorMessage: "Product not found"});
     
     const sanitizedProduct = sanitizeProduct(product);
 
