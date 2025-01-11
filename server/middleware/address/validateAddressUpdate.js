@@ -1,21 +1,24 @@
 const { getFirstNameRegex, getLastNameRegex, getAddressCityRegex, getAddressZipCodeRegex, getAddressStateRegex, getAddressStreetRegex, getAddressUnitRegex } = require("../../utils/regex");
 const { body, validationResult } = require("express-validator");
 
-/* Validate user address */
-const validateUserAddress = [
+/* Validate user address for update*/
+const validateAddressUpdate = [
   body("firstName")
+    .optional()
     .trim()
     .escape()
     .notEmpty().withMessage("First name is required")
     .isLength({ max: 30 }).withMessage("First name must be less than 30 characters")
     .matches(getFirstNameRegex()).withMessage("First name contains invalid characters"),
   body("lastName")
+    .optional()
     .trim()
     .escape()
     .notEmpty().withMessage("Last name is required")
     .isLength({ max: 30 }).withMessage("Last name must be less than 30 characters")
     .matches(getLastNameRegex()).withMessage("Last name contains invalid characters"),
   body("street")
+    .optional()
     .trim()
     .escape()
     .notEmpty().withMessage("Street address is required")
@@ -23,23 +26,27 @@ const validateUserAddress = [
     .matches(getAddressStreetRegex()).withMessage("Street address contains invalid characters"),
   body("addressUnit")
     .optional()
+    .optional()
     .trim()
     .escape()
     .isLength({ max: 50 }).withMessage("Address unit must be less than 50 characters")
     .matches(getAddressUnitRegex()).withMessage("Address unit contains invalid characters"),
   body("city")
+    .optional()
     .trim()
     .escape()
     .notEmpty().withMessage("City is required")
     .isLength({ min: 2, max: 50 }).withMessage("City must be between 2 and 50 characters")
     .matches(getAddressCityRegex()).withMessage("City contains invalid characters"),
   body("state")
+    .optional()
     .trim()
     .escape()
     .notEmpty().withMessage("State is required")
     .isLength({ min: 2, max: 50 }).withMessage("State must be between 2 and 50 characters")
     .matches(getAddressStateRegex()).withMessage("State contains invalid characters"),
   body("zipCode")
+    .optional()
     .trim()
     .escape()
     .notEmpty().withMessage("Zip code is required")
@@ -58,4 +65,4 @@ const validateUserAddress = [
   }
 ];
 
-module.exports = validateUserAddress;
+module.exports = validateAddressUpdate;
