@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { UserRegistrationPage, LoginPage, UserProfilePage, AccountPage, EditEmailPage, ChangePasswordPage, EditUserInfoPage, UpdateUserRole, ManageAccountPage} from "./pages/user";
 import { AddProductPage, ProductDetailsPage, EditProductPage, UserProductsPage  } from "./pages/product";
-import { AddAddressPage, UserAddressesPage  } from "./pages/address";
+import { AddAddressPage, EditAddressPage, UserAddressesPage  } from "./pages/address";
 import HomePage from "./pages/HomePage";
 import PageNotFound from "./pages/PageNotFound";
 import { Navbar } from "./components";
@@ -32,6 +32,7 @@ const App = () =>{
               <Route path="/account/products/:productId" element={<ProductDetailsPage />}/>
               <Route path="/account/products/:productId/edit" element={<EditProductPage />}/>
               <Route path="/account/addresses/add-address" element={<AddAddressPage />}/>
+              <Route path="/account/addresses/:addressId/edit" element={<EditAddressPage />}/>
               <Route path="/account/addresses" element={<UserAddressesPage />}/>
             </Route>
             <Route path="/products/:productId" element={<ProductDetailsPage />}/>

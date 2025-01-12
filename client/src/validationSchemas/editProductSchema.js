@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
-/* Validation for update product form */
-const updateProductSchema = Yup.object().shape({
+/* Validation for edit product form */
+const editProductSchema = Yup.object().shape({
   name: Yup.string()
     .matches(/^[a-zA-Z0-9 ]{3,50}$/, "Product name must contain only letters, numbers, spaces, and between 3 to 50 characters"),
   description: Yup.string()
@@ -37,4 +37,4 @@ const updateProductSchema = Yup.object().shape({
     }),
 });
 
-export default updateProductSchema;
+export default editProductSchema;

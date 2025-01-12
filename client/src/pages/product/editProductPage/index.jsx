@@ -5,7 +5,7 @@ import { useParams, Navigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { isValidId } from "../../../utils/validations";
-import { updateProductSchema } from "../../../validationSchemas"; 
+import { editProductSchema } from "../../../validationSchemas"; 
 import useFetchData from "../../../hooks/useFetchData";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
@@ -33,7 +33,7 @@ const EditProductPage = () => {
       productImage: ""
     },
     /* Add YUP to validate product inputs */
-    validationSchema: updateProductSchema,
+    validationSchema: editProductSchema,
     /* Call updateProduct hook to make a request to server to update product */
     onSubmit: updateProduct
   });
