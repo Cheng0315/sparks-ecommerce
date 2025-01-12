@@ -32,6 +32,9 @@ const UserProductsPage = () => {
     <div>
       <h2 className="text-center text-2xl font-bold">Your Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Link to={"/account/products/add-product"} className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
+          <h3 className="text-xl font-semibold">+ Add Product</h3>
+        </Link>
         {data.userProducts.map((product) => (
           <ProductCard key={product.productId} product={product} />
         ))}

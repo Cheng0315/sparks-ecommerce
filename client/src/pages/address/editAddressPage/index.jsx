@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import { getUSStatesArray } from "../../../utils/address";
-import { editAddressSchema } from "../../../validationSchemas";
+import { addressSchema } from "../../../validationSchemas";
 import { useParams, Navigate } from "react-router-dom";
 import { isValidId } from "../../../utils/validations";
+import useUpdateData from "../../../hooks/useUpdateData";
 import useFetchData from "../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,6 +12,7 @@ const EditAddressPage = () => {
   const statesList = getUSStatesArray();
   const { addressId } = useParams();
   const user = useSelector((state) => state.user.user);
+  const updateData = useUpdateData();
 
   if (!isValidId(addressId)) return <Navigate to="/page-not-found" />;
 
@@ -28,10 +30,10 @@ const EditAddressPage = () => {
       zipCode: ""
     },
     /* Add YUP to validate address inputs */
-    validationSchema: editAddressSchema,
+    validationSchema: addressSchema,
     /* Call editAddress hook to make an edit-address request to the server */
     onSubmit: (values) => {
-      console.log(values);
+      updateData(`/api/addresses/${addressId}`, values, data.address);
     }
   });
 
@@ -57,7 +59,7 @@ const EditAddressPage = () => {
 
   return (
     <div>
-      <h2 className="text-center text-2xl font-bold">Add Address</h2>
+      <h2 className="text-center text-2xl font-bold">Edit Address</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="field">
           <label>First Name:</label>

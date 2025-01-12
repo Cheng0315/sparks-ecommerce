@@ -5,5 +5,4 @@ export { default as changePasswordSchema } from "./changePasswordSchema.js";
 export { default as editUserInfoSchema } from "./editUserInfoSchema.js";
 export { default as addProductSchema } from "./addProductSchema.js";
 export { default as editProductSchema } from "./editProductSchema.js";
-export { default as addAddressSchema } from "./addAddressSchema.js";
-export { default as editAddressSchema } from "./editAddressSchema.js";
+export { default as addressSchema } from "./addressSchema.js";
