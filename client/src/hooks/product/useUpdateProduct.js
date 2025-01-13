@@ -7,15 +7,14 @@ const useUpdateProduct = () => {
   const authorizedAxios = authAxios();
   const navigate = useNavigate();
 
-  const updateProduct = async (values) => {
+  const updateProduct = async (values, productId) => {
     try {
       const allowFields = ["name", "description", "condition", "price", "stockQuantity", "categoryId", "productImage"];
       const formData = createFormData(values, allowFields)
 
-      const response = await authorizedAxios.patch(`/api/products/${values.productId}`, formData, {
+      const response = await authorizedAxios.patch(`/api/products/${productId}`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
-
 
       if (response && response.data) {
         navigate(`/account/products/${response.data.product.productId}`);
