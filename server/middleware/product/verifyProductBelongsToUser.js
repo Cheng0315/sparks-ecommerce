@@ -12,7 +12,7 @@ const verifyProductBelongsToUser = async (req, res, next) => {
     }
     next();
   } catch (error) {
-    res.status(500).json({ errorMessage: "Internal Server Error" });
+    res.status(500).json({ errorMessage: error.message });
   }
 };
 
