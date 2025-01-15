@@ -1,9 +1,32 @@
 import useFetchData from "../../../hooks/useFetchData";
-import { AddressCard } from "../../../components";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { authAxios } from "../../../services/api/authAxios";
 
 const UserAddressesPage = () => {
+  const [addresses, setAddresses] = useState([]);
   const { data, isLoading, error } = useFetchData("/api/addresses");
+  const authorizedAxios = authAxios();
+
+  useEffect(() => {
+    if (data && data.addresses) {
+      setAddresses(data.addresses);
+    }
+  },[data]);
+
+
+  const handleDeleteAddress = async (addressId) => {
+    try {
+      const response = await authorizedAxios.delete(`/api/addresses/${addressId}`);
+
+      if (response.status === 200 && response.data) {
+        console.log(response.data.message);
+        setAddresses(addresses.filter((address) => address.addressId !== addressId));
+      }
+    } catch (error) {
+      console.error("Unable to delete address due to the following error: ", error.errorMessage);
+    }
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -31,8 +54,14 @@ const UserAddressesPage = () => {
         <Link to={"/account/addresses/add-address"} className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
           <h3 className="text-xl font-semibold">+ Add Address</h3>
         </Link>
-        {data.addresses.map((address) => (
-          <AddressCard key={address.addressId} address={address} />
+        {addresses.map((address) => (
+          <div key={address.addressId} className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
+            <h3 className="text-xl font-semibold">{address.firstName} {address.lastName}</h3>
+            <p>{address.street} {address.addressUnit}</p>
+            <p>{address.city}, {address.state} {address.zipCode}</p>
+            <Link to={`/account/addresses/${address.addressId}/edit`}> Edit </Link>
+            <Link to="#" onClick={() => handleDeleteAddress(address.addressId)}> Remove </Link> 
+          </div>
         ))}
       </div>
     </div>
