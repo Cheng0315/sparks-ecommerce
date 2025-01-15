@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { authAxios } from "../../../services/api/authAxios";
 
 const UserAddressesPage = () => {
-  const [addresses, setAddresses] = useState([]);
+  const [userAddresses, setUserAddresses] = useState([]);
   const { data, isLoading, error } = useFetchData("/api/addresses");
   const authorizedAxios = authAxios();
 
   useEffect(() => {
-    if (data && data.addresses) {
-      setAddresses(data.addresses);
+    if (data && data.userAddresses) {
+      setUserAddresses(data.userAddresses);
     }
   },[data]);
 
@@ -21,10 +21,10 @@ const UserAddressesPage = () => {
 
       if (response.status === 200 && response.data) {
         console.log(response.data.message);
-        setAddresses(addresses.filter((address) => address.addressId !== addressId));
+        setUserAddresses(userAddresses.filter((address) => address.addressId !== addressId));
       }
     } catch (error) {
-      console.error("Unable to delete address due to the following error: ", error.errorMessage);
+      console.error("Unable to delete address due to the following error: ", error);
     }
   }
 
@@ -54,7 +54,7 @@ const UserAddressesPage = () => {
         <Link to={"/account/addresses/add-address"} className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
           <h3 className="text-xl font-semibold">+ Add Address</h3>
         </Link>
-        {addresses.map((address) => (
+        {userAddresses.map((address) => (
           <div key={address.addressId} className="border p-4 rounded shadow hover:shadow-md transition-shadow duration-200">
             <h3 className="text-xl font-semibold">{address.firstName} {address.lastName}</h3>
             <p>{address.street} {address.addressUnit}</p>

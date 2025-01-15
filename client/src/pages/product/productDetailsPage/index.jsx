@@ -17,11 +17,7 @@ const ProductDetailsPage = () => {
   if (error) return <Navigate to="/page-not-found" />;
 
   const editProductButton = user && data.product.userId === user.userId ? (
-    <Link
-      to={`/account/products/${data.product.productId}/edit`}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-center" >
-      Edit
-    </Link>
+    <Link to={`/account/products/${data.product.productId}/edit`}> Edit </Link>
   ) : null;
 
   return (
@@ -37,6 +33,8 @@ const ProductDetailsPage = () => {
       </div>
       <div>
         { editProductButton }
+        <br></br>
+        <Link to={"/account/products/"}> View your products </Link>
       </div>
     </div>
   );
