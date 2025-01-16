@@ -3,7 +3,7 @@ const { sanitizeProduct } = require("../../utils/product");
 
 /* Get all the products that belong to the user */
 /* @route = GET /api/products */
-const getAllProductsBelongToUser = async (req, res) => {
+const getUserProducts = async (req, res) => {
   try {
     if (req.authUser.role !== "seller") return res.status(403).json({errorMessage: "Access Denied"});
 
@@ -23,4 +23,4 @@ const getAllProductsBelongToUser = async (req, res) => {
   }
 }
 
-module.exports = getAllProductsBelongToUser;
+module.exports = getUserProducts;

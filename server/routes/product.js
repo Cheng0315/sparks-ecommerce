@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { strictRateLimiter, verifyAccessToken } = require("../middleware/auth");
 const { validateProductDetails, uploadProductImage, validateProductId, parseProductFormData, validateProductImage, verifyProductBelongsToUser, validateProductUpdateDetails, deleteProductImage } = require("../middleware/product");
-const { addProduct, getProduct, updateProductDetails, deleteProduct, getAllProductsBelongToUser } = require("../controllers/product");
+const { addProduct, getProduct, updateProductDetails, deleteProduct, getUserProducts } = require("../controllers/product");
 const validateParamId = require("../middleware/validateParamId");
 
 
@@ -10,7 +10,7 @@ const validateParamId = require("../middleware/validateParamId");
 router.post("/", strictRateLimiter, verifyAccessToken, parseProductFormData, validateProductDetails, validateProductImage, uploadProductImage, addProduct);
 
 /* Read */ 
-router.get("/", strictRateLimiter, verifyAccessToken, getAllProductsBelongToUser)
+router.get("/", strictRateLimiter, verifyAccessToken, getUserProducts)
 router.get("/:productId", validateParamId("productId"), getProduct);
 
 /* Update */

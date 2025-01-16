@@ -2,7 +2,7 @@ const { Address } = require("../../models");
 
 /* Get all the addresses that belong to the user */
 /* @route = GET /api/addresses */
-const getAddresses = async (req, res) => {
+const getUserAddresses = async (req, res) => {
   try {
 
     const userAddresses = await Address.findAll({
@@ -19,4 +19,4 @@ const getAddresses = async (req, res) => {
   }
 }
 
-module.exports = getAddresses;
+module.exports = getUserAddresses;
