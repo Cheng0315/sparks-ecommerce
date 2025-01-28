@@ -23,7 +23,7 @@ const deleteProduct = async (req, res) => {
     await product.destroy();
     
     res.status(200).json({ 
-      message: "Product has been successfully deleted" 
+      message: "Product has been successfully removed" 
     });
   } catch (error) { 
     res.status(500).json({ errorMessage: error.message }); 

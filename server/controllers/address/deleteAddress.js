@@ -20,7 +20,7 @@ const deleteAddress = async (req, res) => {
     await address.destroy();
     
     res.status(200).json({ 
-      message: "Address has been successfully deleted" 
+      message: "Address has been successfully removed" 
     });
   } catch (error) { 
     res.status(500).json({ errorMessage: error.message }); 

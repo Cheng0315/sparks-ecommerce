@@ -1,4 +1,4 @@
-const { getFirstNameRegex, getLastNameRegex, getAddressCityRegex, getAddressZipCodeRegex, getAddressStateRegex, getAddressStreetRegex, getAddressUnitRegex } = require("../../utils/regex");
+const { getFirstNameRegex, getLastNameRegex, getAddressCityRegex, getAddressZipCodeRegex, getAddressStateRegex, getAddressStreetRegex, getAddressUnitRegex, getPhoneNumberRegex } = require("../../utils/regex");
 const { body, validationResult } = require("express-validator");
 
 /* Validate user address */
@@ -44,6 +44,11 @@ const validateAddress = [
     .escape()
     .notEmpty().withMessage("Zip code is required")
     .matches(getAddressZipCodeRegex()).withMessage("Zip code must be a valid format (e.g., 12345 or 12345-6789)"),
+  body("phoneNumber")
+    .trim()
+    .escape()
+    .notEmpty().withMessage("Phone number is required")
+    .matches(getPhoneNumberRegex()).withMessage("Phone number must be a valid format (e.g., 2345678901, (234) 567-8901, 234-567-8901, 234.567.8901, 234 567 8901"),
   (req, res, next) => {
     try {
       const errors = validationResult(req);

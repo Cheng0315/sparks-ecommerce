@@ -47,6 +47,10 @@ module.exports = {
       zip_code: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      phone_number: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
     });
   },

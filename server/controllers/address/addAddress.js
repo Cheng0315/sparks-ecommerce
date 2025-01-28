@@ -5,7 +5,7 @@ const { Address } = require("../../models");
 const addAddress = async (req, res) => {
   try {
 
-    const { firstName, lastName, street, addressUnit, city, state, zipCode } = req.body;
+    const { firstName, lastName, street, addressUnit, city, state, zipCode, phoneNumber } = req.body;
     const user = req.authUser;
     
     const newAddress = await Address.create({
@@ -16,6 +16,7 @@ const addAddress = async (req, res) => {
       city,
       state,
       zipCode,
+      phoneNumber,
       userId: user.userId
     });
 
