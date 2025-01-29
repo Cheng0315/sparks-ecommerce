@@ -12,7 +12,7 @@ const updateAddress = async (req, res) => {
       return res.status(403).json({ errorMessage: "Unauthorized" });
     }
 
-    const fieldsToUpdate = ["firstName", "lastName", "street", "addressUnit", "city", "state", "zipCode"];
+    const fieldsToUpdate = ["firstName", "lastName", "street", "addressUnit", "city", "state", "zipCode", "phoneNumber"];
     
     fieldsToUpdate.forEach(field => {
       if (req.body[field]) address[field] = req.body[field];

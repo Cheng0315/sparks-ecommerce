@@ -28,6 +28,9 @@ const addressSchema = Yup.object().shape({
   zipCode: Yup.string()
     .required("Zip code is required")
     .matches(/^\d{5}(-\d{4})?$/, "Zip code must be a valid format (e.g., 12345 or 12345-6789)"),
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d{10}$/, "Phone number must be 10 digits (e.g., 1234567890)"),
 });
 
 export default addressSchema;

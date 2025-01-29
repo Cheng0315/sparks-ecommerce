@@ -16,7 +16,8 @@ const AddAddressPage = () => {
       addressUnit: "",
       city: "",
       state: "",
-      zipCode: ""
+      zipCode: "",
+      phoneNumber: ""
     },
     /* Add YUP to validate address inputs */
     validationSchema: addressSchema,
@@ -80,6 +81,13 @@ const AddAddressPage = () => {
           <input type="text" name="zipCode" value={formik.values.zipCode} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
           {formik.touched.zipCode && formik.errors.zipCode ? (
             <div className="text-red-500">{formik.errors.zipCode}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <label>Phone Number:</label>
+          <input type="number" name="phoneNumber" value={formik.values.phoneNumber} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+            <div className="text-red-500">{formik.errors.phoneNumber}</div>
           ) : null}
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add Address</button>

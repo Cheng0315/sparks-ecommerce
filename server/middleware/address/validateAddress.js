@@ -48,7 +48,7 @@ const validateAddress = [
     .trim()
     .escape()
     .notEmpty().withMessage("Phone number is required")
-    .matches(getPhoneNumberRegex()).withMessage("Phone number must be a valid format (e.g., 2345678901, (234) 567-8901, 234-567-8901, 234.567.8901, 234 567 8901"),
+    .matches(getPhoneNumberRegex()).withMessage("Phone number must contain 10 digits (e.g., 1234567890)"),
   (req, res, next) => {
     try {
       const errors = validationResult(req);
