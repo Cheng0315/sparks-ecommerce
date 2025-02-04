@@ -1,12 +1,15 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { isValidId } from "../../../utils/validations";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import useFetchData from "../../../hooks/useFetchData";
+import { addItemToCart } from "../../../features/slices/cartSlice";
+import { useDispatch } from "react-redux";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
   const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
   
   if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
 
@@ -16,9 +19,20 @@ const ProductDetailsPage = () => {
 
   if (error) return <Navigate to="/page-not-found" />;
 
-  const editProductButton = user && data.product.userId === user.userId ? (
-    <Link to={`/account/products/${data.product.productId}/edit`}> Edit </Link>
-  ) : null;
+  const addItemToCartHandler = () => {
+    dispatch(addItemToCart({ item: data.product }));
+  }
+
+  const productActionLinks = user && data.product.userId === user.userId ? (
+    <div>
+      <div>
+        <Link to={`/account/products/${data.product.productId}/edit`}> Edit </Link>
+      </div>
+      <div>
+        <Link to={"/account/products/"}> View all your products </Link>
+      </div>
+    </div>
+  ) : <button onClick={addItemToCartHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add to cart</button>
 
   return (
     <div>
@@ -32,9 +46,8 @@ const ProductDetailsPage = () => {
         <p>Stock Quantity: {data.product.stockQuantity}</p>
       </div>
       <div>
-        { editProductButton }
+        { productActionLinks }
         <br></br>
-        <Link to={"/account/products/"}> View your products </Link>
       </div>
     </div>
   );
