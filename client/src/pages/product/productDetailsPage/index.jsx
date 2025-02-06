@@ -4,9 +4,12 @@ import { useSelector } from "react-redux";
 import useFetchData from "../../../hooks/useFetchData";
 import { addItemToCart } from "../../../features/slices/cartSlice";
 import { useDispatch } from "react-redux";
+import { useState, useCallback } from "react";
+import addItemToGuestCart from "../../../utils/cart/addItemToGuestCart";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {
+  const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -14,14 +17,22 @@ const ProductDetailsPage = () => {
   if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
 
   const { data, isLoading, error } = useFetchData(`/api/products/${productId}`);
-
   if (isLoading) return <div>Loading...</div>;
-
   if (error) return <Navigate to="/page-not-found" />;
 
+  const product = data.product;
+
   const addItemToCartHandler = () => {
-    dispatch(addItemToCart({ item: data.product }));
-  }
+    const item = { ...product, quantity: Number(quantity) };
+
+    if (user) {
+      // Add item to the logged in user's cart
+      dispatch(addItemToCart({ item }));
+    } else {
+      // Add item to the guest cart
+      addItemToGuestCart(item);
+    }
+  };
 
   const productActionLinks = user && data.product.userId === user.userId ? (
     <div>
@@ -43,7 +54,17 @@ const ProductDetailsPage = () => {
         <p>Description: {data.product.description}</p>
         <p>Condition: {data.product.condition}</p>
         <p>Price: {data.product.price}</p>
-        <p>Stock Quantity: {data.product.stockQuantity}</p>
+        <label className="block mb-2">Quantity:</label>
+        <select
+          id="quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          className="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-300 mb-4"
+        >
+          {[...Array(50).keys()].map((n) => (
+            <option key={n + 1} value={n + 1}>{n + 1}</option>
+          ))}
+        </select>
       </div>
       <div>
         { productActionLinks }

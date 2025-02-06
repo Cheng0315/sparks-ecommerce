@@ -3,27 +3,27 @@ import {createSlice} from "@reduxjs/toolkit";
 /* Create the slice for cart */
 const cartSlice = createSlice({
   name: "cart",
-  initialState: { items: [] },
+  initialState: { cart: [] },
   reducers: {
     /* Add item to cart */
     addItemToCart: (state, action) => {
-      const newItem = action.payload.item;
-      const existingItem = state.items.find(item => item.productId === newItem.productId);
+      const item = action.payload.item;
+      const existingItem = state.cart.find(cartItem => cartItem.productId === item.productId);
 
       if (existingItem) {
-        existingItem.stockQuantity += newItem.stockQuantity;
+        existingItem.quantity += item.quantity;
       } else {
-        state.items.push(newItem);
+        state.cart.push(item);
       }
     },
     /* Remove item from cart */
     removeItemFromCart: (state, action) => {
-      state.items = state.items.filter(item => item.productId !== action.payload.item.productId);
+      state.cart = state.cart.filter(cartItem => cartItem.productId !== action.payload.item.productId);
     },
     /* Update item quantity in cart*/
     updateItemQuantityInCart: (state, action) => {
       const updatedItem = action.payload.item;
-      const existingItem = state.items.find(item => item.productId === updatedItem.productId);
+      const existingItem = state.cart.find(cartItem => cartItem.productId === updatedItem.productId);
 
       if (existingItem) {
         existingItem.quantity = updatedItem.quantity;
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
     },
     /* Clear the cart*/
     clearCart: state => {
-      state.items = [];
+      state.cart = [];
     },
   }
 })
