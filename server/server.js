@@ -2,7 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const env = require("dotenv");
 const path = require("path");
-const { userRoutes, productRoutes, addressRoutes } = require("./routes");
+const { userRoutes, productRoutes, addressRoutes, cartRoutes } = require("./routes");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { generalRateLimiter } = require("./middleware/auth");
@@ -26,6 +26,7 @@ app.use("/public/assets", express.static(path.join(__dirname, "public/assets")))
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/addresses", addressRoutes);
+app.use("/api/carts", cartRoutes);
 
 /* Server initialization */
 app.listen(process.env.SERVER_PORT, () => console.log(`Server is running on Port: ${process.env.SERVER_PORT}`));

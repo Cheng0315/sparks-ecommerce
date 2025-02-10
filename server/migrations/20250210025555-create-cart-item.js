@@ -29,9 +29,15 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       quantity: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
+    });
+
+    await queryInterface.addConstraint('cart_items', {
+      fields: ['cart_id', 'product_id'],
+      type: 'unique',
+      name: 'unique_cart_item'
     });
   },
   async down(queryInterface, Sequelize) {
