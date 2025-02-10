@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import useFetchData from "../../../hooks/useFetchData";
 import { addItemToCart } from "../../../features/slices/cartSlice";
 import { useDispatch } from "react-redux";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import addItemToGuestCart from "../../../utils/cart/addItemToGuestCart";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
