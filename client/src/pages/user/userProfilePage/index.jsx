@@ -1,11 +1,11 @@
 import { useParams, Navigate } from "react-router-dom";
-import { isValidId } from "../../../utils/validations";
+import { isPositiveInteger } from "../../../utils/validations";
 import useFetchData from "../../../hooks/useFetchData";
 
 const UserProfilePage = () => {
   const { userId } = useParams();
   
-  if (!isValidId(userId)) return <Navigate to="/page-not-found" />;
+  if (!isPositiveInteger(userId)) return <Navigate to="/page-not-found" />;
 
   const { data, isLoading, error } = useFetchData(`/api/users/${userId}`);
 

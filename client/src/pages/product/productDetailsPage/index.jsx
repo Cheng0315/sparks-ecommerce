@@ -1,5 +1,5 @@
 import { useParams, Navigate, Link } from "react-router-dom";
-import { isValidId } from "../../../utils/validations";
+import { isPositiveInteger } from "../../../utils/validations";
 import { useSelector } from "react-redux";
 import useFetchData from "../../../hooks/useFetchData";
 import { addItemToCart } from "../../../features/slices/cartSlice";
@@ -14,7 +14,7 @@ const ProductDetailsPage = () => {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   
-  if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
+  if (!isPositiveInteger(productId)) return <Navigate to="/page-not-found" />;
 
   const { data, isLoading, error } = useFetchData(`/api/products/${productId}`);
   if (isLoading) return <div>Loading...</div>;
@@ -23,6 +23,9 @@ const ProductDetailsPage = () => {
   const product = data.product;
 
   const addItemToCartHandler = () => {
+    console.log(typeof quantity);
+    if (!isPositiveInteger(quantity)) return <Navigate to="/page-not-found" />;
+
     const item = { ...product, quantity: Number(quantity) };
 
     if (user) {

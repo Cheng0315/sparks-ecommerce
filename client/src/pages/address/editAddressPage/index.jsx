@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { getUSStatesArray } from "../../../utils/address";
 import { addressSchema } from "../../../validationSchemas";
 import { useParams, Navigate } from "react-router-dom";
-import { isValidId } from "../../../utils/validations";
+import { isPositiveInteger } from "../../../utils/validations";
 import useUpdateData from "../../../hooks/useUpdateData";
 import useFetchData from "../../../hooks/useFetchData";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const EditAddressPage = () => {
   const user = useSelector((state) => state.user.user);
   const updateData = useUpdateData();
 
-  if (!isValidId(addressId)) return <Navigate to="/page-not-found" />;
+  if (!isPositiveInteger(addressId)) return <Navigate to="/page-not-found" />;
 
   const { data, isLoading, error } = useFetchData(`/api/addresses/${addressId}`);
   

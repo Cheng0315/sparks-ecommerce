@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import { useParams, Navigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { isValidId } from "../../../utils/validations";
+import { isPositiveInteger } from "../../../utils/validations";
 import { editProductSchema } from "../../../validationSchemas"; 
 import useFetchData from "../../../hooks/useFetchData";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const EditProductPage = () => {
   const { productId } = useParams();
-  if (!isValidId(productId)) return <Navigate to="/page-not-found" />;
+  if (!isPositiveInteger(productId)) return <Navigate to="/page-not-found" />;
 
   const { data, isLoading, error } = useFetchData(`/api/products/${productId}`);
   const [previewImageUrl, setPreviewImageUrl] = useState(null);
