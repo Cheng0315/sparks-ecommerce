@@ -1,37 +1,62 @@
-const { Cart, CartItem } = require("../../models");
+const { Cart, CartItem, Product, sequelize } = require("../../models");
 
 /* Add cart item */
 /* @route = POST /api/cart */
 const addCartItem = async (req, res) => {
-  try {
+  const transaction = await sequelize.transaction();
 
+  try {
     const { productId, quantity } = req.body;
     const user = req.authUser;
 
-    let cart = await Cart.findOne({ where: { userId: user.userId } });
+    const product = await Product.findOne({
+      where: { productId },
+      transaction
+    });
 
-    if (!cart) {
-      const newCart = await Cart.create({ userId: user.userId });
-      cart = newCart;
+    if (!product) { 
+      await transaction.rollback();
+      return res.status(404).json({ errorMessage: "Product not found" });
     }
 
-    const existingCartItem = await CartItem.findOne({ where: { cartId: cart.cartId, productId } });
+    let cart = await Cart.findOne({
+      where: { userId: user.userId },
+      transaction
+    });
 
-    if (existingCartItem) {
-      existingCartItem.quantity += quantity;
-      await existingCartItem.save();
+    if (!cart) {
+      cart = await Cart.create({ userId: user.userId }, { transaction });
+    }
+
+    let cartItem = await CartItem.findOne({
+      where: { cartId: cart.cartId, productId },
+      transaction
+    });
+
+    if (cartItem) {
+      cartItem.quantity += quantity;
+      await cartItem.save({ transaction });
     } else {
-      await CartItem.create({
+      cartItem = await CartItem.create({
         cartId: cart.cartId,
         productId,
         quantity
-      });
+      },
+      { transaction }
+    );
     }
 
+    await transaction.commit();
+
+    const item = {...product.dataValues, quantity: cartItem.quantity};
+    delete item.userId;
+    
     res.status(201).json({
+      item,
       message: "Successfully added item to cart"
     });
   } catch (error) {
+    if (transaction) await transaction.rollback();
     res.status(500).json({errorMessage: error.message});
   }
 }
