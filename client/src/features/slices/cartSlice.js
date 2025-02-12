@@ -11,9 +11,9 @@ const cartSlice = createSlice({
       const existingItem = state.cart.find(cartItem => cartItem.productId === item.productId);
 
       if (existingItem) {
-        existingItem.quantity += item.quantity;
+        existingItem.quantity = item.quantity;
       } else {
-        state.cart.push(item);
+        state.cart.push({ ...item });
       }
     },
     /* Remove item from cart */
