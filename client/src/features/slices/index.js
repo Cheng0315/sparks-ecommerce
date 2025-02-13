@@ -1,7 +1,8 @@
 /* exports all reducers and actions*/
 import tokenReducer, { setAccessToken, clearAccessToken } from "./tokenSlice";
 import userReducer, { setUser, clearUser } from "./userSlice";
-import cartReducer, { addItemToCart, removeItemFromCart, updateItemQuantityInCart, clearCart } from "./cartSlice";
+import cartReducer, { addItemToCart, removeItemFromCart, clearCart } from "./cartSlice";
+import guestCartReducer, { addItemToGuestCart, removeItemFromGuestCart, clearGuestCart } from "./guestCartSlice";
 
 export {
   tokenReducer,
@@ -13,6 +14,9 @@ export {
   cartReducer,
   addItemToCart,
   removeItemFromCart,
-  updateItemQuantityInCart,
-  clearCart
+  clearCart,
+  guestCartReducer,
+  addItemToGuestCart,
+  removeItemFromGuestCart,
+  clearGuestCart,
 };

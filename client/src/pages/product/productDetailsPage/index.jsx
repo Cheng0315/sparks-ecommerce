@@ -1,10 +1,10 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { isPositiveInteger } from "../../../utils/validations";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useFetchData from "../../../hooks/useFetchData";
 import { useState } from "react";
-import addItemToGuestCart from "../../../utils/cart/addItemToGuestCart";
 import useAddData from "../../../hooks/useAddData";
+import { addItemToGuestCart } from "../../../features/slices";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const ProductDetailsPage = () => {
@@ -12,6 +12,7 @@ const ProductDetailsPage = () => {
   const { productId } = useParams();
   const user = useSelector((state) => state.user.user);
   const addItemToCart = useAddData();
+  const dispatch = useDispatch();
   
   if (!isPositiveInteger(productId)) return <Navigate to="/page-not-found" />;
 
@@ -25,13 +26,13 @@ const ProductDetailsPage = () => {
 
     if (!isPositiveInteger(quantity)) return <Navigate to="/page-not-found" />;
 
-    const item = { productId: product.productId, quantity };
-
     if (user) {
+      const item = { productId: product.productId, quantity };
       addItemToCart("/api/carts", item);
     } else {
       // Add item to the guest cart
-      addItemToGuestCart(item);
+      const item = { ...product, quantity };
+      dispatch(addItemToGuestCart({ item }));
     }
   };
 
