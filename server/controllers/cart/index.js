@@ -1,6 +1,8 @@
 /* Export all cart controller functions*/
-const addCartItem = require("./addCartItem");
+const addItemToCart = require("./addItemToCart");
+const getCart = require("./getCart");
 
 module.exports = {
-  addCartItem
+  addItemToCart,
+  getCart
 };
