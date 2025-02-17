@@ -11,7 +11,7 @@ const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
   const user = useSelector((state) => state.user.user);
-  const addItemToCart = useAddData();
+  const addData = useAddData();
   const dispatch = useDispatch();
   
   if (!isPositiveInteger(productId)) return <Navigate to="/page-not-found" />;
@@ -21,31 +21,22 @@ const ProductDetailsPage = () => {
   if (error) return <Navigate to="/page-not-found" />;
 
   const product = data.product;
+  const userIsOwnerOfProduct = user && user.userId === product.userId;
 
   const addItemToCartHandler = () => {
 
-    if (!isPositiveInteger(quantity)) return <Navigate to="/page-not-found" />;
+    if (!isPositiveInteger(quantity)) return;
 
     if (user) {
       const item = { productId: product.productId, quantity };
-      addItemToCart("/api/carts", item);
+      addData("/api/cart", item);
     } else {
       // Add item to the guest cart
       const item = { ...product, quantity };
       dispatch(addItemToGuestCart({ item }));
+      console.log("Successfully added to cart.");
     }
   };
-
-  const productActionLinks = user && data.product.userId === user.userId ? (
-    <div>
-      <div>
-        <Link to={`/account/products/${data.product.productId}/edit`}> Edit </Link>
-      </div>
-      <div>
-        <Link to={"/account/products/"}> View all your products </Link>
-      </div>
-    </div>
-  ) : <button onClick={addItemToCartHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add to cart</button>
 
   return (
     <div>
@@ -69,7 +60,18 @@ const ProductDetailsPage = () => {
         </select>
       </div>
       <div>
-        { productActionLinks }
+        { userIsOwnerOfProduct ? (
+          <div>
+            <div>
+              <Link to={`/account/products/${data.product.productId}/edit`}> Edit </Link>
+            </div>
+            <div>
+              <Link to={"/account/products/"}> View all your products </Link>
+            </div>
+          </div>
+        ) : (
+          <button onClick={addItemToCartHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add to cart</button>
+        )}
         <br></br>
       </div>
     </div>

@@ -29,7 +29,7 @@ const getCart = async (req, res) => {
       quantity: product.CartItems[0].quantity // get quantity from CartItem
     }));
 
-    res.status(200).json(cart);
+    res.status(200).json({cart});
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }

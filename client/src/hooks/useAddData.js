@@ -25,11 +25,9 @@ const useAddData = () => {
 
       if (responseData.address) {
         console.log(responseData.message);
-        console.log(responseData.address);
         navigate("/account/addresses");
       } else if (responseData.item) {
         console.log(response.data.message);
-        console.log(response.data.item);
         dispatch(addItemToCart({ item: responseData.item }));
       }
     } catch (error) {
