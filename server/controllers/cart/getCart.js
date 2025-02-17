@@ -1,9 +1,12 @@
 const { Cart, CartItem, Product } = require("../../models");
 
+/* Get all the items in the cart */
+/* @route = GET /api/cart */
 const getCart = async (req, res) => {
   try {
     const user = req.authUser;
 
+    /* Find all the products that the user has in the cart */
     const products = await Product.findAll({
       include: {
         model: CartItem,
@@ -17,6 +20,7 @@ const getCart = async (req, res) => {
       }
     });
 
+    /* Sanitize the products, update the price, and add quantity */
     const cart = products.map((product) => ({
       productId: product.productId,
       name: product.name,

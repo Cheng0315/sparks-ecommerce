@@ -4,11 +4,11 @@ const { body, validationResult } = require("express-validator");
 const validateCartItem = [
   body("productId")
     .isInt()
-    .withMessage("Product ID must be an integer")
+    .withMessage("Product ID must be a positive integer")
     .toInt(),
   body("quantity")
     .isInt()
-    .withMessage("Quantity ID must be an integer")
+    .withMessage("Quantity ID must be a positive integer")
     .toInt(),
   (req, res, next) => {
     try {
