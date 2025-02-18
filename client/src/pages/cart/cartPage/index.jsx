@@ -1,13 +1,14 @@
 import { useSelector} from "react-redux";
-import { useFetchCart } from "../../../hooks/cart";
+import { useFetchCart, useUpdateCartItemQuantity } from "../../../hooks/cart";
 import { Link } from "react-router-dom";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
 const CartPage = () => {
-  const { loading, error } = useFetchCart(); // Call the custom hook
+  const { loading, error } = useFetchCart(); // Fetch the cart from the backend
   const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.cart.cart);
   const guestCart = useSelector((state) => state.guestCart.guestCart);
+  const updateCartItemQuantity = useUpdateCartItemQuantity();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -29,7 +30,11 @@ const CartPage = () => {
           </Link>
           <p className="text-gray-600">Price: ${item.price}</p>
           <p className="text-gray-600">Condition: ${item.condition}</p>
-          <p className="text-gray-600">Quantity: {item.quantity}</p>
+          <div className="flex items-center mt-2">
+            <button onClick={() => updateCartItemQuantity(item.productId, item.quantity - 1)} className="bg-white hover:bg-gray-200 text-gray-700 px-2 py-1 rounded"> - </button>
+            <span className="mx-2">{item.quantity}</span>
+            <button onClick={() => updateCartItemQuantity(item.productId, item.quantity + 1)} className="bg-white hover:bg-gray-200 text-gray-700 px-2 py-1 rounded"> + </button>
+          </div>
         </div>
       </div>
       )))}

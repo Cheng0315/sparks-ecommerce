@@ -34,7 +34,7 @@ const ProductDetailsPage = () => {
       // Add item to the guest cart
       const item = { ...product, quantity };
       dispatch(addItemToGuestCart({ item }));
-      console.log("Successfully added to cart.");
+      console.log("Successfully added item to cart.");
     }
   };
 

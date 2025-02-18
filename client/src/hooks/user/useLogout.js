@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { apiAxios } from "../../services/api/authAxios";
-import { clearAccessToken, clearUser } from "../../features/slices";
+import { clearAccessToken, clearCart, clearUser } from "../../features/slices";
 
 /* custom hook for handling user logout */
 const useLogout = () => {
