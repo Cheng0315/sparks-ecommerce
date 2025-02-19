@@ -17,6 +17,7 @@ const useLogin = () => {
       if (response && response.data) {
         dispatch(setUser({user: response.data.user}));
         dispatch(setAccessToken({accessToken: response.data.accessToken}));
+        dispatch(clearGuestCart());
         /* Redirect to home page after succesful login */
         navigate("/");
       }

@@ -2,7 +2,7 @@
 import tokenReducer, { setAccessToken, clearAccessToken } from "./tokenSlice";
 import userReducer, { setUser, clearUser } from "./userSlice";
 import cartReducer, { addItemToCart, removeItemFromCart, updateItemInCart, setCart, clearCart } from "./cartSlice";
-import guestCartReducer, { addItemToGuestCart, removeItemFromGuestCart, clearGuestCart } from "./guestCartSlice";
+import guestCartReducer, { addItemToGuestCart, removeItemFromGuestCart, updateItemInGuestCart, clearGuestCart } from "./guestCartSlice";
 
 export {
   tokenReducer,
@@ -20,5 +20,6 @@ export {
   guestCartReducer,
   addItemToGuestCart,
   removeItemFromGuestCart,
+  updateItemInGuestCart,
   clearGuestCart,
 };
