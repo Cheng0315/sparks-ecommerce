@@ -51,7 +51,7 @@ const ProductDetailsPage = () => {
         <select
           id="quantity"
           value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
+          onChange={(e) => setQuantity(Number(e.target.value))}
           className="block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-300 mb-4"
         >
           {[...Array(50).keys()].map((n) => (

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/user";
 import { useSelector } from "react-redux";
+import { useCartQuantity } from "../hooks/cart";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
+  const cartQuantity = useCartQuantity();
 
   const logout = useLogout()
 
@@ -12,7 +14,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-white text-lg font-bold">Sparks eCommerce</Link>
         <div className="space-x-4">
-        <Link to="/cart" className="text-gray-300 hover:text-white">Cart</Link>
+        <Link to="/cart" className="text-gray-300 hover:text-white">Cart {cartQuantity}</Link>
           {user ? (
             <>
               {user.role === "user" ? <Link to="/account/update-role" className="text-gray-300 hover:text-white">Become A Seller</Link> : ""}
