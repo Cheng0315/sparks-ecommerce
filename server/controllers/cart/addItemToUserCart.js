@@ -1,8 +1,8 @@
 const { Cart, CartItem, Product, sequelize } = require("../../models");
 
-/* Add item to cart */
+/* Add item to the user's cart */
 /* @route = POST /api/cart */
-const addItemToCart = async (req, res) => {
+const addItemToUserCart = async (req, res) => {
   const transaction = await sequelize.transaction();
 
   try {
@@ -19,17 +19,17 @@ const addItemToCart = async (req, res) => {
       return res.status(404).json({ errorMessage: "Product not found" });
     }
 
-    let cart = await Cart.findOne({
+    let userCart = await Cart.findOne({
       where: { userId: user.userId },
       transaction
     });
 
-    if (!cart) {
-      cart = await Cart.create({ userId: user.userId }, { transaction });
+    if (!userCart) {
+      userCart = await Cart.create({ userId: user.userId }, { transaction });
     }
 
     let cartItem = await CartItem.findOne({
-      where: { cartId: cart.cartId, productId },
+      where: { cartId: userCart.cartId, productId },
       transaction
     });
 
@@ -38,7 +38,7 @@ const addItemToCart = async (req, res) => {
       await cartItem.save({ transaction });
     } else {
       cartItem = await CartItem.create({
-        cartId: cart.cartId,
+        cartId: userCart.cartId,
         productId,
         quantity
       },
@@ -61,4 +61,4 @@ const addItemToCart = async (req, res) => {
   }
 }
 
-module.exports = addItemToCart;
+module.exports = addItemToUserCart;

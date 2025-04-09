@@ -1,8 +1,8 @@
 const { Cart, CartItem, Product } = require("../../models");
 
-/* Get all the items in the cart */
+/* Get all the items belong to the user's cart */
 /* @route = GET /api/cart */
-const getCart = async (req, res) => {
+const getUserCartItems = async (req, res) => {
   try {
     const user = req.authUser;
 
@@ -21,7 +21,7 @@ const getCart = async (req, res) => {
     });
 
     /* Sanitize the products, update the price, and add quantity */
-    const cart = products.map((product) => ({
+    const cartItems = products.map((product) => ({
       productId: product.productId,
       name: product.name,
       description: product.description,
@@ -33,10 +33,10 @@ const getCart = async (req, res) => {
       quantity: product.CartItems[0].quantity // get quantity from CartItem
     }));
 
-    res.status(200).json({cart});
+    res.status(200).json({ cartItems });
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
 };
 
-module.exports = getCart;
+module.exports = getUserCartItems;

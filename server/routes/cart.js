@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { strictRateLimiter, verifyAccessToken } = require("../middleware/auth");
 const { validateCartItem } = require("../middleware/cart");
-const { addItemToCart, getCart, updateCartItemQuantity } = require("../controllers/cart");
+const { addItemToUserCart, getUserCartItems, updateCartItemQuantity } = require("../controllers/cart");
 
 /* Create */
-router.post("/", strictRateLimiter, verifyAccessToken, validateCartItem, addItemToCart);
+router.post("/", strictRateLimiter, verifyAccessToken, validateCartItem, addItemToUserCart);
 
 /* Read */ 
-router.get("/", strictRateLimiter, verifyAccessToken, getCart);
+router.get("/", strictRateLimiter, verifyAccessToken, getUserCartItems);
 
 /* Update */
 router.patch("/", strictRateLimiter, verifyAccessToken, validateCartItem, updateCartItemQuantity);

@@ -5,10 +5,10 @@ const useCartQuantity = () => {
 
   if (user) {
     const cart = useSelector((state) => state.cart.cart);
-    return cart.reduce((total, item) => total + item.quantity, 0);
+    return cart?.reduce((total, item) => total + item.quantity, 0);
   } else {
     const guestCart = useSelector((state) => state.guestCart.guestCart);
-    return guestCart.reduce((total, item) => total + item.quantity, 0);
+    return guestCart?.reduce((total, item) => total + item.quantity, 0);
   }
 };
 

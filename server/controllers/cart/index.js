@@ -1,10 +1,10 @@
 /* Export all cart controller functions*/
-const addItemToCart = require("./addItemToCart");
-const getCart = require("./getCart");
+const addItemToUserCart = require("./addItemToUserCart");
+const getUserCartItems = require("./getUserCartItems");
 const updateCartItemQuantity = require("./updateCartItemQuantity");
 
 module.exports = {
-  addItemToCart,
-  getCart,
+  addItemToUserCart,
+  getUserCartItems,
   updateCartItemQuantity
 };

@@ -16,6 +16,7 @@ const useUpdateCartItemQuantity = () => {
         dispatch(updateItemInCart( response.data.item ));
         console.log("Successfully updated item quantity");
        }
+       
     } catch (error) {
       console.error("Failed to update quantity: ", error);
     }
