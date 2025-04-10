@@ -15,7 +15,6 @@ const guestCartSlice = createSlice({
       } else {
         state.guestCart.push({ ...item });
       }
-      console.log(state.guestCart);
     },
     /* Remove item from guest cart */
     removeItemFromGuestCart: (state, action) => {

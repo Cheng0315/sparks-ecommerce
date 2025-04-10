@@ -17,9 +17,9 @@ const CartPage = () => {
 
   return (
     <div>
-      {displayedCart.length === 0 ? (
+      {displayedCart?.length === 0 ? (
         <p>Your cart is empty.</p>
-      ) : (displayedCart.map(item => (
+      ) : (displayedCart?.map(item => (
         <div key={item.productId} className="cart-item flex items-center p-4 border-b border-gray-300">
         <Link to={`/products/${item.productId}`}>
           <img src={`${serverURL}${item.imageUrl}`} alt={item.name} className="w-20 h-20 object-cover mr-4" />

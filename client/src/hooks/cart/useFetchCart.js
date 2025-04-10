@@ -17,7 +17,7 @@ const useFetchCart = () => {
       setIsLoading(true);
       try {
         const response = await authorizedAxios.get("/api/cart");
-        dispatch(setCart({cart: response.data.userCart}));
+        dispatch(setCart({cart: response.data.cartItems}));
       } catch (err) {
         setError("Failed to fetch cart");
       } finally {

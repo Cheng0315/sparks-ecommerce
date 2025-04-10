@@ -16,7 +16,7 @@ const useUpdateItemQuantity = () => {
       try {
         const response = await authorizedAxios.patch(`/api/cart`, { productId, quantity: newQuantity });
         
-        if (response && response.data) {
+        if (response && response.data.item) {
           dispatch(updateItemInCart( response.data.item ));
           console.log("Successfully updated item quantity");
          }
