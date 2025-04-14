@@ -12,7 +12,7 @@ const addProduct = async (req, res) => {
     const { name, description, condition, stockQuantity, categoryId, price, imageUrl } = req.body;
     const priceInCents = price * 100;
     const user = req.authUser;
-    console.log(req.body);
+    
     const newProduct = await Product.create({
       name,
       description,

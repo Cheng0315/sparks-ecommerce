@@ -8,7 +8,7 @@ const validateCartItem = [
     .toInt(),
   body("quantity")
     .isInt()
-    .withMessage("Quantity ID must be a positive integer")
+    .withMessage("Quantity must be a positive integer")
     .toInt(),
   (req, res, next) => {
     try {
