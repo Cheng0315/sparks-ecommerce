@@ -1,10 +1,10 @@
-const { body, validationResult } = require("express-validator");
+const { param, body, validationResult } = require("express-validator");
     
-/* Validate cart item data */
-const validateCartItem = [
-  body("productId")
+/* Validate cart item product id and quantity for update */
+const validateUpdateCartItem = [
+  param("productId")
     .isInt({ gt: 0 })
-    .withMessage("Product ID must be a positive integer")
+    .withMessage("Product Id must be an integer")
     .toInt(),
   body("quantity")
     .isInt({ gt: 0 })
@@ -23,4 +23,4 @@ const validateCartItem = [
   }
 ];
 
-module.exports = validateCartItem;
+module.exports = validateUpdateCartItem;

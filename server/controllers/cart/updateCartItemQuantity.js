@@ -5,7 +5,8 @@ const { Cart, CartItem, Product } = require("../../models");
 const updateCartItemQuantity = async (req, res) => {
   try {
     const user = req.authUser;
-    const { productId, quantity } = req.body;
+    const { productId } = req.params;
+    const { quantity } = req.body;
 
     const cartItem = await CartItem.findOne({
       include: {

@@ -3,8 +3,8 @@ const { param, validationResult } = require("express-validator");
 /* Validate param id */
 const validateParamId = (paramName) => [
   param(paramName)
-    .isInt()
-    .withMessage(`${paramName} must be an integer`)
+    .isInt({ gt: 0 })
+    .withMessage(`${paramName} must be a positive integer`)
     .toInt(),
   (req, res, next) => {
     const errors = validationResult(req);

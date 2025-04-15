@@ -2,7 +2,7 @@ const { getFirstNameRegex, getLastNameRegex, getAddressCityRegex, getAddressZipC
 const { body, validationResult } = require("express-validator");
 
 /* Validate user address for update*/
-const validateAddressUpdate = [
+const validateUpdateAddress = [
   body("firstName")
     .optional()
     .trim()
@@ -65,4 +65,4 @@ const validateAddressUpdate = [
   }
 ];
 
-module.exports = validateAddressUpdate;
+module.exports = validateUpdateAddress;

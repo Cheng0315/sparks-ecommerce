@@ -1,8 +1,8 @@
 /* Exports all address-related middlewares */
 const validateAddress = require("./validateAddress");
-const validateAddressUpdate = require("./validateAddressUpdate");
+const validateUpdateAddress = require("./validateUpdateAddress");
 
 module.exports = {
   validateAddress,
-  validateAddressUpdate
+  validateUpdateAddress
 };
