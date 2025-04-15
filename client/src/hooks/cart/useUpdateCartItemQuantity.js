@@ -12,21 +12,21 @@ const useUpdateCartItemQuantity = () => {
   const updateCartItemQuantity = async (productId, newQuantity) => {
     if (newQuantity < 1) return; // Prevent negative or zero quantity
     
-    if (user) {
-      try {
+    try {
+      if (user) {
         const response = await authorizedAxios.patch(`/api/cart/items/${productId}`, { quantity: newQuantity });
         
         if (response && response.data.item) {
           dispatch(updateItemInCart( response.data.item ));
           console.log("Successfully updated item quantity");
-         }
-         
-      } catch (error) {
-        console.error("Failed to update quantity: ", error);
+        }
+      } else {
+        dispatch(updateItemInGuestCart({ productId, quantity: newQuantity }));
       }
-    } else {
-      dispatch(updateItemInGuestCart({ productId, quantity: newQuantity }));
+    } catch (error) {
+      console.error("Failed to update quantity: ", error);
     }
+    
   };
 
   return updateCartItemQuantity;

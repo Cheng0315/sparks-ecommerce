@@ -18,7 +18,7 @@ const guestCartSlice = createSlice({
     },
     /* Remove item from guest cart */
     removeItemFromGuestCart: (state, action) => {
-      state.guestCart = state.guestCart.filter(cartItem => cartItem.productId !== action.payload.item.productId);
+      state.guestCart = state.guestCart.filter(cartItem => cartItem.productId !== action.payload.productId);
     },
     /* Update item in guest cart */
     updateItemInGuestCart: (state, action) => {

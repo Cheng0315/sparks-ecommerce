@@ -1,5 +1,5 @@
 import { useSelector} from "react-redux";
-import { useFetchCartItems, useUpdateCartItemQuantity } from "../../../hooks/cart";
+import { useFetchCartItems, useUpdateCartItemQuantity, useDeleteCartItem } from "../../../hooks/cart";
 import { Link } from "react-router-dom";
 const serverURL = import.meta.env.VITE_DEV_SERVER_URL;
 
@@ -9,6 +9,7 @@ const CartPage = () => {
   const cart = useSelector((state) => state.cart.cart);
   const guestCart = useSelector((state) => state.guestCart.guestCart);
   const updateCartItemQuantity = useUpdateCartItemQuantity();
+  const deleteCartItem = useDeleteCartItem(); 
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -34,6 +35,7 @@ const CartPage = () => {
             <button onClick={() => updateCartItemQuantity(item.productId, Number(item.quantity) - 1)} className="bg-white hover:bg-gray-200 text-gray-700 px-2 py-1 rounded"> - </button>
             <span className="mx-2">{item.quantity}</span>
             <button onClick={() => updateCartItemQuantity(item.productId, Number(item.quantity) + 1)} className="bg-white hover:bg-gray-200 text-gray-700 px-2 py-1 rounded"> + </button>
+            <button onClick={() => deleteCartItem(item.productId)} className="text-blue-500 hover:underline bg-transparent border-none px-2 py-1 cursor-pointer"> remove </button>
           </div>
         </div>
       </div>

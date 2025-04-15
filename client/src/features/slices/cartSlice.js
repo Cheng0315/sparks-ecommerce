@@ -18,8 +18,9 @@ const cartSlice = createSlice({
     },
     /* Remove item from cart */
     removeItemFromCart: (state, action) => {
-      state.cart = state.cart.filter(cartItem => cartItem.productId !== action.payload.item.productId);
+      state.cart = state.cart.filter(cartItem => cartItem.productId !== action.payload.productId);
     },
+    /* Update item in cart */
     updateItemInCart: (state, action) => {
       const existingItem = state.cart.find(item => item.productId === action.payload.productId);
       
