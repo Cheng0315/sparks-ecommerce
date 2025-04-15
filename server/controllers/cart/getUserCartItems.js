@@ -1,7 +1,7 @@
 const { Cart, CartItem, Product } = require("../../models");
 
 /* Get all the items belong to the user's cart */
-/* @route = GET /api/cart */
+/* @route = GET /api/cart/items */
 const getUserCartItems = async (req, res) => {
   try {
     const user = req.authUser;

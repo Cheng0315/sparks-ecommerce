@@ -1,7 +1,7 @@
 const { Cart, CartItem, Product, sequelize } = require("../../models");
 
 /* Add item to the user's cart */
-/* @route = POST /api/cart */
+/* @route = POST /api/cart/items */
 const addItemToUserCart = async (req, res) => {
 
   try {

@@ -1,7 +1,7 @@
 const { Cart, CartItem, Product } = require("../../models");
 
 /* Update the quntity in CartItem */
-/* @route = PATCH /api/cart */
+/* @route = PATCH /api/cart/items/:productId */
 const updateCartItemQuantity = async (req, res) => {
   try {
     const user = req.authUser;

@@ -2,9 +2,11 @@
 const addItemToUserCart = require("./addItemToUserCart");
 const getUserCartItems = require("./getUserCartItems");
 const updateCartItemQuantity = require("./updateCartItemQuantity");
+const deleteCartItem = require("./deleteCartItem");
 
 module.exports = {
   addItemToUserCart,
   getUserCartItems,
-  updateCartItemQuantity
+  updateCartItemQuantity,
+  deleteCartItem
 };
