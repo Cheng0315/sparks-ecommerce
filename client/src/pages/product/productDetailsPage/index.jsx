@@ -29,7 +29,7 @@ const ProductDetailsPage = () => {
 
     if (user) {
       const item = { productId: product.productId, quantity };
-      addData("/api/cart", item);
+      addData("/api/cart/items", item);
     } else {
       // Add item to the guest cart
       const item = { ...product, quantity };

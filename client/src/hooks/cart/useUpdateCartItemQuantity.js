@@ -4,17 +4,17 @@ import { authAxios } from "../../services/api/authAxios";
 import { useSelector } from "react-redux";
 import { updateItemInGuestCart } from "../../features/slices";
 
-const useUpdateItemQuantity = () => {
+const useUpdateCartItemQuantity = () => {
   const dispatch = useDispatch();
   const authorizedAxios = authAxios();
   const user = useSelector((state) => state.user.user);
 
-  const updateItemQuantity = async (productId, newQuantity) => {
+  const updateCartItemQuantity = async (productId, newQuantity) => {
     if (newQuantity < 1) return; // Prevent negative or zero quantity
     
     if (user) {
       try {
-        const response = await authorizedAxios.patch(`/api/cart`, { productId, quantity: newQuantity });
+        const response = await authorizedAxios.patch(`/api/cart/items/${productId}`, { quantity: newQuantity });
         
         if (response && response.data.item) {
           dispatch(updateItemInCart( response.data.item ));
@@ -29,7 +29,7 @@ const useUpdateItemQuantity = () => {
     }
   };
 
-  return updateItemQuantity;
+  return updateCartItemQuantity;
 };
 
-export default useUpdateItemQuantity;
+export default useUpdateCartItemQuantity;
