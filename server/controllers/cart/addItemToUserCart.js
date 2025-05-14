@@ -8,6 +8,7 @@ const addItemToUserCart = async (req, res) => {
     const { productId, quantity } = req.body;
     const user = req.authUser;
 
+    // Wrap the complete 'add item to user cart' logic into a single transaction
     const item = await sequelize.transaction(async (transaction) => {
       const product = await Product.findOne({
         where: { productId },

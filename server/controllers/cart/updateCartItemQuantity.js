@@ -1,4 +1,4 @@
-const { Cart, CartItem, Product } = require("../../models");
+const { Cart, CartItem } = require("../../models");
 
 /* Update the quntity in CartItem */
 /* @route = PATCH /api/cart/items/:productId */

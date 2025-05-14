@@ -8,6 +8,7 @@ const deleteCartItem = async (req, res) => {
     const { productId } = req.params;
     const user = req.authUser;
 
+    // Wrap the complete delete cart item logic into a single transaction
     await sequelize.transaction(async (transaction) => {
 
       let userCart = await Cart.findOne({

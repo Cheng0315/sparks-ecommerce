@@ -1,12 +1,15 @@
-const { param, body, validationResult } = require("express-validator");
-    
-/* Validate cart item product id and quantity for update */
-const validateUpdateCartItem = [
-  param("productId")
+const { body, validationResult } = require("express-validator");
+
+/* Validate guest cart items for merging */
+const validateMergeCartItems = [
+  body("items")
+    .isArray({ min: 1 })
+    .withMessage("Items must be a non-empty array"),
+  body("items.*.productId")
     .isInt({ gt: 0 })
     .withMessage("Product Id must be a positive integer")
     .toInt(),
-  body("quantity")
+  body("items.*.quantity")
     .isInt({ gt: 0 })
     .withMessage("Quantity must be a positive integer")
     .toInt(),
@@ -23,4 +26,4 @@ const validateUpdateCartItem = [
   }
 ];
 
-module.exports = validateUpdateCartItem;
+module.exports = validateMergeCartItems;

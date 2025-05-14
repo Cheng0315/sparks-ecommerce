@@ -15,7 +15,7 @@ const corsOptions = {
 env.config();
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(cors(corsOptions));
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(cookieParser());

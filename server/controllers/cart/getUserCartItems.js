@@ -21,7 +21,7 @@ const getUserCartItems = async (req, res) => {
     });
 
     /* Sanitize the products, update the price, and add quantity */
-    const cartItems = products.map((product) => ({
+    const sanitizedCartItems = products.map((product) => ({
       productId: product.productId,
       name: product.name,
       description: product.description,
@@ -33,7 +33,7 @@ const getUserCartItems = async (req, res) => {
       quantity: product.CartItems[0].quantity // get quantity from CartItem
     }));
 
-    res.status(200).json({ cartItems });
+    res.status(200).json({ cartItems: sanitizedCartItems });
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
