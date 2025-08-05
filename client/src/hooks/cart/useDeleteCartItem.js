@@ -22,9 +22,8 @@ const useDeleteCartItem = () => {
         dispatch(removeItemFromGuestCart({ productId }));
       }
     } catch (error) {
-      console.error("Failed to remove item from cart ", error);
+      console.error("Failed to remove item from cart: ", error);
     }
-    
   };
 
   return deleteCartItem;

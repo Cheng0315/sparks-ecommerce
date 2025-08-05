@@ -11,7 +11,7 @@ const useLogin = () => {
   const login = async (values) => {
     try {
       /* Call login function to make request to server to log the user in */
-      const response = await apiAxios.post(`/api/users/login`, values);;
+      const response = await apiAxios.post(`/api/users/login`, values);
 
       /* If login is successful, update the user and token */
       if (response && response.data) {

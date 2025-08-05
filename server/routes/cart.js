@@ -13,7 +13,7 @@ router.get("/items", strictRateLimiter, verifyAccessToken, getUserCartItems);
 
 /* Update */
 router.patch("/items/:productId", strictRateLimiter, verifyAccessToken, validateUpdateCartItem, updateCartItemQuantity);
-router.patch("/merge", strictRateLimiter, verifyAccessToken, validateMergeCartItems, mergeCart);
+router.patch("/mergeCart", strictRateLimiter, verifyAccessToken, validateMergeCartItems, mergeCart);
 
 /* Delete */
 router.delete("/items/:productId", strictRateLimiter, verifyAccessToken, validateParamId("productId"), deleteCartItem);
