@@ -13,6 +13,7 @@ const useLogout = () => {
     dispatch(clearUser());
     dispatch(clearAccessToken());
     dispatch(clearCart());
+
     try {
       /* Make request to backend to delete refresh token on frontend and backend*/
       const response = await apiAxios.delete("/api/users/logout");
