@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { authAxios } from "../services/api/authAxios";
+import { isNotEmpty } from "../utils/validations";
 
 /* custom hook for handling data updates */
 const useUpdateData = () => {
@@ -8,7 +9,7 @@ const useUpdateData = () => {
 
   const updateData = async (url, newValues, originalValues) => {
     /* Filter out values that have not changed */
-    const filteredValues = Object.fromEntries(Object.entries(newValues).filter(([key, value]) => value !== originalValues[key]));
+    const filteredValues = Object.fromEntries(Object.entries(newValues).filter(([key, value]) => value !== originalValues[key] && isNotEmpty(value)));
     
     try {
       /* Make request to server to update data */
