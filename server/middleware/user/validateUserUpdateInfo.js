@@ -31,8 +31,9 @@ const validateUserUpdateInfo = [
 
       const { username } = req.body;
       const user = await User.findOne({ where: { username }});
+      const userId = req.authUser.userId;
 
-      if (user) {
+      if (user && user.userId !== userId) {
         return res.status(409).json({ errorMessage: "Username already in use" });
       }
 

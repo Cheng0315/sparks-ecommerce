@@ -26,7 +26,6 @@ const validateUpdateAddress = [
     .matches(getAddressStreetRegex()).withMessage("Street address contains invalid characters"),
   body("addressUnit")
     .optional()
-    .optional()
     .trim()
     .escape()
     .isLength({ max: 50 }).withMessage("Address unit must be less than 50 characters")
